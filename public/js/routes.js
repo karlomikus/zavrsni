@@ -9,6 +9,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 		templateUrl: 'templates/projects/main.html',
 		controller: 'projectsController'
 	})
+	.when('/new',{
+		templateUrl: 'templates/projects/new.html',
+		controller: 'projectsController'
+	})
 	.when('/project/:id',{
 		templateUrl: 'templates/projects/detail.html',
 		controller: 'projectDetailsController'

@@ -49,3 +49,16 @@ app.factory('Auth', ['$http', function($http)
 		}
 	};
 }]);
+
+app.factory('Category', ['$http', function($http)
+{
+	return {
+		getAll: function() {
+			return $http.get('/api/categories');
+		},
+
+		get: function(id) {
+			return $http.get('/api/categories/' + id);
+		}
+	};
+}]);

@@ -1,0 +1,37 @@
+<form ng-submit="save()" class="form-horizontal">
+  <div class="form-group">
+    <label for="title" class="col-sm-2 control-label">Title</label>
+    <div class="col-sm-10">
+      <input ng-model="projectFormData.title" type="text" class="form-control" id="title" placeholder="Enter your job/project title here...">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="category" class="col-sm-2 control-label">Choose a category</label>
+    <div class="col-sm-10">
+      <select ng-model="projectFormData.category" ng-options="cat.id as cat.name for cat in categories track by cat.id" id="category" class="form-control">
+        <option value="">Select category...</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="descr" class="col-sm-2 control-label">Description</label>
+    <div class="col-sm-10">
+      <textarea ng-model="projectFormData.description" class="form-control" id="descr" placeholder="Write your description" rows="6"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="tags" class="col-sm-2 control-label">Tags</label>
+    <div class="col-sm-10">
+      <input ng-model="projectFormData.tags" type="text" class="form-control" id="tags" placeholder="Enter tags separated by comma...">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-success">Add project</button>
+    </div>
+  </div>
+</form>
+
+<pre>
+  {{ projectFormData }}
+</pre>

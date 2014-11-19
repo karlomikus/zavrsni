@@ -25,6 +25,7 @@ Route::group(array('prefix'=> 'api'), function()
     Route::get('auth/check', 'AuthController@isLoggedIn');
 
     Route::resource('projects', 'ProjectsController');
+    Route::resource('categories', 'CategoriesController');
     Route::resource('users', 'UsersController');
 });
 

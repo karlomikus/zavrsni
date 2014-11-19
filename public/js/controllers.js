@@ -2,13 +2,31 @@
 
 var app = angular.module('myApp.controllers', []);
 
-app.controller('projectsController', function($http, $scope, Project)
+/**
+ * 	Projects controllers
+ */
+app.controller('projectsController', function($http, $scope, $location, Project, Category)
 {
-	$scope.projects = {};
+	$scope.projects = { };
+	$scope.categories = { };
+	$scope.projectFormData = { };
 
 	Project.getAll().success(function(data) {
 		$scope.projects = data;
 	});
+
+	Category.getAll().success(function(data) {
+		$scope.categories = data;
+	});
+
+	$scope.save = function()
+	{
+		Project.save($scope.projectFormData).success(function(data)
+		{
+			console.log('Added new project!');
+			$location.path("/");
+		});
+	}
 });
 
 app.controller('projectDetailsController', function($http, $scope, $routeParams, Project)
@@ -20,6 +38,9 @@ app.controller('projectDetailsController', function($http, $scope, $routeParams,
 	});
 });
 
+/**
+ * 	User controllers
+ */
 app.controller('authController', function($http, $scope, Auth)
 {
 	checkLoginStatus();

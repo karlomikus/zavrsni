@@ -25,6 +25,8 @@ class ProjectsController extends \BaseController {
         $errors         = null;
         $title          = Input::get('title');
         $description    = Input::get('description');
+        $category       = Input::get('category');
+        $tags           = Input::get('tags');
         $userId         = Sentry::getUser()->id;
 
         try
@@ -32,7 +34,9 @@ class ProjectsController extends \BaseController {
             $project = new Project();
             $project->title = $title;
             $project->description = $description;
+            $project->tags = $tags;
             $project->user_id = $userId;
+            $project->category_id = $category;
             $project->save();
         }
         catch(Exception $e)

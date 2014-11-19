@@ -1,4 +1,4 @@
-<div class="panel panel-default" ng-repeat="project in projects">
+<div ng-repeat="project in projects" class="panel panel-default">
     <div class="panel-heading"><a href="/#/project/{{ project.id }}">{{ project.title }}</a></div>
     <div class="panel-body">
         {{ project.description }}
