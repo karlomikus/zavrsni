@@ -32,8 +32,8 @@ app.controller('projectsController', ['$http','$scope', '$location', 'Project', 
 	}
 }]);
 
-app.controller('projectDetailsController', ['$http', '$scope', '$routeParams', 'Project',
-	function($http, $scope, $routeParams, Project)
+app.controller('projectDetailsController', ['$http', '$scope', '$routeParams', 'Project', 'Category',
+	function($http, $scope, $routeParams, Project, Category)
 {
 	$scope.project = {};
 
@@ -41,6 +41,16 @@ app.controller('projectDetailsController', ['$http', '$scope', '$routeParams', '
 	{
 		$scope.project = data;
 	});
+
+	$scope.getProjectCategory = function(id)
+	{
+		var catName = Category.get(id).success(function(catData)
+		{
+			return catData.name;
+		});
+
+		return catName;
+	}
 }]);
 
 /**

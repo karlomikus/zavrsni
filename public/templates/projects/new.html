@@ -8,8 +8,9 @@
   <div class="form-group">
     <label for="category" class="col-sm-2 control-label">Choose a category</label>
     <div class="col-sm-10">
-      <select ng-model="projectFormData.category" ng-options="cat.id as cat.name for cat in categories track by cat.id" id="category" class="form-control">
-        <option value="">Select category...</option>
+      <select ng-model="projectFormData.category" id="category" class="form-control">
+        <option value="">Uncategorized</option>
+        <option ng-repeat="cat in categories" value="{{ cat.id }}">{{ cat.name }}</option>
       </select>
     </div>
   </div>
@@ -31,7 +32,3 @@
     </div>
   </div>
 </form>
-
-<pre>
-  {{ projectFormData }}
-</pre>

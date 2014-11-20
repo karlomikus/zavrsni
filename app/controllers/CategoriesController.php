@@ -29,7 +29,7 @@ class CategoriesController extends \BaseController
      */
     public function show($id)
     {
-        return Response::json(Project::find($id));
+        return Response::json(Category::find($id));
     }
 
     /**
