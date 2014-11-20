@@ -5,18 +5,23 @@ var app = angular.module('myApp.routes', []);
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider)
 {
 	$routeProvider
-	.when('/',{
+	.when('/',
+	{
 		templateUrl: 'templates/projects/main.html',
 		controller: 'projectsController'
 	})
-	.when('/new',{
+	.when('/new',
+	{
 		templateUrl: 'templates/projects/new.html',
 		controller: 'projectsController'
 	})
-	.when('/project/:id',{
+	.when('/project/:id',
+	{
 		templateUrl: 'templates/projects/detail.html',
 		controller: 'projectDetailsController'
-	}).otherwise({
+	})
+	.otherwise(
+	{
 		redirectTo: '/'
 	});
 

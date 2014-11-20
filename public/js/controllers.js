@@ -5,17 +5,20 @@ var app = angular.module('myApp.controllers', []);
 /**
  * 	Projects controllers
  */
-app.controller('projectsController', function($http, $scope, $location, Project, Category)
+app.controller('projectsController', ['$http','$scope', '$location', 'Project', 'Category',
+	function($http, $scope, $location, Project, Category)
 {
-	$scope.projects = { };
-	$scope.categories = { };
-	$scope.projectFormData = { };
+	$scope.projects = {};
+	$scope.categories = {};
+	$scope.projectFormData = {};
 
-	Project.getAll().success(function(data) {
+	Project.getAll().success(function(data)
+	{
 		$scope.projects = data;
 	});
 
-	Category.getAll().success(function(data) {
+	Category.getAll().success(function(data)
+	{
 		$scope.categories = data;
 	});
 
@@ -27,25 +30,27 @@ app.controller('projectsController', function($http, $scope, $location, Project,
 			$location.path("/");
 		});
 	}
-});
+}]);
 
-app.controller('projectDetailsController', function($http, $scope, $routeParams, Project)
+app.controller('projectDetailsController', ['$http', '$scope', '$routeParams', 'Project',
+	function($http, $scope, $routeParams, Project)
 {
 	$scope.project = {};
 
-	Project.get($routeParams.id).success(function(data) {
+	Project.get($routeParams.id).success(function(data)
+	{
 		$scope.project = data;
 	});
-});
+}]);
 
 /**
  * 	User controllers
  */
-app.controller('authController', function($http, $scope, Auth)
+app.controller('authController', ['$http', '$scope', 'Auth',
+	function($http, $scope, Auth)
 {
 	checkLoginStatus();
-
-	$scope.loginData = { };
+	$scope.loginData = {};
 
 	$scope.login = function()
 	{
@@ -61,7 +66,8 @@ app.controller('authController', function($http, $scope, Auth)
 		});
 	}
 
-	$scope.logout = function() {
+	$scope.logout = function()
+	{
 		Auth.logout();
 	}
 
@@ -78,4 +84,4 @@ app.controller('authController', function($http, $scope, Auth)
 			$scope.loggedIn = data;
 		});
 	}
-});
+}]);
