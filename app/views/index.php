@@ -27,7 +27,7 @@
     <nav class="navbar navbar-default">
         <div class="container" ng-controller="authController">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -35,32 +35,34 @@
                 </button>
                 <a class="navbar-brand" href="/">Jobbr</a>
             </div>
-            <ul ng-if="loggedIn == false" class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="/signup">Sign up</a>
-                </li>
-            </ul>
-            <form ng-if="loggedIn == false" ng-submit="login()" class="navbar-form navbar-right">
-                <div class="form-group">
-                    <input ng-model="loginData.email" name="email" type="text" class="form-control" placeholder="Email">
-                </div>
-                <div class="form-group">
-                    <input ng-model="loginData.password" name="password" type="password" class="form-control" placeholder="Password">
-                </div>
-                <button type="submit" class="btn btn-primary">Sign in</button>
-            </form>
-            <ul ng-if="loggedIn == true" class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Karlo Mikus <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/profile">Profile</a></li>
-                        <li><a href="/admin" target="_blank">Administration</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#" click="logout()">Logout</a></li>
-                    </ul>
-                </li>
-                <li><a href="/new">Post new job</a></li>
-            </ul>
+            <div class="collapse navbar-collapse" id="nav-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li ng-if="loggedIn == false"><a href="/signup">Sign up</a></li>
+                </ul>
+                <form ng-if="loggedIn == false" ng-submit="login()" class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input ng-model="loginData.email" name="email" type="text" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input ng-model="loginData.password" name="password" type="password" class="form-control" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                </form>
+                <ul ng-if="loggedIn == true" class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Karlo Mikus <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/profile">Profile</a></li>
+                            <li><a href="/admin" target="_blank">Administration</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#" click="logout()">Logout</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/new">Post new job</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
     

@@ -1,15 +1,25 @@
 <?php
 
-class ProjectsController extends \BaseController {
-
+class ProjectsController extends \BaseController
+{
 	/**
 	 * Display a listing of the project.
 	 *
 	 * @return Response
 	 */
 	public function index()
-	{
-		return Response::json(Project::get());
+    {
+        $projects = Project::get();
+
+        foreach ($projects as $project)
+        {
+            if(!empty($project->tags))
+            {
+                $project->tags = explode(',', $project->tags);
+            }
+        }
+
+		return Response::json($projects);
 	}
 
 	/**
@@ -25,6 +35,7 @@ class ProjectsController extends \BaseController {
         $errors         = null;
         $title          = Input::get('title');
         $description    = Input::get('description');
+        $skills         = Input::get('skills');
         $category       = Input::get('category');
         $tags           = Input::get('tags');
         $userId         = Sentry::getUser()->id;
@@ -32,11 +43,13 @@ class ProjectsController extends \BaseController {
         try
         {
             $project = new Project();
+
             $project->title = $title;
-            $project->description = $description;
+            $project->description = $description . "\n" . $skills;
             $project->tags = $tags;
             $project->user_id = $userId;
             $project->category_id = $category;
+
             $project->save();
         }
         catch(Exception $e)
@@ -67,7 +80,33 @@ class ProjectsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-        if(!Sentry::check()) return Response::json(array('success' => false));
+        $saved          = true;
+        $errors         = null;
+        $title          = Input::get('title');
+        $description    = Input::get('description');
+        $skills         = Input::get('skills');
+        $category       = Input::get('category');
+        $tags           = Input::get('tags');
+        $userId         = Sentry::getUser()->id;
+
+        try
+        {
+            $project = Project::find($id);
+
+            $project->title = $title;
+            $project->description = $description . "\n" . $skills;
+            $project->tags = $tags;
+            $project->category_id = $category;
+
+            $project->save();
+        }
+        catch(Exception $e)
+        {
+            $saved = false;
+            $errors = $e->getMessage();
+        }
+
+        return Response::json(array('success' => $saved, 'errors' => $errors));
 	}
 
 	/**

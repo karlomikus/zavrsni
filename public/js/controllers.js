@@ -5,12 +5,14 @@ var app = angular.module('myApp.controllers', []);
 /**
  * 	Projects controllers
  */
-app.controller('projectsController', ['$http','$scope', '$location', 'Project', 'Category',
-	function($http, $scope, $location, Project, Category)
+app.controller('projectsController', ['$http','$scope', '$location', '$routeParams', 'Project', 'Category',
+	function($http, $scope, $location, $routeParams, Project, Category)
 {
 	$scope.projects = {};
 	$scope.categories = {};
 	$scope.projectFormData = {};
+
+	var projectId = $routeParams.id == undefined ? null : $routeParams.id;
 
 	Project.getAll().success(function(data)
 	{
@@ -22,12 +24,30 @@ app.controller('projectsController', ['$http','$scope', '$location', 'Project', 
 		$scope.categories = data;
 	});
 
+	// Fill project form on edit
+	if(projectId)
+	{
+		Project.get(projectId).success(function(data)
+		{
+			$scope.projectFormData = data;
+		});
+	}
+
 	$scope.save = function()
 	{
 		Project.save($scope.projectFormData).success(function(data)
 		{
 			console.log('Added new project!');
 			$location.path("/");
+		});
+	}
+
+	$scope.edit = function(id)
+	{
+		Project.edit(id, $scope.projectFormData).success(function(data)
+		{
+			console.log('Edited project!');
+			$location.path("/project/" + id);
 		});
 	}
 }]);

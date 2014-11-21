@@ -1,34 +1,40 @@
-<form ng-submit="save()" class="form-horizontal">
+<form ng-submit="edit(projectFormData.id)" class="form-horizontal">
   <div class="form-group">
-    <label for="title" class="col-sm-2 control-label">Title</label>
+    <label for="title" class="col-sm-2 control-label">Ime</label>
     <div class="col-sm-10">
-      <input ng-model="projectFormData.title" type="text" class="form-control" id="title" placeholder="Enter your job/project title here...">
+      <input ng-model="projectFormData.title" type="text" class="form-control" id="title" placeholder="Upišite ime projekta...">
     </div>
   </div>
   <div class="form-group">
-    <label for="category" class="col-sm-2 control-label">Choose a category</label>
+    <label for="category" class="col-sm-2 control-label">Kategorija</label>
     <div class="col-sm-10">
       <select ng-model="projectFormData.category" id="category" class="form-control">
-        <option value="">Uncategorized</option>
+        <option value="">Bez kategorije</option>
         <option ng-repeat="cat in categories" value="{{ cat.id }}">{{ cat.name }}</option>
       </select>
     </div>
   </div>
   <div class="form-group">
-    <label for="descr" class="col-sm-2 control-label">Description</label>
+    <label for="descr" class="col-sm-2 control-label">Opis projekta</label>
     <div class="col-sm-10">
-      <textarea ng-model="projectFormData.description" class="form-control" id="descr" placeholder="Write your description" rows="6"></textarea>
+      <textarea ng-model="projectFormData.description" class="form-control" id="descr" placeholder="Opišite projekta u detalje..." rows="6"></textarea>
     </div>
   </div>
   <div class="form-group">
-    <label for="tags" class="col-sm-2 control-label">Tags</label>
+    <label for="skills" class="col-sm-2 control-label">Tražene sposobnosti</label>
     <div class="col-sm-10">
-      <input ng-model="projectFormData.tags" type="text" class="form-control" id="tags" placeholder="Enter tags separated by comma...">
+      <textarea ng-model="projectFormData.skills" class="form-control" id="skills" placeholder="Napišite zahtjevane sposobnosti..." rows="6"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="tags" class="col-sm-2 control-label">Tagovi</label>
+    <div class="col-sm-10">
+      <input ng-model="projectFormData.tags" type="text" class="form-control" id="tags" placeholder="Unesite tagove razdvojene zerezom...">
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-success">Add project</button>
+      <button type="submit" class="btn btn-success">Dodaj projekt</button>
     </div>
   </div>
 </form>

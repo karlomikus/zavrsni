@@ -20,6 +20,11 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 		templateUrl: 'templates/projects/detail.html',
 		controller: 'projectDetailsController'
 	})
+	.when('/project/edit/:id',
+	{
+		templateUrl: 'templates/projects/new.html',
+		controller: 'projectsController'
+	})
 	.otherwise(
 	{
 		redirectTo: '/'

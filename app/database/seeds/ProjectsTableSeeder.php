@@ -11,7 +11,7 @@ class ProjectsTableSeeder extends Seeder
             Project::create(array(
                 'title' => $faker->sentence(3),
                 'user_id' => 1,
-                'tags' => NULL,
+                'tags' => 'test,tag,plz,ignore,no,copy,pasta',
                 'description' => $faker->paragraph()
             ));
         }

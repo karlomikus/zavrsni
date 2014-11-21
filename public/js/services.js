@@ -22,6 +22,15 @@ app.factory('Project', ['$http', function($http)
 			});
 		},
 
+		edit: function(id, formData) {
+			return $http({
+				method: 'PUT',
+				url: '/api/projects/' + id,
+				headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+				data: $.param(formData)
+			});
+		},
+
 		destroy: function(id) {
 			return $http.delete('/api/projects/' + id);
 		}
