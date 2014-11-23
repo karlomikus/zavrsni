@@ -2,46 +2,61 @@
 
 class ProjectsController extends \BaseController
 {
-	/**
-	 * Display a listing of the project.
-	 *
-	 * @return Response
-	 */
-	public function index()
+    /**
+     * Display a listing of the project.
+     *
+     * @return Response
+     */
+    public function index()
     {
-        $projects = Project::get();
-
-        foreach ($projects as $project)
-        {
-            if(!empty($project->tags))
-            {
-                $project->tags = explode(',', $project->tags);
-            }
-        }
-
-		return Response::json($projects);
-	}
-
-	/**
-	 * Store a newly created project in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-        if(!Sentry::check()) return Response::json(array('success' => false));
-
-        $saved          = true;
-        $errors         = null;
-        $title          = Input::get('title');
-        $description    = Input::get('description');
-        $skills         = Input::get('skills');
-        $category       = Input::get('category');
-        $tags           = Input::get('tags');
-        $userId         = Sentry::getUser()->id;
-
         try
         {
+            $responseStatus = 200;
+            $response = [];
+            $projects = Project::get();
+
+            foreach ($projects as $project)
+            {
+                $response[] = [
+                    'id' => $project->id,
+                    'user' => $project->user->first_name . ' ' . $project->user->last_name,
+                    'userId' => $project->user->id,
+                    'title' => $project->title,
+                    'description' => $project->description,
+                    'category' => $project->category->name,
+                    'categoryId' => $project->category->id,
+                    'tags' => explode(',', $project->tags),
+                    'date' => date_format($project->created_at, 'd.m.Y'),
+                ];
+            }
+        }
+        catch(Exception $e)
+        {
+            $responseStatus = 400;
+        }
+        finally
+        {
+            return Response::json($response, $responseStatus);
+        }
+    }
+
+    /**
+     * Store a newly created project in storage.
+     *
+     * @return Response
+     */
+    public function store()
+    {
+        try
+        {
+            $responseStatus = 200;
+            $title          = Input::get('title');
+            $description    = Input::get('description');
+            $skills         = Input::get('skills');
+            $category       = Input::get('category');
+            $tags           = Input::get('tags');
+            $userId         = Sentry::getUser()->id;
+
             $project = new Project();
 
             $project->title = $title;
@@ -52,34 +67,36 @@ class ProjectsController extends \BaseController
 
             $project->save();
         }
-        catch(Exception $e)
+        catch (Exception $e)
         {
-            $saved = false;
-            $errors = $e->getMessage();
+            $responseStatus = 400;
+            die($e->getMessage());
         }
+        finally
+        {
+            return Response::json([], $responseStatus);
+        }        
+    }
 
-        return Response::json(array('success' => $saved, 'errors' => $errors));
-	}
+    /**
+     * Display the specified project.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        return Response::json(Project::find($id));
+    }
 
-	/**
-	 * Display the specified project.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		return Response::json(Project::find($id));
-	}
-
-	/**
-	 * Update the specified project in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
+    /**
+     * Update the specified project in storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function update($id)
+    {
         $saved          = true;
         $errors         = null;
         $title          = Input::get('title');
@@ -107,16 +124,16 @@ class ProjectsController extends \BaseController
         }
 
         return Response::json(array('success' => $saved, 'errors' => $errors));
-	}
+    }
 
-	/**
-	 * Remove the specified project from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
+    /**
+     * Remove the specified project from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
         if(!Sentry::check()) return Response::json(array('success' => false));
 
         $success    = true;
@@ -133,5 +150,5 @@ class ProjectsController extends \BaseController
         }
 
         return Response::json(array('success' => $success, 'errors' => $errors));
-	}
+    }
 }

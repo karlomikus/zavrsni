@@ -14,7 +14,7 @@ class AddCategoriesToProjects extends Migration {
 	{
 		Schema::table('projects', function(Blueprint $table)
 		{
-            $table->integer('category_id')->unsigned()->nullable();
+            $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
 		});
 	}

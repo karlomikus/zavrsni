@@ -26,6 +26,8 @@ class UsersTableSeeder extends Seeder
             'email'     => 'admin@admin.com',
             'password'  => 'admin123',
             'activated' => true,
+            'first_name'=> 'Karlo',
+            'last_name' => 'Mikuš'
         ));
         $adminGroup = Sentry::findGroupById(1);
         $admin->addGroup($adminGroup);
@@ -40,6 +42,8 @@ class UsersTableSeeder extends Seeder
                 'email'     => $faker->email(),
                 'password'  => '123456',
                 'activated' => true,
+                'first_name'=> $faker->firstName(),
+                'last_name' => $faker->lastName()
             ));
 
             $admin->addGroup($usersGroup);

@@ -19,12 +19,13 @@
     <script src="js/vendor/angular.loading.min.js"></script>
     <script src="js/services.js"></script>
     <script src="js/controllers.js"></script>
+    <script src="js/directives.js"></script>
     <script src="js/routes.js"></script>
     <script src="js/app.js"></script>
 </head>
 <body>
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-inverse">
         <div class="container" ng-controller="authController">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse">

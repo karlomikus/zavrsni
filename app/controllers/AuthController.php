@@ -33,20 +33,52 @@ class AuthController extends \BaseController {
      * Get information about currently logged in user
      * @return Response
      */
-    public function user()
+    public function loggedInUser()
     {
-        $user = null;
+        $userResp = null;
 
         try
         {
             $user = Sentry::getUser();
+
+            // We don't want all user information
+            $userResp = new stdClass;
+            $userResp->email = $user->email;
+            $userResp->firstName = $user->first_name;
+            $userResp->lastName = $user->last_name;
         }
         catch(Exception $e)
         {
 
         }
 
-        return Response::json(array('user' => $user));
+        return Response::json($userResp);
+    }
+
+    /**
+     * Get information about a user
+     * @param $id User ID
+     * @return Response
+     */
+    public function user($id)
+    {
+        $userResp = null;
+
+        try
+        {
+            $user = Sentry::findUserById($id);
+
+            // We don't want all user information
+            $userResp = new stdClass;
+            $userResp->email = $user->email;
+            $userResp->firstName = $user->first_name;
+            $userResp->lastName = $user->last_name;
+        }
+        catch(Exception $e)
+        {
+        }
+
+        return Response::json($userResp);
     }
 
     /**

@@ -3,8 +3,19 @@ use LaravelBook\Ardent\Ardent;
 
 class Project extends Ardent
 {
+    public static $rules = [
+        'title' => 'required|min:3',
+        'description' => 'required|min:3',
+        'category_id' => 'required'
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo('User');
+    }
+
     public function category()
     {
-        return $this->hasOne('Category');
+        return $this->belongsTo('Category');
     }
 }

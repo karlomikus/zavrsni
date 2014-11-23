@@ -25,30 +25,29 @@ app.controller('projectsController', ['$http','$scope', '$location', '$routePara
 	});
 
 	// Fill project form on edit
-	if(projectId)
+	Project.get(projectId).success(function(data)
 	{
-		Project.get(projectId).success(function(data)
-		{
-			$scope.projectFormData = data;
-		});
-	}
+		$scope.projectFormData = data;
+	});
 
-	$scope.save = function()
+	$scope.submit = function()
 	{
-		Project.save($scope.projectFormData).success(function(data)
+		if(projectId)
 		{
-			console.log('Added new project!');
-			$location.path("/");
-		});
-	}
-
-	$scope.edit = function(id)
-	{
-		Project.edit(id, $scope.projectFormData).success(function(data)
+			Project.edit(projectId, $scope.projectFormData).success(function(data)
+			{
+				console.log('Edited project!');
+				$location.path("/project/" + projectId);
+			});
+		}
+		else
 		{
-			console.log('Edited project!');
-			$location.path("/project/" + id);
-		});
+			Project.save($scope.projectFormData).success(function(data)
+			{
+				console.log('Added new project!');
+				$location.path("/");
+			});
+		}
 	}
 }]);
 
