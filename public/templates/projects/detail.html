@@ -1,13 +1,15 @@
-<h1>{{ project.title }}</h1>
+<div class="row">
+	<div class="col-md-8">
+		<h1>{{ project.title }}</h1>
 
-<p>
-	{{ project.description }}
-</p>
-
-<p>
-	<strong>Tags:</strong> {{ project.tags }}
-</p>
-
-<p>
-	<a href="/project/edit/{{ project.id }}">Uredi projekt</a>
-</p>
+		<p>
+			{{ project.description }}
+		</p>
+	</div>
+	<div class="col-md-4">
+		<ul class="list-unstyled">
+			<li><strong>Tags:</strong> {{ project.tags }}</li>
+			<li><a class="btn btn-warning" href="/project/edit/{{ project.id }}">Uredi projekt</a></li>
+		</ul>
+	</div>
+</div>

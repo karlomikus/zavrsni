@@ -24,7 +24,6 @@
     <script src="js/app.js"></script>
 </head>
 <body>
-
     <nav class="navbar navbar-inverse">
         <div class="container" ng-controller="authController">
             <div class="navbar-header">

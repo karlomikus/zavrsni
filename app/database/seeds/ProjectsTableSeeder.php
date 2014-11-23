@@ -13,7 +13,7 @@ class ProjectsTableSeeder extends Seeder
                 'user_id' => 1,
                 'tags' => 'test,tag,plz,ignore,no,copy,pasta',
                 'category_id' => $faker->numberBetween(1, 5),
-                'description' => $faker->paragraph()
+                'description' => $faker->text(600)
             ));
         }
     }
