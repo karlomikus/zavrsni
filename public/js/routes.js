@@ -12,7 +12,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 	})
 	.when('/new',
 	{
-		templateUrl: 'templates/projects/new.html',
+		templateUrl: 'templates/projects/form.html',
 		controller: 'projectsController'
 	})
 	.when('/project/:id',
@@ -22,8 +22,13 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 	})
 	.when('/project/edit/:id',
 	{
-		templateUrl: 'templates/projects/new.html',
+		templateUrl: 'templates/projects/form.html',
 		controller: 'projectsController'
+	})
+	.when('/profile/',
+	{
+		templateUrl: 'templates/profile/main.html',
+		controller: 'projectDetailsController'
 	})
 	.otherwise(
 	{

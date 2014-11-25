@@ -57,6 +57,10 @@ app.factory('Auth', ['$http', function($http)
 			return $http.get('/api/auth/logout');
 		},
 
+		currentUser: function() {
+			return $http.get('/api/auth/user');
+		},
+
 		getUserById: function(id) {
 			return $http.get('/api/auth/user/' + id);
 		}

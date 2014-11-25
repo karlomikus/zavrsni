@@ -23,17 +23,21 @@ Route::group(array('prefix'=> 'api'), function()
     Route::post('auth/login', 'AuthController@login');
     Route::get('auth/logout', 'AuthController@logout');
     Route::get('auth/check', 'AuthController@isLoggedIn');
-    Route::get('auth/user', 'AuthController@loggedInUser');
+    Route::get('auth/user', 'AuthController@currentUser');
     Route::get('auth/user/{id}', 'AuthController@user');
 
     Route::resource('projects', 'ProjectsController');
     Route::resource('categories', 'CategoriesController');
-    Route::resource('users', 'UsersController');
+    //Route::resource('users', 'UsersController');
 });
 
 // Administrator access routes
 Route::group(array('prefix'=> 'admin'), function()
 {
+    Route::get('/', function()
+    {
+        die('Admin not implemented yet!');
+    });
 });
 
 // Catch all missing routes and let angular do the routing

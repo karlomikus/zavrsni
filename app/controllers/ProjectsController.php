@@ -86,7 +86,31 @@ class ProjectsController extends \BaseController
      */
     public function show($id)
     {
-        return Response::json(Project::find($id));
+        try
+        {
+            $responseStatus = 200;
+            $project = Project::find($id);
+
+            $response = [
+                'id' => $project->id,
+                'user' => $project->user->first_name . ' ' . $project->user->last_name,
+                'userId' => $project->user->id,
+                'title' => $project->title,
+                'description' => $project->description,
+                'category' => $project->category->name,
+                'categoryId' => $project->category->id,
+                'tags' => explode(',', $project->tags),
+                'date' => date_format($project->created_at, 'd.m.Y'),
+            ];
+        }
+        catch(Exception $e)
+        {
+            $responseStatus = 400;
+        }
+        finally
+        {
+            return Response::json($response, $responseStatus);
+        }
     }
 
     /**

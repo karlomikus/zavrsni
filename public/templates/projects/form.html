@@ -8,9 +8,9 @@
   <div class="form-group" ng-class="{ 'has-error' : projectForm.category.$invalid && !projectForm.category.$pristine }">
     <label for="category" class="col-sm-2 control-label required">Kategorija</label>
     <div class="col-sm-10">
-      <select name="category" id="category" class="form-control" ng-model="projectFormData.category" required>
+      <select name="category" id="category" class="form-control" ng-model="projectFormData.categoryId" ng-options="cat.id as cat.name for cat in categories" required>
         <option value="">Bez kategorije</option>
-        <option value="{{ cat.id }}" ng-repeat="cat in categories">{{ cat.name }}</option>
+        <!-- <option value="{{ cat.id }}" ng-repeat="cat in categories">{{ cat.name }}</option> -->
       </select>
     </div>
   </div>

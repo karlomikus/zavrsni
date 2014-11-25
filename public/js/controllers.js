@@ -75,8 +75,8 @@ app.controller('projectDetailsController', ['$http', '$scope', '$routeParams', '
 /**
  * 	User controllers
  */
-app.controller('authController', ['$http', '$scope', 'Auth',
-	function($http, $scope, Auth)
+app.controller('authController', ['$http', '$scope', '$rootScope', '$location', 'Auth',
+	function($http, $scope, $rootScope, $location, Auth)
 {
 	checkLoginStatus();
 	$scope.loginData = {};
@@ -98,6 +98,8 @@ app.controller('authController', ['$http', '$scope', 'Auth',
 	$scope.logout = function()
 	{
 		Auth.logout();
+		$scope.loggedIn = false;
+		$location.path('/');
 	}
 
 	function checkLoginStatus()
@@ -107,6 +109,15 @@ app.controller('authController', ['$http', '$scope', 'Auth',
 		Auth.isLoggedIn().success(function(data)
 		{
 			$scope.loggedIn = data;
+			// Save logged in user information
+			Auth.currentUser().success(function(userData)
+			{
+				$rootScope.currentUser = userData;
+			})
+			.error(function(userData)
+			{
+				$rootScope.currentUser = null;
+			});
 		})
 		.error(function(data)
 		{

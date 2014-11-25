@@ -37,9 +37,9 @@
             </div>
             <div class="collapse navbar-collapse" id="nav-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li ng-if="loggedIn == false"><a href="/signup">Sign up</a></li>
+                    <li><a href="#">O Nama</a></li>
+                    <li><a href="#">Kontakt</a></li>
+                    <li ng-if="loggedIn == false"><a href="/signup">Registracija</a></li>
                 </ul>
                 <form ng-if="loggedIn == false" ng-submit="login()" class="navbar-form navbar-right">
                     <div class="form-group">
@@ -48,19 +48,19 @@
                     <div class="form-group">
                         <input ng-model="loginData.password" name="password" type="password" class="form-control" placeholder="Password">
                     </div>
-                    <button type="submit" class="btn btn-primary">Sign in</button>
+                    <button type="submit" class="btn btn-primary">Prijava</button>
                 </form>
                 <ul ng-if="loggedIn == true" class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Karlo Mikus <span class="caret"></span></a>
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ currentUser.firstName }} {{ currentUser.lastName }} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/profile">Profile</a></li>
-                            <li><a href="/admin" target="_blank">Administration</a></li>
+                            <li><a href="/profile">Profil</a></li>
+                            <li><a href="/admin" target="_blank">Administracija</a></li>
                             <li class="divider"></li>
-                            <li><a href="#" click="logout()">Logout</a></li>
+                            <li><a href="#" ng-click="logout()">Odjava</a></li>
                         </ul>
                     </li>
-                    <li><a href="/new">Post new job</a></li>
+                    <li><a href="/new">Novi posao</a></li>
                 </ul>
             </div>
         </div>
