@@ -14,18 +14,10 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.js"></script>
-    <script src="https://code.angularjs.org/1.3.2/angular-route.js"></script>
-    <script src="js/vendor/angular.loading.min.js"></script>
-    <script src="js/services.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/directives.js"></script>
-    <script src="js/routes.js"></script>
-    <script src="js/app.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-inverse">
-        <div class="container" ng-controller="authController">
+        <div class="container" ng-controller="AuthCtrl">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -41,7 +33,7 @@
                     <li><a href="#">Kontakt</a></li>
                     <li ng-if="loggedIn == false"><a href="/signup">Registracija</a></li>
                 </ul>
-                <form ng-if="loggedIn == false" ng-submit="login()" class="navbar-form navbar-right">
+                <form class="navbar-form navbar-right" ng-if="loggedIn == false" ng-submit="login()">
                     <div class="form-group">
                         <input ng-model="loginData.email" name="email" type="text" class="form-control" placeholder="Email">
                     </div>
@@ -50,7 +42,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Prijava</button>
                 </form>
-                <ul ng-if="loggedIn == true" class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" ng-if="loggedIn == true">
                     <li class="dropdown">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ currentUser.firstName }} {{ currentUser.lastName }} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -70,5 +62,16 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.js"></script>
+<script src="//code.angularjs.org/1.3.2/angular-route.js"></script>
+<script src="//code.angularjs.org/1.3.2/angular-resource.js"></script>
+<script src="js/vendor/angular.loading.min.js"></script>
+
+<script src="js/services.js"></script>
+<script src="js/controllers.js"></script>
+<script src="js/directives.js"></script>
+<script src="js/routes.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

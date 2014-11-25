@@ -5,77 +5,43 @@ var app = angular.module('myApp.controllers', []);
 /**
  * 	Projects controllers
  */
-app.controller('projectsController', ['$http','$scope', '$location', '$routeParams', 'Project', 'Category',
-	function($http, $scope, $location, $routeParams, Project, Category)
+app.controller('ProjectsCtrl', ['$scope', 'Project', function($scope, Project)
 {
-	$scope.projects = {};
-	$scope.categories = {};
-	$scope.projectFormData = {};
+	$scope.projects = Project.query();
+}]);
 
+app.controller('ProjectDetailsCtrl', ['$scope', '$routeParams', 'Project', function($scope, $routeParams, Project)
+{
+	$scope.project = Project.get({id: $routeParams.id});
+}]);
+
+app.controller('ProjectFormCtrl', ['$scope', '$location', '$routeParams', 'Project', 'Category', function($scope, $location, $routeParams, Project, Category)
+{
+	// Check if ID is passed incase of project editing
 	var projectId = $routeParams.id == undefined ? null : $routeParams.id;
 
-	Project.getAll().success(function(data)
-	{
-		$scope.projects = data;
-	});
-
-	Category.getAll().success(function(data)
-	{
-		$scope.categories = data;
-	});
-
-	// Fill project form on edit
-	Project.get(projectId).success(function(data)
-	{
-		$scope.projectFormData = data;
-	});
+	$scope.categories = Category.query();
+	$scope.projectFormData = projectId ? Project.get({id: projectId}) : {};
+	$scope.project = new Project();
 
 	$scope.submit = function()
 	{
 		if(projectId)
 		{
-			Project.edit(projectId, $scope.projectFormData).success(function(data)
-			{
-				console.log('Edited project!');
-				$location.path("/project/" + projectId);
-			});
+			console.log('Not implemented yet!');
 		}
 		else
 		{
-			Project.save($scope.projectFormData).success(function(data)
-			{
-				console.log('Added new project!');
-				$location.path("/");
-			});
+			$scope.project.$save();
+			$location.path('/');
 		}
-	}
-}]);
-
-app.controller('projectDetailsController', ['$http', '$scope', '$routeParams', 'Project', 'Category',
-	function($http, $scope, $routeParams, Project, Category)
-{
-	$scope.project = {};
-
-	Project.get($routeParams.id).success(function(data)
-	{
-		$scope.project = data;
-	});
-
-	$scope.getProjectCategory = function(id)
-	{
-		var catName = Category.get(id).success(function(catData)
-		{
-			return catData.name;
-		});
-
-		return catName;
 	}
 }]);
 
 /**
  * 	User controllers
  */
-app.controller('authController', ['$http', '$scope', '$rootScope', '$location', 'Auth',
+app.controller('AuthCtrl', ['$http', '$scope', '$rootScope', '$location', 'Auth',
 	function($http, $scope, $rootScope, $location, Auth)
 {
 	checkLoginStatus();

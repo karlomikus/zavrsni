@@ -2,34 +2,33 @@
   <div class="form-group" ng-class="{ 'has-error' : projectForm.title.$invalid && !projectForm.title.$pristine }">
     <label for="title" class="col-sm-2 control-label required">Ime</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="title" id="title" placeholder="Upišite ime projekta..." ng-model="projectFormData.title" ng-minlength="3">
+      <input type="text" class="form-control" name="title" id="title" placeholder="Upišite ime projekta..." ng-model="project.title" ng-minlength="3">
     </div>
   </div>
   <div class="form-group" ng-class="{ 'has-error' : projectForm.category.$invalid && !projectForm.category.$pristine }">
     <label for="category" class="col-sm-2 control-label required">Kategorija</label>
     <div class="col-sm-10">
-      <select name="category" id="category" class="form-control" ng-model="projectFormData.categoryId" ng-options="cat.id as cat.name for cat in categories" required>
+      <select name="category" id="category" class="form-control" ng-model="project.categoryId" ng-options="cat.id as cat.name for cat in categories" required>
         <option value="">Bez kategorije</option>
-        <!-- <option value="{{ cat.id }}" ng-repeat="cat in categories">{{ cat.name }}</option> -->
       </select>
     </div>
   </div>
   <div class="form-group">
     <label for="descr" class="col-sm-2 control-label required">Opis projekta</label>
     <div class="col-sm-10">
-      <textarea class="form-control" name="description" id="descr" placeholder="Opišite projekta u detalje..." rows="6" ng-model="projectFormData.description" required></textarea>
+      <textarea class="form-control" name="description" id="descr" placeholder="Opišite projekta u detalje..." rows="6" ng-model="project.description" required></textarea>
     </div>
   </div>
   <div class="form-group">
     <label for="skills" class="col-sm-2 control-label">Tražene sposobnosti</label>
     <div class="col-sm-10">
-      <textarea ng-model="projectFormData.skills" class="form-control" name="skills" id="skills" placeholder="Napišite zahtjevane sposobnosti..." rows="6"></textarea>
+      <textarea ng-model="project.skills" class="form-control" name="skills" id="skills" placeholder="Napišite zahtjevane sposobnosti..." rows="6"></textarea>
     </div>
   </div>
   <div class="form-group">
     <label for="tags" class="col-sm-2 control-label">Tagovi</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="tags" id="tags" placeholder="Unesite tagove razdvojene zerezom..." ng-model="projectFormData.tags">
+      <input type="text" class="form-control" name="tags" id="tags" placeholder="Unesite tagove razdvojene zerezom..." ng-model="project.tags">
     </div>
   </div>
   <div class="form-group">

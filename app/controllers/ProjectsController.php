@@ -53,7 +53,7 @@ class ProjectsController extends \BaseController
             $title          = Input::get('title');
             $description    = Input::get('description');
             $skills         = Input::get('skills');
-            $category       = Input::get('category');
+            $category       = Input::get('categoryId');
             $tags           = Input::get('tags');
             $userId         = Sentry::getUser()->id;
 
@@ -70,11 +70,10 @@ class ProjectsController extends \BaseController
         catch (Exception $e)
         {
             $responseStatus = 400;
-            die($e->getMessage());
         }
         finally
         {
-            return Response::json([], $responseStatus);
+            return Response::json(null, $responseStatus);
         }        
     }
 
