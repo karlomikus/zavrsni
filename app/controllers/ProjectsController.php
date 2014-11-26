@@ -74,7 +74,7 @@ class ProjectsController extends \BaseController
         finally
         {
             return Response::json(null, $responseStatus);
-        }        
+        }
     }
 
     /**
@@ -120,33 +120,34 @@ class ProjectsController extends \BaseController
      */
     public function update($id)
     {
-        $saved          = true;
-        $errors         = null;
-        $title          = Input::get('title');
-        $description    = Input::get('description');
-        $skills         = Input::get('skills');
-        $category       = Input::get('category');
-        $tags           = Input::get('tags');
-        $userId         = Sentry::getUser()->id;
-
         try
         {
+            $responseStatus = 200;
+            $title          = Input::get('title');
+            $description    = Input::get('description');
+            $skills         = Input::get('skills');
+            $category       = Input::get('categoryId');
+            //$tags           = Input::get('tags');
+
             $project = Project::find($id);
 
             $project->title = $title;
             $project->description = $description . "\n" . $skills;
-            $project->tags = $tags;
+            //$project->tags = $tags;
             $project->category_id = $category;
 
             $project->save();
         }
-        catch(Exception $e)
+        catch (Exception $e)
         {
-            $saved = false;
-            $errors = $e->getMessage();
-        }
+            $responseStatus = 400;
 
-        return Response::json(array('success' => $saved, 'errors' => $errors));
+            echo $e->getMessage();
+        }
+        finally
+        {
+            return Response::json(null, $responseStatus);
+        }
     }
 
     /**

@@ -39,7 +39,11 @@ var app = angular.module('myApp.services', []);
 
 app.factory('Project', ['$resource', function($resource)
 {
-  return $resource('/api/projects/:id');
+  return $resource('/api/projects/:id', {}, {
+    update: {
+      method: 'PUT'
+    }
+  });
 }]);
 
 app.factory('Category', ['$resource', function($resource)
@@ -76,3 +80,17 @@ app.factory('Auth', ['$http', function($http)
     }
   };
 }]);
+
+app.factory('Notification', function()
+{
+  return {
+    notify: function(text, type) {
+      noty({
+        text: text, 
+        layout: 'topCenter', 
+        type: type, 
+        animation: { open: 'animated flipInX', close: 'animated flipOutX'}
+      });
+    }
+  };
+})

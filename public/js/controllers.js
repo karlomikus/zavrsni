@@ -10,29 +10,40 @@ app.controller('ProjectsCtrl', ['$scope', 'Project', function($scope, Project)
 	$scope.projects = Project.query();
 }]);
 
-app.controller('ProjectDetailsCtrl', ['$scope', '$routeParams', 'Project', function($scope, $routeParams, Project)
+app.controller('ProjectDetailsCtrl', ['$scope', '$routeParams', '$location', 'Project', function($scope, $routeParams, $location, Project)
 {
 	$scope.project = Project.get({id: $routeParams.id});
+
+	$scope.delete = function(id)
+	{
+		Project.delete({id: id});
+		Project.query();
+		$location.path('/');
+	}
 }]);
 
-app.controller('ProjectFormCtrl', ['$scope', '$location', '$routeParams', 'Project', 'Category', function($scope, $location, $routeParams, Project, Category)
+app.controller('ProjectFormCtrl', ['$scope', '$location', '$routeParams', 'Project', 'Category', 'Notification', function($scope, $location, $routeParams, Project, Category, Notification)
 {
 	// Check if ID is passed incase of project editing
 	var projectId = $routeParams.id == undefined ? null : $routeParams.id;
 
 	$scope.categories = Category.query();
-	$scope.projectFormData = projectId ? Project.get({id: projectId}) : {};
-	$scope.project = new Project();
+	$scope.project = projectId ? Project.get({id: projectId}) : new Project();
 
 	$scope.submit = function()
 	{
 		if(projectId)
 		{
-			console.log('Not implemented yet!');
+			Project.update({id: projectId}, $scope.project);
+			Notification.notify('Projekt je uspješno spremljen!', 'success');
+			Project.query();
+			$location.path('/project/' + projectId);
 		}
 		else
 		{
 			$scope.project.$save();
+			Notification.notify('Projekt je uspješno spremljen!', 'success');
+			Project.query();
 			$location.path('/');
 		}
 	}
