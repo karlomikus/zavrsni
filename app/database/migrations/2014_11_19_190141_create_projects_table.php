@@ -16,10 +16,16 @@ class CreateProjectsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('title', 100);
-			$table->integer('user_id')->unsigned();;
+			$table->datetime('start_date');
+			$table->datetime('end_date');
+			$table->string('location');
+			$table->integer('user_id')->unsigned();
 			$table->foreign('user_id')->references('id')->on('users');
+			$table->integer('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories');
 			$table->string('tags')->nullable();
 			$table->text('description');
+			$table->text('skills');
 			$table->timestamps();
 		});
 	}

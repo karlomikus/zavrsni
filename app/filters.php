@@ -36,7 +36,7 @@ App::after(function($request, $response)
 Route::filter('auth', function()
 {
 	if(!Sentry::check())
-		return Response::redirect('/');
+		return Redirect::to('/');
 });
 
 

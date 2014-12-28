@@ -2,41 +2,7 @@
 
 var app = angular.module('myApp.services', []);
 
-// app.factory('Project', ['$http', function($http)
-// {
-//   return {
-//     getAll: function() {
-//       return $http.get('/api/projects');
-//     },
-
-//     get: function(id) {
-//       return $http.get('/api/projects/' + id);
-//     },
-
-//     save: function(formData) {
-//       return $http({
-//         method: 'POST',
-//         url: '/api/projects',
-//         headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
-//         data: $.param(formData)
-//       });
-//     },
-
-//     edit: function(id, formData) {
-//       return $http({
-//         method: 'PUT',
-//         url: '/api/projects/' + id,
-//         headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
-//         data: $.param(formData)
-//       });
-//     },
-
-//     destroy: function(id) {
-//       return $http.delete('/api/projects/' + id);
-//     }
-//   };
-// }]);
-
+// PROJECTS
 app.factory('Project', ['$resource', function($resource)
 {
   return $resource('/api/projects/:id', {}, {
@@ -46,41 +12,66 @@ app.factory('Project', ['$resource', function($resource)
   });
 }]);
 
+// CATEGORIES
 app.factory('Category', ['$resource', function($resource)
 {
   return $resource('/api/categories/:id');
 }]);
 
-app.factory('Auth', ['$http', function($http)
+// PROFILE
+app.factory('Profile', ['$http', '$rootScope', function($http, $rootScope)
 {
   return {
-    login: function(formData) {
-      return $http({
-        method: 'POST',
-        url: '/api/auth/login',
-        headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
-        data: $.param(formData)
-      });
-    },
-
-    isLoggedIn: function() {
-      return $http.get('/api/auth/check');
-    },
-
-    logout: function() {
-      return $http.get('/api/auth/logout');
-    },
-
-    currentUser: function() {
-      return $http.get('/api/auth/user');
-    },
-
-    getUserById: function(id) {
-      return $http.get('/api/auth/user/' + id);
+    projects: function($id) {
+      $http.get('/api/profile/projects/' + $id).then(function(data)
+      {
+        return data;
+      })
     }
   };
 }]);
 
+// USER AND AUTHENTICATION
+app.factory('Auth', ['$http', '$rootScope', 'SessionService', function($http, $rootScope, SessionService)
+{
+  return {
+    login: function(credentials) {
+      var login = $http.post('/api/auth/login', credentials);
+      login.success(function(data) {
+        $rootScope.user = data;
+        SessionService.set('auth', true);
+        console.log($rootScope.user);
+      });
+      return login;
+    },
+
+    getUser: function() {
+      return $http.get('/api/auth/user');
+    },
+
+    isLoggedIn: function() {
+      return Boolean(SessionService.get('auth'));
+    }
+  };
+}]);
+
+app.factory('SessionService', function(){
+  return {
+    get: function(key) {
+      sessionStorage.getItem(key);
+    },
+
+    set: function(key, val) {
+      sessionStorage.setItem(key, val);
+    },
+
+    unset: function(key) {
+      sessionStorage.removeItem(key);
+    }
+  };
+});
+
+// NOTIFICATIONS
 app.factory('Notification', function()
 {
   return {

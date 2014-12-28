@@ -3,32 +3,59 @@
 var app = angular.module('myApp.controllers', []);
 
 /**
+ * 	User controllers
+ */
+app.controller('AuthCtrl', ['$http', '$scope', '$rootScope', '$location', 'Auth',
+	function($http, $scope, $rootScope, $location, Auth)
+{
+	$scope.login = function(loginData)
+	{
+		Auth.login(loginData);
+	}
+}]);
+
+/**
  * 	Projects controllers
  */
 app.controller('ProjectsCtrl', ['$scope', 'Project', function($scope, Project)
 {
-	$scope.projects = Project.query();
+	var projects = Project.get(function()
+	{
+		$scope.projects = projects.data;
+	});
 }]);
 
-app.controller('ProjectDetailsCtrl', ['$scope', '$routeParams', '$location', 'Project', function($scope, $routeParams, $location, Project)
+app.controller('ProjectDetailsCtrl', ['$scope', '$routeParams', '$window', 'Project', function($scope, $routeParams, $window, Project)
 {
-	$scope.project = Project.get({id: $routeParams.id});
+	Project.get({id: $routeParams.id}, function(project)
+	{
+		$scope.project = project.data;
+	});
 
 	$scope.delete = function(id)
 	{
 		Project.delete({id: id});
-		Project.query();
-		$location.path('/');
+		$window.location.href = '/';
 	}
 }]);
 
-app.controller('ProjectFormCtrl', ['$scope', '$location', '$routeParams', 'Project', 'Category', 'Notification', function($scope, $location, $routeParams, Project, Category, Notification)
+app.controller('ProjectFormCtrl', ['$scope', '$window', '$routeParams', 'Project', 'Category', 'Notification', function($scope, $window, $routeParams, Project, Category, Notification)
 {
 	// Check if ID is passed incase of project editing
 	var projectId = $routeParams.id == undefined ? null : $routeParams.id;
-
 	$scope.categories = Category.query();
-	$scope.project = projectId ? Project.get({id: projectId}) : new Project();
+
+	if(projectId)
+	{
+		Project.get({id: projectId}, function(project)
+		{
+			$scope.project = project.data;
+		});
+	}
+	else
+	{
+		$scope.project = new Project();
+	}
 
 	$scope.submit = function()
 	{
@@ -36,69 +63,23 @@ app.controller('ProjectFormCtrl', ['$scope', '$location', '$routeParams', 'Proje
 		{
 			Project.update({id: projectId}, $scope.project);
 			Notification.notify('Projekt je uspješno spremljen!', 'success');
-			Project.query();
-			$location.path('/project/' + projectId);
 		}
 		else
 		{
 			$scope.project.$save();
 			Notification.notify('Projekt je uspješno spremljen!', 'success');
-			Project.query();
-			$location.path('/');
 		}
+
+		$window.location.href = '/';
 	}
 }]);
 
 /**
- * 	User controllers
+ *  Profile controllers
  */
-app.controller('AuthCtrl', ['$http', '$scope', '$rootScope', '$location', 'Auth',
-	function($http, $scope, $rootScope, $location, Auth)
+app.controller('ProfileController', ['$scope', '$rootScope', 'Profile', function($scope, $rootScope, Profile)
 {
-	checkLoginStatus();
-	$scope.loginData = {};
+	var userId = $rootScope.user.id;
 
-	$scope.login = function()
-	{
-		Auth.login($scope.loginData).success(function(data)
-		{
-			checkLoginStatus();
-			console.log("Logged in!")
-		})
-		.error(function(data)
-		{
-			checkLoginStatus();
-			console.log("Unable to sign in");
-		});
-	}
-
-	$scope.logout = function()
-	{
-		Auth.logout();
-		$scope.loggedIn = false;
-		$location.path('/');
-	}
-
-	function checkLoginStatus()
-	{
-		$scope.loggedIn = false;
-
-		Auth.isLoggedIn().success(function(data)
-		{
-			$scope.loggedIn = data;
-			// Save logged in user information
-			Auth.currentUser().success(function(userData)
-			{
-				$rootScope.currentUser = userData;
-			})
-			.error(function(userData)
-			{
-				$rootScope.currentUser = null;
-			});
-		})
-		.error(function(data)
-		{
-			$scope.loggedIn = data;
-		});
-	}
+	console.log(userId);
 }]);

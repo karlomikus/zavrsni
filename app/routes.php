@@ -17,8 +17,14 @@ Route::get('/', function()
     return View::make('index');
 });
 
-// Public access routes
-Route::group(array('prefix'=> 'api'), function()
+// Catch all missing routes and let angular do the routing
+App::missing(function($exception)
+{
+    return View::make('index');
+});
+
+// Public api access routes
+Route::group(['prefix'=> 'api'], function()
 {
     Route::post('auth/login', 'AuthController@login');
     Route::get('auth/logout', 'AuthController@logout');
@@ -26,22 +32,20 @@ Route::group(array('prefix'=> 'api'), function()
     Route::get('auth/user', 'AuthController@currentUser');
     Route::get('auth/user/{id}', 'AuthController@user');
 
+    Route::get('profile/projects/{id}', 'ProfileController@userProjects');
+
     Route::resource('projects', 'ProjectsController');
     Route::resource('categories', 'CategoriesController');
-    //Route::resource('users', 'UsersController');
 });
 
 // Administrator access routes
-Route::group(array('prefix'=> 'admin'), function()
+Route::group(['prefix'=> 'admin', 'before' => 'auth'], function()
 {
-    Route::get('/', function()
-    {
-        die('Admin not implemented yet!');
-    });
-});
+    Route::get('/', 'Admin\DashboardController@index');
 
-// Catch all missing routes and let angular do the routing
-App::missing(function($exception)
-{
-    return View::make('index');
+    Route::get('projects', 'Admin\ProjectsController@index');
+
+    Route::get('users', 'Admin\UsersController@index');
+    Route::get('users/edit/{id}', 'Admin\UsersController@edit');
+    Route::get('users/create', 'Admin\UsersController@create');
 });

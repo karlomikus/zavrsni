@@ -27,7 +27,13 @@ class UsersTableSeeder extends Seeder
             'password'  => 'admin123',
             'activated' => true,
             'first_name'=> 'Karlo',
-            'last_name' => 'Mikuš'
+            'last_name' => 'Mikuš',
+            'gender'    => 'm',
+            'dob'       => '1992-09-25',
+            'telephone' => '0912345678',
+            'address'   => 'Ilica 1',
+            'city'      => 'Zagreb',
+            'postcode'  => '10000'
         ));
         $adminGroup = Sentry::findGroupById(1);
         $admin->addGroup($adminGroup);
@@ -43,7 +49,13 @@ class UsersTableSeeder extends Seeder
                 'password'  => '123456',
                 'activated' => true,
                 'first_name'=> $faker->firstName(),
-                'last_name' => $faker->lastName()
+                'last_name' => $faker->lastName(),
+                'gender'    => $faker->randomElement(['m', 'f']),
+                'dob'       => $faker->dateTime(),
+                'telephone' => $faker->phoneNumber(),
+                'address'   => $faker->streetAddress(),
+                'city'      => $faker->city(),
+                'postcode'  => $faker->postcode()
             ));
 
             $admin->addGroup($usersGroup);

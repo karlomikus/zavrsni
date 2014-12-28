@@ -3,6 +3,8 @@ use LaravelBook\Ardent\Ardent;
 
 class Project extends Ardent
 {
+    protected $guarded = ['id'];
+
     public static $rules = [
         'title' => 'required|min:3',
         'description' => 'required|min:3',

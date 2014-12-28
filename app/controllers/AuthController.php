@@ -1,14 +1,15 @@
 <?php
 
-class AuthController extends \BaseController {
-
+class AuthController extends ApiController
+{
     /**
      * Authenticate the user
      * @return Response
      */
     public function login()
     {
-        $email = Input::get('email');
+        $user     = null;
+        $email    = Input::get('email');
         $password = Input::get('password');
 
         $credentials = array(
@@ -18,15 +19,14 @@ class AuthController extends \BaseController {
 
         try
         {
-            Sentry::authenticate($credentials, false);
-            $loggedIn = true;
+            $user = Sentry::authenticate($credentials, false);
         }
         catch(Exception $e)
         {
-            $loggedIn = false;
+            // TODO
         }
 
-        return Response::json(array('success' => $loggedIn));
+        return Response::json($user);
     }
 
     /**
@@ -41,13 +41,21 @@ class AuthController extends \BaseController {
             $user = Sentry::getUser();
 
             $response = [
+                'id' => $user->id,
                 'email' => $user->email,
                 'firstName' => $user->first_name,
                 'lastName' => $user->last_name,
+                'gender' => $user->gender,
+                'dob' => $user->dob,
+                'telephone' => $user->telephone,
+                'address' => $user->address,
+                'city' => $user->city,
+                'postcode' => $user->postcode,
             ];
         }
         catch(Exception $e)
         {
+            $response = null;
             $responseStatus = 400;
         }
         finally
@@ -72,6 +80,12 @@ class AuthController extends \BaseController {
                 'email' => $user->email,
                 'firstName' => $user->first_name,
                 'lastName' => $user->last_name,
+                'gender' => $user->gender,
+                'dob' => $user->dob,
+                'telephone' => $user->telephone,
+                'address' => $user->address,
+                'city' => $user->city,
+                'postcode' => $user->postcode,
             ];
         }
         catch(Exception $e)
@@ -90,7 +104,7 @@ class AuthController extends \BaseController {
      */
     public function isLoggedIn()
     {
-        return Response::json(Sentry::check());
+        return Response::json(Sentry::check() ? true : null);
     }
 
     /**

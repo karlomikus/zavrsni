@@ -8,7 +8,9 @@
 		"laravel/framework": "4.2.*",
         "cartalyst/sentry": "2.1.*",
         "laravelbook/ardent": "2.*",
-        "fzaninotto/faker": "1.5.*@dev"
+        "fzaninotto/faker": "1.5.*@dev",
+		"barryvdh/laravel-ide-helper": "~1.11",
+		"league/fractal": "~0.11"
 	},
 	"autoload": {
 		"classmap": [
@@ -16,7 +18,8 @@
 			"app/controllers",
 			"app/models",
 			"app/database/migrations",
-			"app/database/seeds"
+			"app/database/seeds",
+			"app/transformers"
 		]
 	},
 	"scripts": {

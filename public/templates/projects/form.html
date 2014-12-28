@@ -1,40 +1,63 @@
-<form name="projectForm" class="form-horizontal" ng-submit="submit()" novalidate>
-  <div class="form-group" ng-class="{ 'has-error' : projectForm.title.$invalid && !projectForm.title.$pristine }">
-    <label for="title" class="col-sm-2 control-label required">Ime</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="title" id="title" placeholder="Upišite ime projekta..." ng-model="project.title" ng-minlength="3">
+<div class="col-md-8">
+  <form name="projectForm" class="form-horizontal" ng-submit="submit()" novalidate>
+    <div class="form-group" ng-class="{ 'has-error' : projectForm.title.$invalid && !projectForm.title.$pristine }">
+      <label for="title" class="col-sm-2 control-label required">Ime</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="title" id="title" placeholder="Upišite ime projekta..." ng-model="project.title" ng-minlength="3">
+      </div>
     </div>
-  </div>
-  <div class="form-group" ng-class="{ 'has-error' : projectForm.category.$invalid && !projectForm.category.$pristine }">
-    <label for="category" class="col-sm-2 control-label required">Kategorija</label>
-    <div class="col-sm-10">
-      <select name="category" id="category" class="form-control" ng-model="project.categoryId" ng-options="cat.id as cat.name for cat in categories" required>
-        <option value="">Bez kategorije</option>
-      </select>
+    <div class="form-group" ng-class="{ 'has-error' : projectForm.category.$invalid && !projectForm.category.$pristine }">
+      <label for="category" class="col-sm-2 control-label required">Kategorija</label>
+      <div class="col-sm-10">
+        <select name="category" id="category" class="form-control" ng-model="project.categoryId" ng-options="cat.id as cat.name for cat in categories" required>
+          <option value="">Bez kategorije</option>
+        </select>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="descr" class="col-sm-2 control-label required">Opis projekta</label>
-    <div class="col-sm-10">
-      <textarea class="form-control" name="description" id="descr" placeholder="Opišite projekta u detalje..." rows="6" ng-model="project.description" required></textarea>
+    <div class="form-group">
+      <label for="start" class="col-sm-2 control-label">Početak</label>
+      <div class="col-sm-10">
+        <input class="form-control" name="start" id="start" placeholder="Datum početka projekta..." ng-model="project.startDate">
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="skills" class="col-sm-2 control-label">Tražene sposobnosti</label>
-    <div class="col-sm-10">
-      <textarea ng-model="project.skills" class="form-control" name="skills" id="skills" placeholder="Napišite zahtjevane sposobnosti..." rows="6"></textarea>
+    <div class="form-group">
+      <label for="endDate" class="col-sm-2 control-label">Rok</label>
+      <div class="col-sm-10">
+        <input class="form-control" name="endDate" id="endDate" placeholder="Rok za završetak projekta..." ng-model="project.endDate">
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="tags" class="col-sm-2 control-label">Tagovi</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="tags" id="tags" placeholder="Unesite tagove razdvojene zerezom..." ng-model="project.tags">
+    <div class="form-group">
+      <label for="location" class="col-sm-2 control-label">Lokacija</label>
+      <div class="col-sm-10">
+        <input class="form-control" name="location" id="location" placeholder="Mjesto/grad izvršavanja projekta..." ng-model="project.location">
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-success" ng-disabled="projectForm.$invalid">Spremi projekt</button>
-      <button class="btn btn-default">Pregled projekta</button>
+    <div class="form-group">
+      <label for="descr" class="col-sm-2 control-label required">Opis projekta</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" name="description" id="descr" placeholder="Opišite projekt u detalje..." rows="6" ng-model="project.description" required></textarea>
+      </div>
     </div>
-  </div>
-</form>
+    <div class="form-group">
+      <label for="skills" class="col-sm-2 control-label">Tražene sposobnosti</label>
+      <div class="col-sm-10">
+        <textarea ng-model="project.skills" class="form-control" name="skills" id="skills" placeholder="Napišite zahtjevane sposobnosti..." rows="6"></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="tags" class="col-sm-2 control-label">Tagovi</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="tags" id="tags" placeholder="Unesite tagove razdvojene zerezom..." ng-model="project.tags">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-success" ng-disabled="projectForm.$invalid">Spremi projekt</button>
+        <button class="btn btn-default">Pregled projekta</button>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="col-md-4">
+  Additional info
+</div>

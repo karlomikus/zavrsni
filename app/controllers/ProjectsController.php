@@ -1,9 +1,11 @@
 <?php
 
-class ProjectsController extends \BaseController
+use Transformers\ProjectTransformer;
+
+class ProjectsController extends ApiController
 {
     /**
-     * Display a listing of the project.
+     * Display a listing of the projects.
      *
      * @return Response
      */
@@ -11,32 +13,15 @@ class ProjectsController extends \BaseController
     {
         try
         {
-            $responseStatus = 200;
-            $response = [];
             $projects = Project::get();
-
-            foreach ($projects as $project)
-            {
-                $response[] = [
-                    'id' => $project->id,
-                    'user' => $project->user->first_name . ' ' . $project->user->last_name,
-                    'userId' => $project->user->id,
-                    'title' => $project->title,
-                    'description' => $project->description,
-                    'category' => $project->category->name,
-                    'categoryId' => $project->category->id,
-                    'tags' => explode(',', $project->tags),
-                    'date' => date_format($project->created_at, 'd.m.Y'),
-                ];
-            }
         }
         catch(Exception $e)
         {
-            $responseStatus = 400;
+            $this->setStatusCode(400);
         }
         finally
         {
-            return Response::json($response, $responseStatus);
+            return $this->respondWithCollection($projects, new ProjectTransformer());
         }
     }
 
@@ -55,15 +40,22 @@ class ProjectsController extends \BaseController
             $skills         = Input::get('skills');
             $category       = Input::get('categoryId');
             $tags           = Input::get('tags');
+            $startDate      = Input::get('startDate');
+            $endDate        = Input::get('endDate');
+            $location       = Input::get('location');
             $userId         = Sentry::getUser()->id;
 
             $project = new Project();
 
-            $project->title = $title;
-            $project->description = $description . "\n" . $skills;
-            $project->tags = $tags;
-            $project->user_id = $userId;
+            $project->title       = $title;
+            $project->description = $description;
+            $project->skills      = $skills;
+            $project->tags        = $tags;
+            $project->user_id     = $userId;
             $project->category_id = $category;
+            $project->start_date  = $startDate;
+            $project->end_date    = $endDate;
+            $project->location    = $location;
 
             $project->save();
         }
@@ -87,28 +79,15 @@ class ProjectsController extends \BaseController
     {
         try
         {
-            $responseStatus = 200;
             $project = Project::find($id);
-
-            $response = [
-                'id' => $project->id,
-                'user' => $project->user->first_name . ' ' . $project->user->last_name,
-                'userId' => $project->user->id,
-                'title' => $project->title,
-                'description' => $project->description,
-                'category' => $project->category->name,
-                'categoryId' => $project->category->id,
-                'tags' => explode(',', $project->tags),
-                'date' => date_format($project->created_at, 'd.m.Y'),
-            ];
         }
         catch(Exception $e)
         {
-            $responseStatus = 400;
+            $this->setStatusCode(400);
         }
         finally
         {
-            return Response::json($response, $responseStatus);
+            return $this->respondWithItem($project, new ProjectTransformer());
         }
     }
 
@@ -127,22 +106,27 @@ class ProjectsController extends \BaseController
             $description    = Input::get('description');
             $skills         = Input::get('skills');
             $category       = Input::get('categoryId');
-            //$tags           = Input::get('tags');
+            $tags           = Input::get('tags');
+            $startDate      = Input::get('startDate');
+            $endDate        = Input::get('endDate');
+            $location       = Input::get('location');
 
             $project = Project::find($id);
 
-            $project->title = $title;
-            $project->description = $description . "\n" . $skills;
-            //$project->tags = $tags;
+            $project->title       = $title;
+            $project->description = $description;
+            $project->skills      = $skills;
+            $project->tags        = $tags;
             $project->category_id = $category;
+            $project->start_date  = $startDate;
+            $project->end_date    = $endDate;
+            $project->location    = $location;
 
             $project->save();
         }
         catch (Exception $e)
         {
             $responseStatus = 400;
-
-            echo $e->getMessage();
         }
         finally
         {
@@ -158,21 +142,18 @@ class ProjectsController extends \BaseController
      */
     public function destroy($id)
     {
-        if(!Sentry::check()) return Response::json(array('success' => false));
-
-        $success    = true;
-        $errors     = null;
-
         try
         {
+            $responseStatus = 200;
             Project::destroy($id);
         }
         catch(Exception $e)
         {
-            $success = false;
-            $errors = $e->getMessage();
+            $responseStatus = 400;
         }
-
-        return Response::json(array('success' => $success, 'errors' => $errors));
+        finally
+        {
+            return Response::json(null, $responseStatus);
+        }
     }
 }

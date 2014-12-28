@@ -1,0 +1,28 @@
+body {
+	padding-top: 50px;
+}
+
+#sidebar {
+	background: #F5F5F5;
+	border-right: 1px solid #ddd;
+	position: fixed;
+	top: 50px;
+	bottom: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+	width: 250px;
+}
+
+#content {
+	padding-left: 250px;
+	padding-top: 20px;
+}
+
+
+
+
+
+
+.page-header, .page-header h1 {
+	margin-top: 0;
+}

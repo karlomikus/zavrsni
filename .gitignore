@@ -7,3 +7,6 @@ composer.phar
 Thumbs.db
 /.idea
 /vagrant
+/xdebug
+*.sublime-project
+*.sublime-workspace

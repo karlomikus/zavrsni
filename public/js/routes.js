@@ -23,7 +23,11 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     })
     .when('/profile/', {
       templateUrl: 'templates/profile/main.html',
-      controller: 'ProjectDetailsCtrl'
+      controller: 'ProfileController'
+    })
+    .when('/myprojects', {
+      templateUrl: 'templates/profile/projects.html',
+      controller: 'ProfileController'
     })
     .otherwise({
       redirectTo: '/'

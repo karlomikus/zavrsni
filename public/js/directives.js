@@ -2,23 +2,29 @@
 
 var app = angular.module('myApp.directives', []);
 
-// app.directive('user', ['Auth', function(Auth)
-// {
-// 	return {
-// 		restrict: 'E',
-// 		template: function(elem, attr) {
-// 			var user = {};
-// 			Auth.getUserById(attr.id).success(function(data)
-// 			{
-// 				user = data;
-// 			}).error(function(data)
-// 			{
-// 				user = {};
-// 			});
+app.directive('projectUserActions', function()
+{
+	return {
+		restrict: 'E',
+		scope: {
+			project: '=for'
+		},
+		templateUrl: 'templates/directives/project-user-actions.html'
+	}
+});
 
-// 			console.log(user);
+app.directive('loginForm', function()
+{
+	return {
+		restrict: 'E',
+		templateUrl: 'templates/directives/login-form.html'
+	}
+});
 
-// 			return '<h1>User name ' + user.firstName + '</h1>'
-// 		}
-// 	}
-// }]);
+app.directive('userBar', function()
+{
+	return {
+		restrict: 'E',
+		templateUrl: 'templates/directives/user-bar.html'
+	}
+});

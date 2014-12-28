@@ -6,15 +6,20 @@ class ProjectsTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for ($i = 0; $i < 6; $i++)
+        for ($i = 0; $i < 12; $i++)
         {
-            Project::create(array(
-                'title' => $faker->sentence(3),
-                'user_id' => 1,
-                'tags' => 'test,tag,plz,ignore,no,copy,pasta',
+            Project::create(
+            [
+                'title'       => $faker->sentence(3),
+                'start_date'  => $faker->dateTimeThisYear(),
+                'end_date'    => date('Y-m-d H:i:s'),
+                'location'    => $faker->city(),
+                'user_id'     => $faker->numberBetween(1, 7),
+                'tags'        => 'test,tag,plz,ignore,no,copy,pasta',
                 'category_id' => $faker->numberBetween(1, 5),
-                'description' => $faker->text(600)
-            ));
+                'description' => $faker->text(600),
+                'skills'      => $faker->text(400)
+            ]);
         }
     }
 }

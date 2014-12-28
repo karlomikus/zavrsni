@@ -1,16 +1,21 @@
 <div class="row">
-	<div class="col-md-8">
-		<h1>{{ project.title }}</h1>
-
-		<p>
-			{{ project.description }}
-		</p>
-	</div>
-	<div class="col-md-4">
-		<ul class="list-unstyled">
-			<li><strong>Tags:</strong> {{ project.tags }}</li>
-			<li><a class="btn btn-warning" href="/project/edit/{{ project.id }}">Uredi projekt</a></li>
-			<li><a class="btn btn-danger" href="#" ng-click="delete(project.id)">Obriši projekt</a></li>
+	<div class="col-md-9">
+		<h1 ng-bind="project.title"></h1>
+		<p ng-bind="project.description"></p>
+		<h3>Tražene sposobnosti:</h3>
+		<p ng-bind="project.skills"></p>
+		<h3>Dodatne informacije:</h3>
+		<ul>
+			<li>Početak projekta: {{ project.startDate }}</li>
+			<li>Završetak projekta: {{ project.endDate }}</li>
+			<li>Lokacija: {{ project.location }}</li>
 		</ul>
+	</div>
+	<div class="col-md-3 text-center">
+		<img src="http://placehold.it/100x100" alt="project owner image" class="img-circle">
+		<br><br>
+		<span class="label label-primary" ng-repeat="tag in project.tagsArray">{{ tag }}</span>
+		<br><br>
+		<project-user-actions for="project" ng-if="user.data.id == project.userId" />
 	</div>
 </div>
