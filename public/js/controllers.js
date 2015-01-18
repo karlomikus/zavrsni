@@ -5,12 +5,38 @@ var app = angular.module('myApp.controllers', []);
 /**
  * 	User controllers
  */
-app.controller('AuthCtrl', ['$http', '$scope', '$rootScope', '$location', 'Auth',
+app.controller('AuthController', ['$http', '$scope', '$rootScope', '$location', 'Auth',
 	function($http, $scope, $rootScope, $location, Auth)
 {
+	Auth.currentUser();
+
 	$scope.login = function(loginData)
 	{
 		Auth.login(loginData);
+	}
+
+	$scope.logout = function()
+	{
+		Auth.logout();
+		Auth.currentUser();
+		window.location = "/";
+	}
+
+	$scope.isLoggedIn = function()
+	{
+		var hasOwnProperty = Object.prototype.hasOwnProperty;
+		var obj = $rootScope.currentUser;
+
+		if (obj == null) return false;
+
+		if (obj.length > 0)    return true;
+		if (obj.length === 0)  return false;
+
+		for (var key in obj) {
+			if (hasOwnProperty.call(obj, key)) return true;
+		}
+
+		return false;
 	}
 }]);
 
@@ -79,7 +105,10 @@ app.controller('ProjectFormCtrl', ['$scope', '$window', '$routeParams', 'Project
  */
 app.controller('ProfileController', ['$scope', '$rootScope', 'Profile', function($scope, $rootScope, Profile)
 {
-	var userId = $rootScope.user.id;
+	var userId = $rootScope.currentUser.id;
 
-	console.log(userId);
+	$scope.projects = {};
+	Profile.projects(userId).success(function(data) {
+		$scope.projects = data.data;
+	});
 }]);

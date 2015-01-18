@@ -16,6 +16,6 @@
 		<br><br>
 		<span class="label label-primary" ng-repeat="tag in project.tagsArray">{{ tag }}</span>
 		<br><br>
-		<project-user-actions for="project" ng-if="user.data.id == project.userId" />
+		<project-user-actions for="project" ng-if="currentUser.id == project.userId" />
 	</div>
 </div>

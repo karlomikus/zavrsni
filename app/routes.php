@@ -29,7 +29,7 @@ Route::group(['prefix'=> 'api'], function()
     Route::post('auth/login', 'AuthController@login');
     Route::get('auth/logout', 'AuthController@logout');
     Route::get('auth/check', 'AuthController@isLoggedIn');
-    Route::get('auth/user', 'AuthController@currentUser');
+    Route::get('auth/session', 'AuthController@currentUser');
     Route::get('auth/user/{id}', 'AuthController@user');
 
     Route::get('profile/projects/{id}', 'ProfileController@userProjects');

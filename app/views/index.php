@@ -14,9 +14,9 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body>
+    <body >
         <nav class="navbar navbar-inverse">
-            <div class="container" ng-controller="AuthCtrl">
+            <div class="container" ng-controller="AuthController">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -30,9 +30,9 @@
                     <ul class="nav navbar-nav">
                         <li><a href="#">O Nama</a></li>
                         <li><a href="#">Kontakt</a></li>
-                        <li ng-if="loggedIn == false"><a href="/signup">Registracija</a></li>
+                        <li><a href="/signup">Registracija</a></li>
                     </ul>
-                    <form class="navbar-form navbar-right" ng-if="user == null" ng-submit="login(loginData)">
+                    <form class="navbar-form navbar-right" ng-show="!isLoggedIn()" ng-submit="login(loginData)">
                         <div class="form-group">
                             <input ng-model="loginData.email" name="email" type="text" class="form-control" placeholder="Email">
                         </div>
@@ -41,9 +41,9 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Prijava</button>
                     </form>
-                    <ul class="nav navbar-nav navbar-right" ng-if="user">
+                    <ul class="nav navbar-nav navbar-right" ng-show="isLoggedIn()">
                         <li class="dropdown">
-                            <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ user.email }} <span class="caret"></span></a>
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ currentUser.email }} <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/profile">Profil</a></li>
                                 <li><a href="/myprojects">Moji projekti</a></li>

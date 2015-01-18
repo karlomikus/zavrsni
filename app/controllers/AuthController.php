@@ -4,6 +4,7 @@ class AuthController extends ApiController
 {
     /**
      * Authenticate the user
+     * 
      * @return Response
      */
     public function login()
@@ -31,6 +32,7 @@ class AuthController extends ApiController
 
     /**
      * Get information about currently logged in user
+     * 
      * @return Response
      */
     public function currentUser()
@@ -40,22 +42,25 @@ class AuthController extends ApiController
             $responseStatus = 200;
             $user = Sentry::getUser();
 
-            $response = [
-                'id' => $user->id,
-                'email' => $user->email,
-                'firstName' => $user->first_name,
-                'lastName' => $user->last_name,
-                'gender' => $user->gender,
-                'dob' => $user->dob,
-                'telephone' => $user->telephone,
-                'address' => $user->address,
-                'city' => $user->city,
-                'postcode' => $user->postcode,
-            ];
+            $response = null;
+            if($user != null)
+            {
+                 $response = [
+                    'id' => $user->id,
+                    'email' => $user->email,
+                    'firstName' => $user->first_name,
+                    'lastName' => $user->last_name,
+                    'gender' => $user->gender,
+                    'dob' => $user->dob,
+                    'telephone' => $user->telephone,
+                    'address' => $user->address,
+                    'city' => $user->city,
+                    'postcode' => $user->postcode,
+                ];
+            }
         }
         catch(Exception $e)
         {
-            $response = null;
             $responseStatus = 400;
         }
         finally
@@ -66,6 +71,7 @@ class AuthController extends ApiController
 
     /**
      * Get information about a user
+     * 
      * @param $id User ID
      * @return Response
      */
@@ -100,6 +106,7 @@ class AuthController extends ApiController
 
     /**
      * Check if user is logged in
+     * 
      * @return Response
      */
     public function isLoggedIn()
@@ -109,6 +116,7 @@ class AuthController extends ApiController
 
     /**
      * Logout the user
+     * 
      * @return Response
      */
     public function logout()

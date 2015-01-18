@@ -22,54 +22,38 @@ app.factory('Category', ['$resource', function($resource)
 app.factory('Profile', ['$http', '$rootScope', function($http, $rootScope)
 {
   return {
-    projects: function($id) {
-      $http.get('/api/profile/projects/' + $id).then(function(data)
-      {
-        return data;
-      })
+    projects: function(id) {
+      return $http.get('/api/profile/projects/' + id);
     }
   };
 }]);
 
 // USER AND AUTHENTICATION
-app.factory('Auth', ['$http', '$rootScope', 'SessionService', function($http, $rootScope, SessionService)
+app.factory('Auth', ['$http', '$rootScope', function($http, $rootScope)
 {
   return {
     login: function(credentials) {
       var login = $http.post('/api/auth/login', credentials);
       login.success(function(data) {
-        $rootScope.user = data;
-        SessionService.set('auth', true);
-        console.log($rootScope.user);
+        $rootScope.currentUser = data;
       });
-      return login;
     },
 
-    getUser: function() {
-      return $http.get('/api/auth/user');
+    logout: function() {
+      return $http.get('/api/auth/logout');
     },
 
-    isLoggedIn: function() {
-      return Boolean(SessionService.get('auth'));
+    currentUser: function() {
+      var userApi = $http.get('/api/auth/session');
+      userApi.success(function(data) {
+        if(data != null)
+          $rootScope.currentUser = data; 
+        else
+          $rootScope.currentUser = null;
+      });
     }
   };
 }]);
-
-app.factory('SessionService', function(){
-  return {
-    get: function(key) {
-      sessionStorage.getItem(key);
-    },
-
-    set: function(key, val) {
-      sessionStorage.setItem(key, val);
-    },
-
-    unset: function(key) {
-      sessionStorage.removeItem(key);
-    }
-  };
-});
 
 // NOTIFICATIONS
 app.factory('Notification', function()
