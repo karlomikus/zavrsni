@@ -40,10 +40,22 @@ app.controller('AuthController', ['$http', '$scope', '$rootScope', '$location', 
 	}
 }]);
 
+app.controller('RegisterController', ['$scope', 'Auth', 'Notification', function($scope, Auth, Notification)
+{
+	$scope.submit = function(credentials) {
+		Auth.register(credentials).success(function() {
+			Notification.notify('Registracija uspješna!', 'success');
+			window.location = "/";
+		}).error(function() {
+			Notification.notify('Registracija neuspješna!', 'error');
+		});
+	}
+}]);
+
 /**
  * 	Projects controllers
  */
-app.controller('ProjectsCtrl', ['$scope', 'Project', function($scope, Project)
+app.controller('ProjectsController', ['$scope', 'Project', function($scope, Project)
 {
 	var projects = Project.get(function()
 	{
@@ -51,7 +63,7 @@ app.controller('ProjectsCtrl', ['$scope', 'Project', function($scope, Project)
 	});
 }]);
 
-app.controller('ProjectDetailsCtrl', ['$scope', '$routeParams', '$window', 'Project', function($scope, $routeParams, $window, Project)
+app.controller('ProjectDetailsController', ['$scope', '$routeParams', '$window', 'Project', function($scope, $routeParams, $window, Project)
 {
 	Project.get({id: $routeParams.id}, function(project)
 	{
@@ -65,7 +77,7 @@ app.controller('ProjectDetailsCtrl', ['$scope', '$routeParams', '$window', 'Proj
 	}
 }]);
 
-app.controller('ProjectFormCtrl', ['$scope', '$window', '$routeParams', 'Project', 'Category', 'Notification', function($scope, $window, $routeParams, Project, Category, Notification)
+app.controller('ProjectFormController', ['$scope', '$window', '$routeParams', 'Project', 'Category', 'Notification', function($scope, $window, $routeParams, Project, Category, Notification)
 {
 	// Check if ID is passed incase of project editing
 	var projectId = $routeParams.id == undefined ? null : $routeParams.id;

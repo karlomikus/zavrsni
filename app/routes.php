@@ -24,13 +24,14 @@ App::missing(function($exception)
 });
 
 // Public api access routes
-Route::group(['prefix'=> 'api'], function()
+Route::group(['prefix' => 'api'], function()
 {
     Route::post('auth/login', 'AuthController@login');
     Route::get('auth/logout', 'AuthController@logout');
     Route::get('auth/check', 'AuthController@isLoggedIn');
     Route::get('auth/session', 'AuthController@currentUser');
     Route::get('auth/user/{id}', 'AuthController@user');
+    Route::post('auth/register', 'AuthController@register');
 
     Route::get('profile/projects/{id}', 'ProfileController@userProjects');
 
@@ -39,7 +40,7 @@ Route::group(['prefix'=> 'api'], function()
 });
 
 // Administrator access routes
-Route::group(['prefix'=> 'admin', 'before' => 'auth'], function()
+Route::group(['prefix' => 'admin', 'before' => 'auth'], function()
 {
     Route::get('/', 'Admin\DashboardController@index');
 

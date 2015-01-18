@@ -104,6 +104,29 @@ class AuthController extends ApiController
         }
     }
 
+    public function register()
+    {
+        try
+        {
+            $responseStatus = 200;
+            $email          = Input::get('email');
+            $password       = Input::get('password');
+
+            $user = Sentry::register(array(
+                'email'    => $email,
+                'password' => $password,
+            ));
+        }
+        catch (Exception $e)
+        {
+            $responseStatus = 400;
+        }
+        finally
+        {
+            return Response::json(null, $responseStatus);
+        }
+    }
+
     /**
      * Check if user is logged in
      * 

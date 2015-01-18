@@ -7,19 +7,19 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   $routeProvider
     .when('/', {
       templateUrl: 'templates/projects/main.html',
-      controller: 'ProjectsCtrl'
+      controller: 'ProjectsController'
     })
     .when('/new', {
       templateUrl: 'templates/projects/form.html',
-      controller: 'ProjectFormCtrl'
+      controller: 'ProjectFormController'
     })
     .when('/project/:id', {
       templateUrl: 'templates/projects/detail.html',
-      controller: 'ProjectDetailsCtrl'
+      controller: 'ProjectDetailsController'
     })
     .when('/project/edit/:id', {
       templateUrl: 'templates/projects/form.html',
-      controller: 'ProjectFormCtrl'
+      controller: 'ProjectFormController'
     })
     .when('/profile/', {
       templateUrl: 'templates/profile/main.html',
@@ -28,6 +28,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     .when('/myprojects', {
       templateUrl: 'templates/profile/projects.html',
       controller: 'ProfileController'
+    })
+    .when('/register', {
+      templateUrl: 'templates/profile/register.html',
+      controller: 'RegisterController'
     })
     .otherwise({
       redirectTo: '/'

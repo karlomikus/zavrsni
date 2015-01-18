@@ -30,7 +30,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="#">O Nama</a></li>
                         <li><a href="#">Kontakt</a></li>
-                        <li><a href="/signup">Registracija</a></li>
+                        <li ng-if="!isLoggedIn()"><a href="/register">Registracija</a></li>
                     </ul>
                     <form class="navbar-form navbar-right" ng-show="!isLoggedIn()" ng-submit="login(loginData)">
                         <div class="form-group">

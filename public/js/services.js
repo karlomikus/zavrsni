@@ -51,6 +51,10 @@ app.factory('Auth', ['$http', '$rootScope', function($http, $rootScope)
         else
           $rootScope.currentUser = null;
       });
+    },
+
+    register: function(credentials) {
+      return $http.post('/api/auth/register', credentials);
     }
   };
 }]);
