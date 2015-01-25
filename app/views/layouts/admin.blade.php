@@ -42,6 +42,7 @@
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="/admin">Kontrolni panel</a></li>
                 <li><a href="/admin/projects">Projekti</a></li>
+                <li><a href="/admin/categories">Kategorije</a></li>
                 <li><a href="/admin/users">Korisnici</a></li>
                 <li><a href="/admin/settings">Postavke</a></li>
             </ul>

@@ -2,6 +2,7 @@
 
 use Project;
 use View;
+use Redirect;
 
 class ProjectsController extends BaseAdminController
 {
@@ -17,5 +18,12 @@ class ProjectsController extends BaseAdminController
     {
     	$projects = $this->project->orderBy('title', 'asc')->get();
         return View::make('admin.projects.main')->with('projects', $projects);
+    }
+
+    public function destroy($id)
+    {
+        $project = $this->project->find($id);
+        $project->delete();
+        return Redirect::to('admin/projects');
     }
 } 

@@ -46,6 +46,7 @@ Route::group(['prefix' => 'admin', 'before' => 'auth'], function()
 
     // Projects management
     Route::get('projects', 'Admin\ProjectsController@index');
+    Route::get('projects/delete/{id}', 'Admin\ProjectsController@destroy');
 
     // Users management
     Route::get('users', 'Admin\UsersController@index');
