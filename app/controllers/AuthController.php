@@ -24,7 +24,7 @@ class AuthController extends ApiController
         }
         catch(Exception $e)
         {
-            // TODO
+            $user = $e->getMessage();
         }
 
         return Response::json($user);
@@ -115,7 +115,7 @@ class AuthController extends ApiController
             $user = Sentry::register(array(
                 'email'    => $email,
                 'password' => $password,
-            ));
+            ), true);
         }
         catch (Exception $e)
         {

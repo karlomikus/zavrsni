@@ -44,9 +44,15 @@ Route::group(['prefix' => 'admin', 'before' => 'auth'], function()
 {
     Route::get('/', 'Admin\DashboardController@index');
 
+    // Projects management
     Route::get('projects', 'Admin\ProjectsController@index');
 
+    // Users management
     Route::get('users', 'Admin\UsersController@index');
     Route::get('users/edit/{id}', 'Admin\UsersController@edit');
+    Route::post('users/edit/{id}', 'Admin\UsersController@update');
     Route::get('users/create', 'Admin\UsersController@create');
+    Route::post('users/create', 'Admin\UsersController@store');
+    Route::get('users/delete/{id}', 'Admin\UsersController@destroy');
+    Route::get('users/changeban/{id}', 'Admin\UsersController@changeBanStatus');
 });

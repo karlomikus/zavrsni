@@ -44,7 +44,7 @@ class UsersTableSeeder extends Seeder
 
         for ($i = 0; $i < 7; $i++)
         {
-            Sentry::createUser(array(
+            $randomUser = Sentry::createUser(array(
                 'email'     => $faker->email(),
                 'password'  => '123456',
                 'activated' => true,
@@ -58,7 +58,7 @@ class UsersTableSeeder extends Seeder
                 'postcode'  => $faker->postcode()
             ));
 
-            $admin->addGroup($usersGroup);
+            $randomUser->addGroup($usersGroup);
         }
     }
 }

@@ -3,11 +3,11 @@
         <form name="registerForm" ng-submit="submit(registerData)" novalidate>
           <div class="form-group" ng-class="{ 'has-error' : registerForm.email.$invalid && !registerForm.email.$pristine }">
             <label for="email">Email adresa</label>
-            <input name="email" type="email" class="form-control" id="email" placeholder="Upišite vaš email..." required ng-model="registerData.email">
+            <input name="email" type="email" class="form-control" id="email" required ng-model="registerData.email">
           </div>
           <div class="form-group">
             <label for="password">Zaporka</label>
-            <input name="password" type="password" class="form-control" id="password" placeholder="Odaberite zaporku..." required ng-model="registerData.password">
+            <input name="password" type="password" class="form-control" id="password" required ng-model="registerData.password">
           </div>
           <div class="form-group">
             <label for="pwdcheck">Ponovite zaporku</label>
@@ -15,10 +15,30 @@
           </div>
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="terms" required> Prihvaćam <a href="#">Uvjete korištenja usluge.</a>
+              <input type="checkbox" name="terms" required> Prihvaćam <a href="#" data-toggle="modal" data-target="#terms-modal">Uvjete korištenja usluge.</a>
             </label>
           </div>
           <button type="submit" class="btn btn-primary" ng-disabled="registerForm.$invalid">Registracija</button>
         </form>
     </div>
+</div>
+
+<div class="modal fade" id="terms-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Uvjeti korištenja usluge</h4>
+      </div>
+      <div class="modal-body">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At veniam facere, tenetur sit quis eligendi mollitia vitae dolores nemo perferendis iste recusandae maiores aspernatur qui iusto placeat voluptatum fugiat laboriosam.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At veniam facere, tenetur sit quis eligendi mollitia vitae dolores nemo perferendis iste recusandae maiores aspernatur qui iusto placeat voluptatum fugiat laboriosam.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At veniam facere, tenetur sit quis eligendi mollitia vitae dolores nemo perferendis iste recusandae maiores aspernatur qui iusto placeat voluptatum fugiat laboriosam.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At veniam facere, tenetur sit quis eligendi mollitia vitae dolores nemo perferendis iste recusandae maiores aspernatur qui iusto placeat voluptatum fugiat laboriosam.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -13,6 +13,7 @@ app.controller('AuthController', ['$http', '$scope', '$rootScope', '$location', 
 	$scope.login = function(loginData)
 	{
 		Auth.login(loginData);
+		Auth.currentUser();
 	}
 
 	$scope.logout = function()

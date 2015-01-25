@@ -1,11 +1,7 @@
 @extends('layouts.admin')
 
 @section('pageHeader')
-	@if (isset($user))
-		<h1>Uređivanje korisnika: {{{ $user->fullName }}}</h1>
-	@else
-		<h1>Kreiranje novog korisnika</h1>
-	@endif
+	<h1>Uređivanje korisnika</h1>
 @stop
 
 @section('content')
@@ -19,13 +15,18 @@
 				</div>
 
 				<div class="form-group">
+					{{ Form::label('email', 'Email') }}
+					{{ Form::text('email', null, ['class' => 'form-control']) }}
+				</div>
+
+				<div class="form-group">
 					{{ Form::label('last_name', 'Prezime') }}
 					{{ Form::text('last_name', null, ['class' => 'form-control']) }}
 				</div>
 
 				<div class="form-group">
 					{{ Form::label('gender', 'Spol') }}
-					{{ Form::text('gender', null, ['class' => 'form-control']) }}
+					{{ Form::select('gender', ['m' => 'Muško', 'f' => 'Žensko'], null, ['class' => 'form-control']) }}
 				</div>
 
 				<div class="form-group">
@@ -52,6 +53,11 @@
 					{{ Form::label('telephone', 'Telefon') }}
 					{{ Form::text('telephone', null, ['class' => 'form-control']) }}
 				</div>
+
+				<hr>
+
+				<button type="submit" class="btn btn-success">Spremi promjene</button>
+				<a class="btn btn-default" href="/admin/users">Odustani</a>
 
 			{{ Form::close() }}
 		</div>
