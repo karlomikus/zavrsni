@@ -6,7 +6,7 @@ class ProjectsTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for ($i = 0; $i < 12; $i++)
+        for ($i = 0; $i < 30; $i++)
         {
             Project::create(
             [

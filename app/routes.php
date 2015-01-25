@@ -42,7 +42,9 @@ Route::group(['prefix' => 'api'], function()
 // Administrator access routes
 Route::group(['prefix' => 'admin', 'before' => 'auth'], function()
 {
+    // Dashboard
     Route::get('/', 'Admin\DashboardController@index');
+    Route::get('charts/projects/{year}', 'Admin\DashboardController@getProjectsChartData');
 
     // Projects management
     Route::get('projects', 'Admin\ProjectsController@index');

@@ -23,7 +23,7 @@
                     <td>{{{ $project->created_at }}}</td>
                     <td><a href="/admin/categories/edit/{{ $project->category->id }}">{{ $project->category->name }}</a></td>
                     <td>
-                        <a href="/admin/projects/delete/{{ $project->id }}" class="btn btn-xs btn-danger">Delete</a>
+                        <a href="/admin/projects/delete/{{ $project->id }}" class="btn btn-xs btn-danger">Obriši</a>
                     </td>
                 </tr>
             @endforeach

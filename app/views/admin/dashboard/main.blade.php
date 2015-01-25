@@ -15,7 +15,8 @@
     		</div>
     	</div>
     	<div class="col-md-7">
-    		<canvas id="projects-chart" style="width: 100%; height: 400px;"></canvas>
+            <h4>Mjesečni broj projekata u {{ date('Y') }}. godini</h4>
+    		<canvas id="projects-chart"></canvas>
     	</div>
     </div>
     <div class="row">
