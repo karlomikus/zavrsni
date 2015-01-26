@@ -65,6 +65,7 @@ app.factory('Notification', function()
   return {
     notify: function(text, type) {
       noty({
+        timeout: 3000,
         text: text, 
         layout: 'topCenter', 
         type: type, 

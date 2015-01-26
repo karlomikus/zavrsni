@@ -1,3 +1,7 @@
-<ul>
-	<li ng-repeat="project in projects">{{ project.title }}</li>
-</ul>
+<h2>Moji projekti</h2>
+<div class="list-group">
+  <a href="/project/{{ project.id }}" class="list-group-item" ng-repeat="project in projects">
+    <h4 class="list-group-item-heading">{{ project.title }}</h4>
+    <p class="list-group-item-text">Projekt je dodan {{ project.date }}</p>
+  </a>
+</div>

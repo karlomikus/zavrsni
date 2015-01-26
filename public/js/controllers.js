@@ -78,7 +78,7 @@ app.controller('ProjectDetailsController', ['$scope', '$routeParams', '$window',
 	}
 }]);
 
-app.controller('ProjectFormController', ['$scope', '$window', '$routeParams', 'Project', 'Category', 'Notification', function($scope, $window, $routeParams, Project, Category, Notification)
+app.controller('ProjectFormController', ['$scope', '$location', '$routeParams', 'Project', 'Category', 'Notification', function($scope, $location, $routeParams, Project, Category, Notification)
 {
 	// Check if ID is passed incase of project editing
 	var projectId = $routeParams.id == undefined ? null : $routeParams.id;
@@ -102,14 +102,14 @@ app.controller('ProjectFormController', ['$scope', '$window', '$routeParams', 'P
 		{
 			Project.update({id: projectId}, $scope.project);
 			Notification.notify('Projekt je uspješno spremljen!', 'success');
+			$location.path('/project/' + projectId);
 		}
 		else
 		{
 			$scope.project.$save();
 			Notification.notify('Projekt je uspješno spremljen!', 'success');
+			$location.path('/myprojects/');
 		}
-
-		$window.location.href = '/';
 	}
 }]);
 
