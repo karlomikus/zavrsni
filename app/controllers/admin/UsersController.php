@@ -24,7 +24,7 @@ class UsersController extends BaseAdminController
      */
     public function index()
     {
-    	$users = $this->user->all();
+    	$users = $this->user->paginate(15);
         return View::make('admin.users.main')->with('users', $users);
     }
 

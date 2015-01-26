@@ -16,7 +16,7 @@ class ProjectsController extends BaseAdminController
 
     public function index()
     {
-    	$projects = $this->project->orderBy('title', 'asc')->get();
+    	$projects = $this->project->orderBy('title', 'asc')->paginate(15);
         return View::make('admin.projects.main')->with('projects', $projects);
     }
 
