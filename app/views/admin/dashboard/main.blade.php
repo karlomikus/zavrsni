@@ -17,22 +17,12 @@
                 <div class="col-md-12">
                     <h3 class="subtitle">Novi projekti</h3>
                     <div class="list-group">
-                        <a href="#" class="list-group-item active">
-                            <h4 class="list-group-item-heading">List group item heading</h4>
-                            <p class="list-group-item-text">Lorem ipsum dolor sit amet</p>
+                    @foreach($recentProjects as $project)
+                        <a href="/project/{{ $project->id }}" class="list-group-item" target="_blank">
+                            <h4 class="list-group-item-heading">{{ $project->title }}</h4>
+                            <p class="list-group-item-text">Dodao: {{ $project->user->fullName }}</p>
                         </a>
-                        <a href="#" class="list-group-item">
-                            <h4 class="list-group-item-heading">List group item heading</h4>
-                            <p class="list-group-item-text">Lorem ipsum dolor sit amet</p>
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <h4 class="list-group-item-heading">List group item heading</h4>
-                            <p class="list-group-item-text">Lorem ipsum dolor sit amet</p>
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <h4 class="list-group-item-heading">List group item heading</h4>
-                            <p class="list-group-item-text">Lorem ipsum dolor sit amet</p>
-                        </a>
+                    @endforeach
                     </div>
                 </div>
             </div>
