@@ -47,7 +47,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="/profile">Profil</a></li>
                                 <li><a href="/myprojects">Moji projekti</a></li>
-                                <li><a href="/admin" target="_blank">Administracija</a></li>
+                                <li ng-show="currentUser.admin"><a href="/admin" target="_blank">Administracija</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#" ng-click="logout()">Odjava</a></li>
                             </ul>
