@@ -11,7 +11,7 @@
 			<li>Lokacija: {{ project.location }}</li>
 		</ul>
 	</div>
-	<div class="col-md-3 text-center">
+	<div class="col-md-3 text-center" data-spy="affix" data-offset-top="60" data-offset-bottom="200">
 		<img src="http://placehold.it/100x100" alt="project owner image" class="img-circle">
 		<br><br>
 		<span class="label label-primary" ng-repeat="tag in project.tagsArray">{{ tag }}</span>

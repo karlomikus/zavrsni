@@ -3,6 +3,10 @@ label.required:after {
   color: red;
 }
 
+body {
+  margin-top: 70px;
+}
+
 
 /*! 
  * angular-loading-bar v0.6.0
