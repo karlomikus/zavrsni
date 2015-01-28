@@ -50,6 +50,9 @@ Route::group(['prefix' => 'admin', 'before' => 'auth|auth.admin'], function()
     Route::get('projects', 'Admin\ProjectsController@index');
     Route::get('projects/delete/{id}', 'Admin\ProjectsController@destroy');
 
+    // Categories management
+    Route::get('categories', 'Admin\CategoriesController@index');
+
     // Users management
     Route::get('users', 'Admin\UsersController@index');
     Route::get('users/edit/{id}', 'Admin\UsersController@edit');
@@ -58,4 +61,7 @@ Route::group(['prefix' => 'admin', 'before' => 'auth|auth.admin'], function()
     Route::post('users/create', 'Admin\UsersController@store');
     Route::get('users/delete/{id}', 'Admin\UsersController@destroy');
     Route::get('users/changeban/{id}', 'Admin\UsersController@changeBanStatus');
+
+    // Settings
+    Route::get('settings', 'Admin\SettingsController@index');
 });

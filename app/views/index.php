@@ -57,6 +57,13 @@
                 </div>
             </div>
         </nav>
+        <div class="container">
+            <div class="alert alert-warning">
+                <h4>Dummy admin information:</h4>
+                <strong>Email:</strong> admin@admin.com<br>
+                <strong>Password:</strong> admin123
+            </div>
+        </div>
         <div id="content" class="container" ng-view></div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

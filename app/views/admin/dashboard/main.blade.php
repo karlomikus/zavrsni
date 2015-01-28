@@ -7,21 +7,43 @@
 @section('content')
     <div class="row">
     	<div class="col-md-5">
-    		<div class="row">
+    		<div class="row row-dashboard-buttons">
     			<div class="col-md-3"><a href="/admin/projects" class="btn btn-primary btn-block"><i class="fa fa-archive fa-3x"></i><br>Pregled projekata</a></div>
     			<div class="col-md-3"><a href="/admin/users/create" class="btn btn-primary btn-block"><i class="fa fa-plus fa-3x"></i><br>Dodavanje korisnika</a></div>
     			<div class="col-md-3"><a href="/profile" class="btn btn-primary btn-block"><i class="fa fa-user fa-3x"></i><br>Moj profil</a></div>
     			<div class="col-md-3"><a href="/admin/settings" class="btn btn-primary btn-block"><i class="fa fa-cog fa-3x"></i><br>Postavke sustava</a></div>
     		</div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="subtitle">Novi projekti</h3>
+                    <div class="list-group">
+                        <a href="#" class="list-group-item active">
+                            <h4 class="list-group-item-heading">List group item heading</h4>
+                            <p class="list-group-item-text">Lorem ipsum dolor sit amet</p>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <h4 class="list-group-item-heading">List group item heading</h4>
+                            <p class="list-group-item-text">Lorem ipsum dolor sit amet</p>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <h4 class="list-group-item-heading">List group item heading</h4>
+                            <p class="list-group-item-text">Lorem ipsum dolor sit amet</p>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <h4 class="list-group-item-heading">List group item heading</h4>
+                            <p class="list-group-item-text">Lorem ipsum dolor sit amet</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
     	</div>
     	<div class="col-md-7">
-            <h4>Mjesečni broj projekata u {{ date('Y') }}. godini</h4>
-    		<canvas id="projects-chart"></canvas>
-    	</div>
-    </div>
-    <div class="row">
-    	<div class="col-md-7">
-    		Novi projekti:
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="subtitle">Mjesečni broj projekata u {{ date('Y') }}. godini</h3>
+                    <canvas id="projects-chart"></canvas>
+                </div>
+            </div>
     	</div>
     </div>
 @stop
