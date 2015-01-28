@@ -15,7 +15,7 @@
         <![endif]-->
     </head>
     <body >
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container" ng-controller="AuthController">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse">
@@ -47,7 +47,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="/profile">Profil</a></li>
                                 <li><a href="/myprojects">Moji projekti</a></li>
-                                <li><a href="/admin" target="_blank">Administracija</a></li>
+                                <li ng-show="currentUser.admin"><a href="/admin" target="_blank">Administracija</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#" ng-click="logout()">Odjava</a></li>
                             </ul>
@@ -57,6 +57,13 @@
                 </div>
             </div>
         </nav>
+        <div class="container">
+            <div class="alert alert-warning">
+                <h4>Dummy admin information:</h4>
+                <strong>Email:</strong> admin@admin.com<br>
+                <strong>Password:</strong> admin123
+            </div>
+        </div>
         <div id="content" class="container" ng-view></div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

@@ -24,6 +24,9 @@ app.factory('Profile', ['$http', '$rootScope', function($http, $rootScope)
   return {
     projects: function(id) {
       return $http.get('/api/profile/projects/' + id);
+    },
+    get: function(id) {
+      return $http.get('/api/auth/user/' + id);
     }
   };
 }]);
@@ -47,7 +50,7 @@ app.factory('Auth', ['$http', '$rootScope', function($http, $rootScope)
       var userApi = $http.get('/api/auth/session');
       userApi.success(function(data) {
         if(data != null)
-          $rootScope.currentUser = data; 
+          $rootScope.currentUser = data;
         else
           $rootScope.currentUser = null;
       });
@@ -66,9 +69,9 @@ app.factory('Notification', function()
     notify: function(text, type) {
       noty({
         timeout: 3000,
-        text: text, 
-        layout: 'topCenter', 
-        type: type, 
+        text: text,
+        layout: 'topCenter',
+        type: type,
         animation: { open: 'animated flipInX', close: 'animated flipOutX'}
       });
     }

@@ -26,4 +26,4 @@ class ProjectsController extends BaseAdminController
         $project->delete();
         return Redirect::to('admin/projects');
     }
-} 
+}

@@ -13,7 +13,7 @@ class ProjectsController extends ApiController
     {
         try
         {
-            $projects = Project::get();
+            $projects = Project::orderBy('created_at', 'DESC')->get();
         }
         catch(Exception $e)
         {

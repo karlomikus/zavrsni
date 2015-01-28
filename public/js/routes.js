@@ -27,7 +27,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     })
     .when('/myprojects', {
       templateUrl: 'templates/profile/projects.html',
-      controller: 'ProfileController'
+      controller: 'MyProjectsController'
     })
     .when('/register', {
       templateUrl: 'templates/profile/register.html',

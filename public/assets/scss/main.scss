@@ -18,10 +18,24 @@ body {
 	padding-top: 20px;
 }
 
+#projects-chart {
+	width: 100% !important;
+	height: 350px;
+}
 
+.subtitle {
+	margin-top: 0;
+	border-bottom: 1px solid #337AB7;
+	padding-bottom: 10px;
+	color: #777;
+}
 
-
-
+.row-dashboard-buttons {
+	margin-bottom: 20px;
+	.btn {
+		white-space: normal;
+	}
+}
 
 .page-header, .page-header h1 {
 	margin-top: 0;

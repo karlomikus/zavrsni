@@ -11,15 +11,15 @@ $.getJSON( "/admin/charts/projects/2015", function(jsonData)
                 strokeColor: "rgba(220,220,220,1)",
                 pointColor: "rgba(220,220,220,1)",
                 pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
+                pointHighlightFill: "#337AB7",
+                pointHighlightStroke: "#337AB7",
                 data: jsonData
             }
         ]
     };
 
     var options = {
-        //responsive: true,
+        responsive: true,
         bezierCurve : false
     };
 

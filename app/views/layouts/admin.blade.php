@@ -27,7 +27,7 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="/admin/projects" class="dropdown-toggle">{{{ $currentUser->first_name }}} {{{ $currentUser->last_name }}} (Administrator)</a>
+                        <a href="/profile" class="dropdown-toggle">{{{ $currentUser->first_name }}} {{{ $currentUser->last_name }}} (Administrator)</a>
                     </li>
                     <li>
                         <a href="/"><i class="glyphicon glyphicon-eye-open"></i></a>

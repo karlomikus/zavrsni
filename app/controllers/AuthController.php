@@ -4,7 +4,7 @@ class AuthController extends ApiController
 {
     /**
      * Authenticate the user
-     * 
+     *
      * @return Response
      */
     public function login()
@@ -32,7 +32,7 @@ class AuthController extends ApiController
 
     /**
      * Get information about currently logged in user
-     * 
+     *
      * @return Response
      */
     public function currentUser()
@@ -56,12 +56,14 @@ class AuthController extends ApiController
                     'address' => $user->address,
                     'city' => $user->city,
                     'postcode' => $user->postcode,
+                    'admin' => $user->inGroup(Sentry::findGroupByName('Administrators'))
                 ];
             }
         }
         catch(Exception $e)
         {
             $responseStatus = 400;
+            die($e->getMessage());
         }
         finally
         {
@@ -71,7 +73,7 @@ class AuthController extends ApiController
 
     /**
      * Get information about a user
-     * 
+     *
      * @param $id User ID
      * @return Response
      */
@@ -129,7 +131,7 @@ class AuthController extends ApiController
 
     /**
      * Check if user is logged in
-     * 
+     *
      * @return Response
      */
     public function isLoggedIn()
@@ -139,7 +141,7 @@ class AuthController extends ApiController
 
     /**
      * Logout the user
-     * 
+     *
      * @return Response
      */
     public function logout()

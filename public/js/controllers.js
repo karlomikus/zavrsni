@@ -120,6 +120,16 @@ app.controller('ProfileController', ['$scope', '$rootScope', 'Profile', function
 {
 	var userId = $rootScope.currentUser.id;
 
+	$scope.profile = {};
+	Profile.get(userId).success(function(data) {
+		$scope.profile = data.data;
+	});
+}]);
+
+app.controller('MyProjectsController', ['$scope', '$rootScope', 'Profile', function($scope, $rootScope, Profile)
+{
+	var userId = $rootScope.currentUser.id;
+
 	$scope.projects = {};
 	Profile.projects(userId).success(function(data) {
 		$scope.projects = data.data;
