@@ -40,7 +40,7 @@ Route::group(['prefix' => 'api'], function()
 });
 
 // Administrator access routes
-Route::group(['prefix' => 'admin', 'before' => 'auth'], function()
+Route::group(['prefix' => 'admin', 'before' => 'auth|auth.admin'], function()
 {
     // Dashboard
     Route::get('/', 'Admin\DashboardController@index');
