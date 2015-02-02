@@ -44,7 +44,6 @@
                 <li><a href="/admin/projects">Projekti</a></li>
                 <li><a href="/admin/categories">Kategorije</a></li>
                 <li><a href="/admin/users">Korisnici</a></li>
-                <li><a href="/admin/settings">Postavke</a></li>
             </ul>
         </nav>
         <section id="content">

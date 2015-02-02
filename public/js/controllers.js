@@ -3,6 +3,35 @@
 var app = angular.module('myApp.controllers', []);
 
 /**
+ * 	Main controllers
+ */
+app.controller('MainController', ['$scope', 'Auth', function($scope, Auth)
+{
+	setCurrentUser();
+	console.log($scope.cuurrentUser);
+
+	$scope.login = function(loginData)
+	{
+		Auth.login(loginData);
+		setCurrentUser();
+	}
+
+	$scope.isLoggedIn = function()
+	{
+		return $scope.currentUser != null;
+	}
+
+	function setCurrentUser()
+	{
+		$scope.currentUser = null;
+		Auth.currentUser().then(function(response)
+		{
+			$scope.currentUser = response.data;
+		});
+	}
+}]);
+
+/**
  * 	User controllers
  */
 app.controller('AuthController', ['$http', '$scope', '$rootScope', '$location', 'Auth',
@@ -116,14 +145,16 @@ app.controller('ProjectFormController', ['$scope', '$location', '$routeParams', 
 /**
  *  Profile controllers
  */
-app.controller('ProfileController', ['$scope', '$rootScope', 'Profile', function($scope, $rootScope, Profile)
+app.controller('ProfileController', ['$scope', 'Profile', function($scope, Profile)
 {
-	var userId = $rootScope.currentUser.id;
+	console.log($scope.$parent.currentUser);
+	
+	// var userId = $scope.$parent. currentUser.id;
 
-	$scope.profile = {};
-	Profile.get(userId).success(function(data) {
-		$scope.profile = data.data;
-	});
+	// $scope.profile = {};
+	// Profile.get(userId).success(function(data) {
+	// 	$scope.profile = data.data;
+	// });
 }]);
 
 app.controller('MyProjectsController', ['$scope', '$rootScope', 'Profile', function($scope, $rootScope, Profile)

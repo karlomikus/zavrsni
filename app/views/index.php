@@ -14,9 +14,9 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body >
+    <body ng-controller="MainController">
         <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container" ng-controller="AuthController">
+            <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse">
                     <span class="sr-only">Toggle navigation</span>

@@ -11,7 +11,7 @@
     			<div class="col-md-3"><a href="/admin/projects" class="btn btn-primary btn-block"><i class="fa fa-archive fa-3x"></i><br>Pregled projekata</a></div>
     			<div class="col-md-3"><a href="/admin/users/create" class="btn btn-primary btn-block"><i class="fa fa-plus fa-3x"></i><br>Dodavanje korisnika</a></div>
     			<div class="col-md-3"><a href="/profile" class="btn btn-primary btn-block"><i class="fa fa-user fa-3x"></i><br>Moj profil</a></div>
-    			<div class="col-md-3"><a href="/admin/settings" class="btn btn-primary btn-block"><i class="fa fa-cog fa-3x"></i><br>Postavke sustava</a></div>
+    			<div class="col-md-3"><a href="/admin/categories" class="btn btn-primary btn-block"><i class="fa fa-bars fa-3x"></i><br>Uredi kategorije</a></div>
     		</div>
             <div class="row">
                 <div class="col-md-12">

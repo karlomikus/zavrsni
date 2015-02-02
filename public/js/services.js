@@ -47,13 +47,7 @@ app.factory('Auth', ['$http', '$rootScope', function($http, $rootScope)
     },
 
     currentUser: function() {
-      var userApi = $http.get('/api/auth/session');
-      userApi.success(function(data) {
-        if(data != null)
-          $rootScope.currentUser = data;
-        else
-          $rootScope.currentUser = null;
-      });
+      return $http.get('/api/auth/session');
     },
 
     register: function(credentials) {

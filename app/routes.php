@@ -52,6 +52,11 @@ Route::group(['prefix' => 'admin', 'before' => 'auth|auth.admin'], function()
 
     // Categories management
     Route::get('categories', 'Admin\CategoriesController@index');
+    Route::get('categories/create', 'Admin\CategoriesController@create');
+    Route::post('categories/create', 'Admin\CategoriesController@store');
+    Route::get('categories/edit/{id}', 'Admin\CategoriesController@edit');
+    Route::post('categories/edit/{id}', 'Admin\CategoriesController@update');
+    Route::get('categories/delete/{id}', 'Admin\CategoriesController@destroy');
 
     // Users management
     Route::get('users', 'Admin\UsersController@index');
