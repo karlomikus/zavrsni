@@ -32,13 +32,14 @@ app.factory('Profile', ['$http', '$rootScope', function($http, $rootScope)
 }]);
 
 // USER AND AUTHENTICATION
-app.factory('Auth', ['$http', '$rootScope', function($http, $rootScope)
+app.factory('Auth', ['$http', 'UserStorage', function($http, UserStorage)
 {
   return {
     login: function(credentials) {
-      var login = $http.post('/api/auth/login', credentials);
-      login.success(function(data) {
-        $rootScope.currentUser = data;
+      var _this = this;
+      //return $http.post('/api/auth/login', credentials);
+      $http.post('/api/auth/login', credentials).then(function(response) {
+        _this.checkSession();
       });
     },
 
@@ -46,8 +47,20 @@ app.factory('Auth', ['$http', '$rootScope', function($http, $rootScope)
       return $http.get('/api/auth/logout');
     },
 
+    checkSession: function() {
+      $http.get('/api/auth/session').then(function(response) {
+        if(Object.getOwnPropertyNames(response.data).length !== 0)
+          UserStorage.set(JSON.stringify(response.data));
+        else
+          UserStorage.destroy();
+      });
+    },
+
     currentUser: function() {
-      return $http.get('/api/auth/session');
+      var jsonString = UserStorage.get();
+      if(jsonString != null)
+        return JSON.parse(jsonString);
+      return null;
     },
 
     register: function(credentials) {
@@ -55,6 +68,21 @@ app.factory('Auth', ['$http', '$rootScope', function($http, $rootScope)
     }
   };
 }]);
+
+app.factory('UserStorage', function()
+{
+  return {
+    set: function(val) {
+      localStorage.setItem("User", val);
+    },
+    get: function() {
+      return localStorage.getItem("User");
+    },
+    destroy: function() {
+      localStorage.removeItem("User");
+    }
+  }
+});
 
 // NOTIFICATIONS
 app.factory('Notification', function()

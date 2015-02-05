@@ -9,7 +9,7 @@ app.directive('projectUserActions', function()
 		scope: {
 			project: '=for'
 		},
-		templateUrl: 'templates/directives/project-user-actions.html'
+		templateUrl: 'templates/directives/project-user-actions.html',
 	}
 });
 

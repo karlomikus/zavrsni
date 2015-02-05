@@ -4,7 +4,7 @@ var app = angular.module('myApp', ['ngRoute', 'ngResource', 'myApp.routes', 'myA
 
 app.run(['$rootScope', '$route', 'Auth', function($rootScope, $route, Auth)
 {
-	// $rootScope.$on('$routeChangeStart', function(next, current) {
-	// 	Auth.currentUser();
-	// });
+	$rootScope.$on('$routeChangeStart', function(next, current) {
+		Auth.checkSession();
+	});
 }]);

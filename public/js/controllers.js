@@ -5,68 +5,25 @@ var app = angular.module('myApp.controllers', []);
 /**
  * 	Main controllers
  */
-app.controller('MainController', ['$scope', 'Auth', function($scope, Auth)
+app.controller('MainController', ['$scope', 'Auth', 'UserStorage', function($scope, Auth, UserStorage)
 {
-	setCurrentUser();
-	console.log($scope.cuurrentUser);
+	$scope.currentUser = Auth.currentUser();
 
 	$scope.login = function(loginData)
 	{
 		Auth.login(loginData);
-		setCurrentUser();
-	}
-
-	$scope.isLoggedIn = function()
-	{
-		return $scope.currentUser != null;
-	}
-
-	function setCurrentUser()
-	{
-		$scope.currentUser = null;
-		Auth.currentUser().then(function(response)
-		{
-			$scope.currentUser = response.data;
-		});
-	}
-}]);
-
-/**
- * 	User controllers
- */
-app.controller('AuthController', ['$http', '$scope', '$rootScope', '$location', 'Auth',
-	function($http, $scope, $rootScope, $location, Auth)
-{
-	Auth.currentUser();
-
-	$scope.login = function(loginData)
-	{
-		Auth.login(loginData);
-		Auth.currentUser();
+		$scope.currentUser = Auth.currentUser();
 	}
 
 	$scope.logout = function()
 	{
 		Auth.logout();
-		Auth.currentUser();
-		window.location = "/";
+		$scope.currentUser = Auth.currentUser();
 	}
 
 	$scope.isLoggedIn = function()
 	{
-		var hasOwnProperty = Object.prototype.hasOwnProperty;
-		var obj = $rootScope.currentUser;
-
-		if (obj == null) return false;
-
-		if (obj.length > 0)    return true;
-		if (obj.length === 0)  return false;
-
-		for (var key in obj) {
-			if (hasOwnProperty.call(obj, key)) return true;
-		}
-
-		return false;
+		return $scope.currentUser != null;
 	}
 }]);
 
@@ -93,8 +50,9 @@ app.controller('ProjectsController', ['$scope', 'Project', function($scope, Proj
 	});
 }]);
 
-app.controller('ProjectDetailsController', ['$scope', '$routeParams', '$window', 'Project', function($scope, $routeParams, $window, Project)
+app.controller('ProjectDetailsController', ['$scope', '$routeParams', '$location', 'Project', function($scope, $routeParams, $location, Project)
 {
+	$scope.project = {};
 	Project.get({id: $routeParams.id}, function(project)
 	{
 		$scope.project = project.data;
@@ -103,7 +61,7 @@ app.controller('ProjectDetailsController', ['$scope', '$routeParams', '$window',
 	$scope.delete = function(id)
 	{
 		Project.delete({id: id});
-		$window.location.href = '/';
+		$location.path('/');
 	}
 }]);
 
@@ -147,14 +105,12 @@ app.controller('ProjectFormController', ['$scope', '$location', '$routeParams', 
  */
 app.controller('ProfileController', ['$scope', 'Profile', function($scope, Profile)
 {
-	console.log($scope.$parent.currentUser);
-	
-	// var userId = $scope.$parent. currentUser.id;
+	var userId = $scope.$parent.currentUser.id;
 
-	// $scope.profile = {};
-	// Profile.get(userId).success(function(data) {
-	// 	$scope.profile = data.data;
-	// });
+	$scope.profile = {};
+	Profile.get(userId).success(function(data) {
+		$scope.profile = data;
+	});
 }]);
 
 app.controller('MyProjectsController', ['$scope', '$rootScope', 'Profile', function($scope, $rootScope, Profile)
