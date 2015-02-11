@@ -1,5 +1,7 @@
 <?php
 
+use Transformers\ProfileTransformer;
+
 class AuthController extends ApiController
 {
     /**
@@ -39,35 +41,17 @@ class AuthController extends ApiController
     {
         try
         {
-            $responseStatus = 200;
             $user = Sentry::getUser();
-
-            $response = null;
-            if($user != null)
-            {
-                 $response = [
-                    'id' => $user->id,
-                    'email' => $user->email,
-                    'firstName' => $user->first_name,
-                    'lastName' => $user->last_name,
-                    'gender' => $user->gender,
-                    'dob' => $user->dob,
-                    'telephone' => $user->telephone,
-                    'address' => $user->address,
-                    'city' => $user->city,
-                    'postcode' => $user->postcode,
-                    'admin' => $user->inGroup(Sentry::findGroupByName('Administrators'))
-                ];
-            }
         }
         catch(Exception $e)
         {
-            $responseStatus = 400;
-            die($e->getMessage());
+            $this->setStatusCode(400);
         }
         finally
         {
-            return Response::json($response, $responseStatus);
+            if($user != null)
+                return $this->respondWithItem($user, new ProfileTransformer());
+            return Response::json(null);
         }
     }
 

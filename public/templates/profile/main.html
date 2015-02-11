@@ -1,23 +1,23 @@
 <div class="row">
 
   <div class="col-md-8">
-    <form name="profileForm" class="form-horizontal" novalidate>
+    <form name="profileForm" class="form-horizontal" enctype="multipart/form-data" novalidate>
       <div class="form-group" ng-class="{ 'has-error' : profileForm.email.$invalid && !profileForm.email.$pristine }">
         <label for="email" class="col-sm-2 control-label required">Email</label>
         <div class="col-sm-10">
           <input type="email" class="form-control" name="email" id="email" placeholder="Upišite email..." required ng-model="profileData.email">
         </div>
       </div>
-      <div class="form-group" ng-class="{ 'has-error' : profileForm.firstname.$invalid && !profileForm.firstname.$pristine }">
-        <label for="firstname" class="col-sm-2 control-label required">Ime</label>
+      <div class="form-group" ng-class="{ 'has-error' : profileForm.firstName.$invalid && !profileForm.firstName.$pristine }">
+        <label for="firstName" class="col-sm-2 control-label required">Ime</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Vaše ime..." required ng-model="profileData.firstname">
+          <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Vaše ime..." required ng-model="profileData.firstName">
         </div>
       </div>
-      <div class="form-group" ng-class="{ 'has-error' : profileForm.lastname.$invalid && !profileForm.lastname.$pristine }">
-        <label for="lastname" class="col-sm-2 control-label required">Prezime</label>
+      <div class="form-group" ng-class="{ 'has-error' : profileForm.lastName.$invalid && !profileForm.lastName.$pristine }">
+        <label for="lastName" class="col-sm-2 control-label required">Prezime</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Vaše prezime..." required ng-model="profileData.lastname">
+          <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Vaše prezime..." required ng-model="profileData.lastName">
         </div>
       </div>
       <div class="form-group" ng-class="{ 'has-error' : profileForm.dob.$invalid && !profileForm.dob.$pristine }">
@@ -48,9 +48,9 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="picture" class="col-sm-2 control-label">Slika</label>
+        <label for="pic" class="col-sm-2 control-label">Slika</label>
         <div class="col-sm-10">
-          <input type="file" name="picture" id="picture">
+          <input type="file" name="pic" id="pic" ng-model="profileData.pic">
           <p class="help-block">Slika će biti prikazana s desne strane vaših postova.</p>
         </div>
       </div>
@@ -62,7 +62,7 @@
       </div>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-success" ng-disabled="profileForm.$invalid">Spremi promjene</button>
+          <button type="submit" class="btn btn-success" ng-disabled="profileForm.$invalid" ng-click="updateProfile(profileData)">Spremi promjene</button>
         </div>
       </div>
     </form>
@@ -72,14 +72,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">Profile preview</div>
       <div class="panel-body">
-        <dl class="dl-horizontal">
-          <dt>Ime:</dt>
-          <dd>{{ profile.firstName }}</dd>
-          <dt>Prezime:</dt>
-          <dd>{{ profile.lastName }}</dd>
-          <dt>Email:</dt>
-          <dd>{{ profile.email }}</dd>
-        </dl>
+        OK NESTO CE TU IC VALJDA...
       </div>
     </div>
   </div>

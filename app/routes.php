@@ -34,6 +34,7 @@ Route::group(['prefix' => 'api'], function()
     Route::post('auth/register', 'AuthController@register');
 
     Route::get('profile/projects/{id}', 'ProfileController@userProjects');
+    Route::post('profile/update', 'ProfileController@update');
 
     Route::resource('projects', 'ProjectsController');
     Route::resource('categories', 'CategoriesController');

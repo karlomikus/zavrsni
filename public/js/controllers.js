@@ -107,15 +107,19 @@ app.controller('ProfileController', ['$scope', 'Profile', function($scope, Profi
 {
 	var userId = $scope.$parent.currentUser.id;
 
-	$scope.profile = {};
+	$scope.profileData = {};
 	Profile.get(userId).success(function(data) {
-		$scope.profile = data;
+		$scope.profileData = data;
 	});
+
+	$scope.updateProfile = function(data) {
+		Profile.update(data);
+	}
 }]);
 
 app.controller('MyProjectsController', ['$scope', '$rootScope', 'Profile', function($scope, $rootScope, Profile)
 {
-	var userId = $rootScope.currentUser.id;
+	var userId = $scope.$parent.currentUser.id;
 
 	$scope.projects = {};
 	Profile.projects(userId).success(function(data) {

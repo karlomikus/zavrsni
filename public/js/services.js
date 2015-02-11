@@ -27,6 +27,9 @@ app.factory('Profile', ['$http', '$rootScope', function($http, $rootScope)
     },
     get: function(id) {
       return $http.get('/api/auth/user/' + id);
+    },
+    update: function(data) {
+      return $http.post('/api/profile/update', data);
     }
   };
 }]);
@@ -37,7 +40,6 @@ app.factory('Auth', ['$http', 'UserStorage', function($http, UserStorage)
   return {
     login: function(credentials) {
       var _this = this;
-      //return $http.post('/api/auth/login', credentials);
       $http.post('/api/auth/login', credentials).then(function(response) {
         _this.checkSession();
       });
@@ -50,7 +52,7 @@ app.factory('Auth', ['$http', 'UserStorage', function($http, UserStorage)
     checkSession: function() {
       $http.get('/api/auth/session').then(function(response) {
         if(Object.getOwnPropertyNames(response.data).length !== 0)
-          UserStorage.set(JSON.stringify(response.data));
+          UserStorage.set(JSON.stringify(response.data.data));
         else
           UserStorage.destroy();
       });

@@ -20,6 +20,10 @@ class AddUserInformation extends Migration {
 			$table->string('address')->nullable();
 			$table->string('city')->nullable();
 			$table->integer('postcode')->nullable();
+			$table->string('website')->nullable();
+			$table->string('facebook')->nullable();
+			$table->string('pic')->nullable();
+			$table->text('description')->nullable();
 		});
 	}
 
@@ -38,6 +42,10 @@ class AddUserInformation extends Migration {
 			$table->dropColumn('address');
 			$table->dropColumn('city');
 			$table->dropColumn('postcode');
+			$table->dropColumn('website');
+			$table->dropColumn('facebook');
+			$table->dropColumn('pic');
+			$table->dropColumn('description');
 		});
 	}
 
