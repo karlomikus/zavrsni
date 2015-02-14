@@ -28,8 +28,6 @@
                 </div>
                 <div class="collapse navbar-collapse" id="nav-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="#">O Nama</a></li>
-                        <li><a href="#">Kontakt</a></li>
                         <li ng-if="!isLoggedIn()"><a href="/register">Registracija</a></li>
                     </ul>
                     <form class="navbar-form navbar-right" ng-show="!isLoggedIn()" ng-submit="login(loginData)">
@@ -43,7 +41,7 @@
                     </form>
                     <ul class="nav navbar-nav navbar-right" ng-show="isLoggedIn()">
                         <li class="dropdown">
-                            <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ currentUser.email }} <span class="caret"></span></a>
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ currentUser.fullName }} <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/profile">Profil</a></li>
                                 <li><a href="/myprojects">Moji projekti</a></li>
@@ -65,6 +63,8 @@
         <script src="//code.angularjs.org/1.3.4/angular-resource.js"></script>
         <script src="js/vendor/angular.loading.min.js"></script>
         <script src="js/vendor/noty.min.js"></script>
+        <script src="js/vendor/bootstrap.datepicker.js"></script>
+        <script src="js/vendor/locales/bootstrap-datepicker.hr.js"></script>
         <script src="js/services.js"></script>
         <script src="js/controllers.js"></script>
         <script src="js/directives.js"></script>

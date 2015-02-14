@@ -22,7 +22,8 @@ class ProjectTransformer extends TransformerAbstract
             'date'        => date_format(date_create($project->created_at), 'd.m.Y'),
             'startDate'   => date_format(date_create($project->start_date), 'd.m.Y'),
             'endDate'     => date_format(date_create($project->end_date), 'd.m.Y'),
-            'location'    => $project->location
+            'location'    => $project->location,
+            'contactType' => $project->contact_type
         ];
     }
 }

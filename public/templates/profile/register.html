@@ -5,6 +5,14 @@
             <label for="email">Email adresa</label>
             <input name="email" type="email" class="form-control" id="email" required ng-model="registerData.email">
           </div>
+          <div class="form-group" ng-class="{ 'has-error' : registerForm.firstName.$invalid && !registerForm.firstName.$pristine }">
+            <label for="firstName">Ime</label>
+            <input name="firstName" type="text" class="form-control" id="firstName" required ng-model="registerData.firstName">
+          </div>
+          <div class="form-group" ng-class="{ 'has-error' : registerForm.lastName.$invalid && !registerForm.lastName.$pristine }">
+            <label for="lastName">Prezime</label>
+            <input name="lastName" type="text" class="form-control" id="lastName" required ng-model="registerData.lastName">
+          </div>
           <div class="form-group">
             <label for="password">Zaporka</label>
             <input name="password" type="password" class="form-control" id="password" required ng-model="registerData.password">

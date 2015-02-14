@@ -13,12 +13,14 @@ app.controller('MainController', ['$scope', 'Auth', 'UserStorage', function($sco
 	{
 		Auth.login(loginData);
 		$scope.currentUser = Auth.currentUser();
+		Auth.checkSession();
 	}
 
 	$scope.logout = function()
 	{
 		Auth.logout();
 		$scope.currentUser = Auth.currentUser();
+		Auth.checkSession();
 	}
 
 	$scope.isLoggedIn = function()
@@ -80,7 +82,11 @@ app.controller('ProjectFormController', ['$scope', '$location', '$routeParams', 
 	}
 	else
 	{
+		var currentDate = new Date();
 		$scope.project = new Project();
+		$scope.project.contactType = 'website';
+		$scope.project.startDate = currentDate.getFullYear() + "-" + (currentDate.getMonth() + 1) + "-" + currentDate.getDate();
+		$scope.project.endDate = currentDate.getFullYear() + "-" + (currentDate.getMonth() + 2) + "-" + currentDate.getDate();
 	}
 
 	$scope.submit = function()
@@ -90,6 +96,11 @@ app.controller('ProjectFormController', ['$scope', '$location', '$routeParams', 
 			Project.update({id: projectId}, $scope.project);
 			Notification.notify('Projekt je uspješno spremljen!', 'success');
 			$location.path('/project/' + projectId);
+			// Refresh project scope
+			Project.get({id: projectId}, function(project)
+			{
+				$scope.project = project.data;
+			});
 		}
 		else
 		{
@@ -108,8 +119,10 @@ app.controller('ProfileController', ['$scope', 'Profile', function($scope, Profi
 	var userId = $scope.$parent.currentUser.id;
 
 	$scope.profileData = {};
-	Profile.get(userId).success(function(data) {
-		$scope.profileData = data;
+	
+	Profile.get(userId).success(function(response) {
+		$scope.profileData = response.data;
+		$scope.profileData.pic = {};
 	});
 
 	$scope.updateProfile = function(data) {
@@ -125,4 +138,21 @@ app.controller('MyProjectsController', ['$scope', '$rootScope', 'Profile', funct
 	Profile.projects(userId).success(function(data) {
 		$scope.projects = data.data;
 	});
+}]);
+
+
+
+app.controller('MessageController', ['$scope', 'Notification', 'Message', function($scope, Notification, Message)
+{
+	$scope.send = function(data) {
+
+		var userId = $scope.$parent.project.userId;
+		var projectId = $scope.$parent.project.id;
+
+		Message.send(userId, projectId, data).success(function() {
+			Notification.notify('Poruka je uspješno poslana', 'success');
+			$scope.messageData = {};
+			$scope.messageForm.$setPristine();
+		});
+	};
 }]);

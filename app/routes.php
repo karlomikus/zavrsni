@@ -26,6 +26,7 @@ App::missing(function($exception)
 // Public api access routes
 Route::group(['prefix' => 'api'], function()
 {
+    // Authentication and users
     Route::post('auth/login', 'AuthController@login');
     Route::get('auth/logout', 'AuthController@logout');
     Route::get('auth/check', 'AuthController@isLoggedIn');
@@ -33,11 +34,18 @@ Route::group(['prefix' => 'api'], function()
     Route::get('auth/user/{id}', 'AuthController@user');
     Route::post('auth/register', 'AuthController@register');
 
+    // Profiles
     Route::get('profile/projects/{id}', 'ProfileController@userProjects');
     Route::post('profile/update', 'ProfileController@update');
 
+    // Projects
     Route::resource('projects', 'ProjectsController');
     Route::resource('categories', 'CategoriesController');
+
+    // Messages
+    Route::get('messages/{id}', 'MessagesController@index');
+    Route::get('messages/single/{id}', 'MessagesController@show');
+    Route::post('messages/{userId}/{projectId}', 'MessagesController@store');
 });
 
 // Administrator access routes

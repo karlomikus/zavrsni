@@ -39,13 +39,14 @@ app.factory('Auth', ['$http', 'UserStorage', function($http, UserStorage)
 {
   return {
     login: function(credentials) {
-      var _this = this;
+      var self = this;
       $http.post('/api/auth/login', credentials).then(function(response) {
-        _this.checkSession();
+        self.checkSession();
       });
     },
 
     logout: function() {
+      UserStorage.destroy();
       return $http.get('/api/auth/logout');
     },
 
@@ -75,16 +76,26 @@ app.factory('UserStorage', function()
 {
   return {
     set: function(val) {
-      localStorage.setItem("User", val);
+      sessionStorage.setItem("User", val);
     },
     get: function() {
-      return localStorage.getItem("User");
+      return sessionStorage.getItem("User");
     },
     destroy: function() {
-      localStorage.removeItem("User");
+      sessionStorage.removeItem("User");
     }
   }
 });
+
+// MESSAGES
+app.factory('Message', ['$http', function($http)
+{
+  return {
+    send: function(userId, projectId, data) {
+      return $http.post('/api/messages/' + userId + '/' + projectId, data);
+    }
+  }
+}]);
 
 // NOTIFICATIONS
 app.factory('Notification', function()
@@ -100,4 +111,4 @@ app.factory('Notification', function()
       });
     }
   };
-})
+});

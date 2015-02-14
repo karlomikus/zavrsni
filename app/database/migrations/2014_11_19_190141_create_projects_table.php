@@ -26,6 +26,7 @@ class CreateProjectsTable extends Migration {
 			$table->string('tags')->nullable();
 			$table->text('description');
 			$table->text('skills');
+			$table->enum('contact_type', ['email', 'website']);
 			$table->timestamps();
 		});
 	}

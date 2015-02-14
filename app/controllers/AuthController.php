@@ -65,28 +65,15 @@ class AuthController extends ApiController
     {
         try
         {
-            $responseStatus = 200;
             $user = Sentry::findUserById($id);
-
-            $response = [
-                'email' => $user->email,
-                'firstName' => $user->first_name,
-                'lastName' => $user->last_name,
-                'gender' => $user->gender,
-                'dob' => $user->dob,
-                'telephone' => $user->telephone,
-                'address' => $user->address,
-                'city' => $user->city,
-                'postcode' => $user->postcode,
-            ];
         }
         catch(Exception $e)
         {
-            $responseStatus = 400;
+            $this->setStatusCode(400);
         }
         finally
         {
-            return Response::json($response, $responseStatus);
+            return $this->respondWithItem($user, new ProfileTransformer());
         }
     }
 

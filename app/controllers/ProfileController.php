@@ -24,13 +24,17 @@ class ProfileController extends ApiController
             $user->facebook    = Input::get('facebook');
             $user->description = Input::get('description');
 
-            if(Input::hasFile('pic'))
-            {
-                $file = Input::file('pic');
-                $destinationPath = public_path() . '/uploads';
-                $fileName = $user->id;
-                $file->move($destinationPath, $fileName);
-            }
+            // $picture = Input::get('pic');
+
+            // if($picture)
+            // {
+            //     $base64Image = substr($picture, strpos($picture, ",") + 1);
+            //     $image = base64_decode($picture);
+            //     $destinationPath = public_path() . '/uploads';
+            //     $img = Image::make($picture);
+            //     //$fileName = $user->id;
+            //     //$file->move($destinationPath, $fileName);
+            // }
 
             $user->save();
         }

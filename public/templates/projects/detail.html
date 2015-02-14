@@ -20,31 +20,28 @@
 	</div>
 </div>
 <hr>
-<div class="row">
+<div class="row" ng-controller="MessageController">
 	<div class="col-md-12">
 		<h3>Prijavi se za posao!</h3>
-		<p>
-			Ova osoba je omogućila kontaktiranje pomoću portala!
-		</p>
-		<form action="#">
-			<div class="form-group">
+		<form name="messageForm" ng-submit="send(messageData)" novalidate>
+			<div class="form-group" ng-class="{ 'has-error' : messageForm.fullname.$invalid && !messageForm.fullname.$pristine }">
 				<label for="fullname">Ime i prezime</label>
-				<input type="text" class="form-control" id="fullname">
+				<input type="text" class="form-control" name="fullname" id="fullname" required ng-model="messageData.fullname">
 			</div>
-			<div class="form-group">
+			<div class="form-group" ng-class="{ 'has-error' : messageForm.email.$invalid && !messageForm.email.$pristine }">
 				<label for="email">Email</label>
-				<input type="email" class="form-control" id="email">
+				<input type="email" class="form-control" name="email" id="email" required ng-model="messageData.email">
 			</div>
-			<div class="form-group">
+			<div class="form-group" ng-class="{ 'has-error' : messageForm.cv.$invalid && !messageForm.cv.$pristine }">
 				<label for="cv">CV</label>
-				<input type="text" class="form-control" id="cv" placeholder="http://">
+				<input type="text" class="form-control" name="cv" id="cv" required placeholder="http://" ng-model="messageData.cv">
+			</div>
+			<div class="form-group" ng-class="{ 'has-error' : messageForm.msg.$invalid && !messageForm.msg.$pristine }">
+				<label for="msg">Poruka</label>
+				<textarea class="form-control" name="msg" id="msg" rows="6" required ng-model="messageData.msg"></textarea>
 			</div>
 			<div class="form-group">
-				<label for="addon">Dodatno</label>
-				<textarea class="form-control" name="addon" id="addon" rows="6"></textarea>
-			</div>
-			<div class="form-group">
-				<button type="submit" class="btn btn-primary">Pošalji</button>
+				<button type="submit" class="btn btn-primary" ng-disabled="messageForm.$invalid">Pošalji</button>
 			</div>
 		</form>
 	</div>

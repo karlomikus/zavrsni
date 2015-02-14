@@ -10,7 +10,7 @@
 	</div>
 	<div class="col-md-4">
 		<div class="input-group">
-			<input ng-model="titleFilter" type="search" placeholder="Pretraživanje..." class="form-control">
+			<input type="search" placeholder="Pretraživanje..." class="form-control" ng-model="projectsSearch">
 			<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
 		</div>
 	</div>
@@ -20,13 +20,13 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<div ng-repeat="project in projects | filter: titleFilter" class="panel panel-default">
+		<div class="panel panel-default" ng-repeat="project in projects | filter: { title: projectsSearch }">
 		    <div class="panel-heading"><a href="/#/project/{{ project.id }}">{{ project.title }}</a> by {{ project.user }} on {{ project.date }}</div>
 		    <div class="panel-body">
 		        {{ project.description }}
 		    </div>
 		    <div class="panel-footer">
-		    	<span ng-repeat="tag in project.tagsArray" class="label label-primary">{{ tag }}</span> in {{ project.category }}
+		    	<span class="label label-primary" ng-repeat="tag in project.tagsArray">{{ tag }}</span> in {{ project.category }}
 		    </div>
 		</div>
 	</div>
