@@ -10,7 +10,8 @@
         "laravelbook/ardent": "2.*",
         "fzaninotto/faker": "1.5.*@dev",
 		"barryvdh/laravel-ide-helper": "~1.11",
-		"league/fractal": "~0.11"
+		"league/fractal": "~0.11",
+		"erusev/parsedown": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

@@ -1,6 +1,6 @@
 <form name="projectForm" class="form-horizontal" ng-submit="submit()" novalidate>
   <div class="col-md-8">
-    <h3>Dodavanje novog projekta</h3>
+    <h3 class="subtitle">Dodavanje novog projekta</h3>
     <div class="form-group" ng-class="{ 'has-error' : projectForm.title.$invalid && !projectForm.title.$pristine }">
       <label for="title" class="col-sm-2 control-label required">Ime</label>
       <div class="col-sm-10">
@@ -54,12 +54,15 @@
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-success" ng-disabled="projectForm.$invalid">Spremi projekt</button>
-        <button class="btn btn-default">Pregled projekta</button>
       </div>
     </div>
   </div>
   <div class="col-md-4">
-    <h3>Dodatne postavke</h3>
+    <h3 class="subtitle">Dodatne informacije</h3>
+    <div class="alert alert-warning">
+      <h4>Markdown podrška</h4>
+      Polja za opis projekta i tražene sposobnosti podržavaju <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank" class="alert-link">markdown sintaksu</a>!
+    </div>
     <div class="radio">
       <label>
         <input type="radio" name="contact-type" value="website" ng-model="project.contactType">

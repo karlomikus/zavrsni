@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Jobbr &dash; Završni rad (Karlo Mikuš)</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700|Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/animate.css">
         <link rel="stylesheet" href="css/main.css">
         <!--[if lt IE 9]>
@@ -15,7 +16,7 @@
         <![endif]-->
     </head>
     <body ng-controller="MainController">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-jobbr navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse">
@@ -41,10 +42,10 @@
                     </form>
                     <ul class="nav navbar-nav navbar-right" ng-show="isLoggedIn()">
                         <li class="dropdown">
-                            <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ currentUser.fullName }} <span class="caret"></span></a>
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ currentUser.fullName }} <span class="badge">2</span> <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/profile">Profil</a></li>
-                                <li><a href="/myprojects">Moji projekti</a></li>
+                                <li><a href="/myprojects">Moji projekti <span class="badge">2</span></a></li>
                                 <li ng-show="currentUser.admin"><a href="/admin" target="_blank">Administracija</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#" ng-click="logout()">Odjava</a></li>
@@ -62,6 +63,7 @@
         <script src="//code.angularjs.org/1.3.4/angular-route.js"></script>
         <script src="//code.angularjs.org/1.3.4/angular-resource.js"></script>
         <script src="js/vendor/angular.loading.min.js"></script>
+        <script src="js/vendor/angular.scroll.min.js"></script>
         <script src="js/vendor/noty.min.js"></script>
         <script src="js/vendor/bootstrap.datepicker.js"></script>
         <script src="js/vendor/locales/bootstrap-datepicker.hr.js"></script>

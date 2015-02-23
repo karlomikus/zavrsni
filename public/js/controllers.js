@@ -142,7 +142,7 @@ app.controller('MyProjectsController', ['$scope', '$rootScope', 'Profile', funct
 
 
 
-app.controller('MessageController', ['$scope', 'Notification', 'Message', function($scope, Notification, Message)
+app.controller('MessageFormController', ['$scope', 'Notification', 'Message', function($scope, Notification, Message)
 {
 	$scope.send = function(data) {
 
@@ -155,4 +155,9 @@ app.controller('MessageController', ['$scope', 'Notification', 'Message', functi
 			$scope.messageForm.$setPristine();
 		});
 	};
+}]);
+
+app.controller('MessageController', ['$scope', 'Message', function($scope, Message)
+{
+	
 }]);

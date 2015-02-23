@@ -1,0 +1,119 @@
+$primary-color: #000025;
+$primary-color-link: #9a9aaf;
+$accent-color: #fd9d20;
+$gray-color: #e2e2e2;
+
+$font-primary-color: #626262;
+$font-primary: 'Open Sans', sans-serif;
+$font-secondary: 'Raleway', sans-serif;
+
+body {
+  margin-top: 70px;
+  font-family: $font-primary;
+  color: $font-primary-color; 
+}
+
+a {
+  color: $accent-color;
+  &:hover, &:active, &:focus {
+    color: $primary-color;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $primary-color;
+}
+
+.subtitle {
+  border-bottom: 2px solid $gray-color;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+hr {
+  border-width: 2px;
+  border-color: $gray-color;
+}
+
+label.required:after {
+  content: '*';
+  color: red;
+}
+
+// Forms
+.form-control {
+  border-radius: 0;
+  &:focus {
+    border-color: $accent-color;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba($accent-color, 0.6);
+  }
+}
+
+// Navbar
+.navbar-jobbr {
+  background: $primary-color;
+  a {
+    color: $primary-color-link;
+  }
+  .nav {
+    > li {
+      > a {
+        &:hover, &:active, &:focus {
+          //background: $primary-color-link;
+          color: $primary-color; 
+        }
+      }
+    }
+  }
+}
+
+// Panels
+.panel-jobbr {
+  border: 0;
+  background-color: #efefef;
+  border-radius: 0;
+  float: left;
+  width: 48%;
+  margin-right: 2%;
+  .panel-heading {
+    a {
+      color: $primary-color;
+      font-size: 22px; 
+    }
+    small {
+      display: block;
+      color: #626262; 
+    }
+  }
+  .panel-body {
+    line-height: 22px;
+    height: 150px;
+  }
+  .panel-footer {
+    border: 0;
+    background: $gray-color;
+    .project-tag {
+      background: $primary-color;
+      color: #fff;
+      margin-right: 5px;
+      padding: 3px 8px; 
+    }
+  }
+}
+
+// Main page
+.projects-search {
+  padding: 10px 20px;
+  font-family: $font-secondary; 
+  font-size: 22px;
+  width: 100%;
+  display: block;
+  border: 2px solid $gray-color;
+  margin: 30px 0;
+  &:focus, &:active {
+    border-color: $primary-color;
+    color: $primary-color;
+  }
+}
+
+@import 'plugins';

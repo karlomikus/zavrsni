@@ -1,18 +1,12 @@
-<div class="alert alert-warning">
+<!-- <div class="alert alert-warning">
     <h4>Dummy admin information:</h4>
     <strong>Email:</strong> admin@admin.com<br>
     <strong>Password:</strong> admin123
-</div>
+</div> -->
 
 <div class="row">
-	<div class="col-md-8">
-		Lista projekata
-	</div>
-	<div class="col-md-4">
-		<div class="input-group">
-			<input type="search" placeholder="Pretraživanje..." class="form-control" ng-model="projectsSearch">
-			<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-		</div>
+	<div class="col-md-12">
+		<input type="search" placeholder="Pretraživanje otvorenih projekata..." class="projects-search" ng-model="projectsSearch">
 	</div>
 </div>
 
@@ -20,13 +14,16 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<div class="panel panel-default" ng-repeat="project in projects | filter: { title: projectsSearch }">
-		    <div class="panel-heading"><a href="/#/project/{{ project.id }}">{{ project.title }}</a> by {{ project.user }} on {{ project.date }}</div>
+		<div class="panel panel-jobbr" ng-repeat="project in projects | filter: { title: projectsSearch }">
+		    <div class="panel-heading">
+		    	<a href="/#/project/{{ project.id }}">{{ project.title }}</a>
+		    	<small>by {{ project.user }} &dash; {{ project.date }}</small>
+		    </div>
 		    <div class="panel-body">
-		        {{ project.description }}
+		        {{ project.description | words: 50 }}
 		    </div>
 		    <div class="panel-footer">
-		    	<span class="label label-primary" ng-repeat="tag in project.tagsArray">{{ tag }}</span> in {{ project.category }}
+		    	<span class="project-tag" ng-repeat="tag in project.tagsArray">{{ tag }}</span>
 		    </div>
 		</div>
 	</div>
