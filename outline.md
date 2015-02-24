@@ -11,3 +11,8 @@
 
 1. Database
 2. Migrations/Seeding
+
+#REFERENCE
+LARAVEL DOCS
+ANGULAR DOCS
+http://en.wikipedia.org/wiki/Active_record_pattern

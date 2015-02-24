@@ -4,7 +4,7 @@ use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
 use League\Fractal\Manager;
 
-class ApiController extends BaseController
+class ApiController extends Controller
 {
     protected $fractal;
     protected $statusCode = 200;
@@ -16,7 +16,6 @@ class ApiController extends BaseController
      */
     function __construct(Manager $fractal)
     {
-    	parent::__construct();
     	$this->fractal = $fractal;
     }
 
