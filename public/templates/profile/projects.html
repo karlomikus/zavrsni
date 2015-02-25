@@ -3,6 +3,6 @@
   <a href="/project/{{ project.id }}" class="list-group-item clearfix" ng-repeat="project in projects">
     <h4 class="list-group-item-heading">{{ project.title }}</h4>
     <p class="list-group-item-text">Projekt je dodan {{ project.date }}</p>
-    <button class="btn btn-primary">2 Poruke</button>
+    <button class="btn btn-primary">{{ project.messages }} Poruke</button>
   </a>
 </div>

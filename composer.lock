@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e27a9767b2066ceccf2fb95a69127969",
+    "hash": "5ce98f6a79e79e7318cd2bbbe5039043",
     "packages": [
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -353,12 +353,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "74f58bbda974d0820183d228f120c2f3258bf7f6"
+                "reference": "2495d3361ac1e9fc15608a1b33ec2dd41c56b2dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/74f58bbda974d0820183d228f120c2f3258bf7f6",
-                "reference": "74f58bbda974d0820183d228f120c2f3258bf7f6",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/2495d3361ac1e9fc15608a1b33ec2dd41c56b2dc",
+                "reference": "2495d3361ac1e9fc15608a1b33ec2dd41c56b2dc",
                 "shasum": ""
             },
             "require": {
@@ -397,7 +397,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2015-02-19 08:29:00"
+            "time": "2015-02-23 10:49:44"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -2127,7 +2127,6 @@
         "erusev/parsedown": 20
     },
     "prefer-stable": false,
-    "prefer-lowest": false,
     "platform": [],
     "platform-dev": []
 }

@@ -72,20 +72,20 @@ app.factory('Auth', ['$http', 'UserStorage', function($http, UserStorage)
   };
 }]);
 
-app.factory('UserStorage', function()
+app.factory('UserStorage', ['$window', function($window)
 {
   return {
     set: function(val) {
-      sessionStorage.setItem("User", val);
+      $window.sessionStorage.setItem("User", val);
     },
     get: function() {
-      return sessionStorage.getItem("User");
+      return $window.sessionStorage.getItem("User");
     },
     destroy: function() {
-      sessionStorage.removeItem("User");
+      $window.sessionStorage.removeItem("User");
     }
   }
-});
+}]);
 
 // MESSAGES
 app.factory('Message', ['$http', function($http)
