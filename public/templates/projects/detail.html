@@ -1,10 +1,10 @@
 <div class="row">
 	<div class="col-md-9">
 		<h1 ng-bind="project.title"></h1>
-		<p ng-bind="project.description"></p>
-		<h3>Tražene sposobnosti:</h3>
-		<p ng-bind="project.skills"></p>
-		<h3>Dodatne informacije:</h3>
+		<div ng-bind-html="project.descriptionParsed"></div>
+		<h3 class="subtitle">Tražene sposobnosti:</h3>
+		<div ng-bind-html="project.skillsParsed"></div>
+		<h3 class="subtitle">Dodatne informacije:</h3>
 		<ul>
 			<li>Početak projekta: {{ project.startDate }}</li>
 			<li>Završetak projekta: {{ project.endDate }}</li>

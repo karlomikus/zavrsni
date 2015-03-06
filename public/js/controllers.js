@@ -82,11 +82,8 @@ app.controller('ProjectFormController', ['$scope', '$location', '$routeParams', 
 	}
 	else
 	{
-		var currentDate = new Date();
 		$scope.project = new Project();
 		$scope.project.contactType = 'website';
-		$scope.project.startDate = currentDate.getFullYear() + "-" + (currentDate.getMonth() + 1) + "-" + currentDate.getDate();
-		$scope.project.endDate = currentDate.getFullYear() + "-" + (currentDate.getMonth() + 2) + "-" + currentDate.getDate();
 	}
 
 	$scope.submit = function()

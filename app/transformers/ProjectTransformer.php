@@ -18,6 +18,7 @@ class ProjectTransformer extends TransformerAbstract
             'description'       => $project->description,
             'descriptionParsed' => $markdown->text($project->description),
             'skills'            => $project->skills,
+            'skillsParsed'      => $markdown->text($project->skills),
             'category'          => $project->category->name,
             'categoryId'        => (int) $project->category->id,
             'tagsArray'         => (array) explode(',', $project->tags),
@@ -26,7 +27,8 @@ class ProjectTransformer extends TransformerAbstract
             'startDate'         => date_format(date_create($project->start_date), 'd.m.Y'),
             'endDate'           => date_format(date_create($project->end_date), 'd.m.Y'),
             'location'          => $project->location,
-            'contactType'       => $project->contact_type
+            'contactType'       => $project->contact_type,
+            'messages'          => (int) 12
         ];
     }
 }

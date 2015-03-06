@@ -62,6 +62,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular.js"></script>
         <script src="//code.angularjs.org/1.3.4/angular-route.js"></script>
         <script src="//code.angularjs.org/1.3.4/angular-resource.js"></script>
+        <script src="//code.angularjs.org/1.3.4/angular-sanitize.js"></script>
         <script src="js/vendor/angular.loading.min.js"></script>
         <script src="js/vendor/angular.scroll.min.js"></script>
         <script src="js/vendor/noty.min.js"></script>
