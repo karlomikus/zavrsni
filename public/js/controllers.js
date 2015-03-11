@@ -108,6 +108,31 @@ app.controller('ProjectFormController', ['$scope', '$location', '$routeParams', 
 	}
 }]);
 
+app.controller('MessageFormController', ['$scope', 'Notification', 'Message', function($scope, Notification, Message)
+{
+	$scope.send = function(data) {
+
+		var userId = $scope.$parent.project.userId;
+		var projectId = $scope.$parent.project.id;
+
+		Message.send(userId, projectId, data).success(function() {
+			Notification.notify('Poruka je uspješno poslana', 'success');
+			$scope.messageData = {};
+			$scope.messageForm.$setPristine();
+		});
+	};
+}]);
+
+app.controller('ApplicationsController', ['$scope', 'Message', function($scope, Message){
+	
+	var projectId = $scope.$parent.project.id;
+
+	Message.forProject(projectId).success(function(response) {
+		$scope.messages = response.data;
+	});
+
+}]);
+
 /**
  *  Profile controllers
  */
@@ -135,23 +160,6 @@ app.controller('MyProjectsController', ['$scope', '$rootScope', 'Profile', funct
 	Profile.projects(userId).success(function(data) {
 		$scope.projects = data.data;
 	});
-}]);
-
-
-
-app.controller('MessageFormController', ['$scope', 'Notification', 'Message', function($scope, Notification, Message)
-{
-	$scope.send = function(data) {
-
-		var userId = $scope.$parent.project.userId;
-		var projectId = $scope.$parent.project.id;
-
-		Message.send(userId, projectId, data).success(function() {
-			Notification.notify('Poruka je uspješno poslana', 'success');
-			$scope.messageData = {};
-			$scope.messageForm.$setPristine();
-		});
-	};
 }]);
 
 app.controller('MessageController', ['$scope', 'Message', function($scope, Message)

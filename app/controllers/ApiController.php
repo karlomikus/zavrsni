@@ -4,8 +4,8 @@ use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
 use League\Fractal\Manager;
 
-class ApiController extends Controller
-{
+class ApiController extends Controller {
+	
     protected $fractal;
     protected $statusCode = 200;
 
@@ -18,17 +18,6 @@ class ApiController extends Controller
     {
     	$this->fractal = $fractal;
     }
-
-    /**
-	 * Setup the layout used by the controller.
-	 *
-	 * @return void
-	 */
-	protected function setupLayout()
-	{
-		if (!is_null($this->layout))
-			$this->layout = View::make($this->layout);
-	}
 
 	/**
 	 * Single resource item response

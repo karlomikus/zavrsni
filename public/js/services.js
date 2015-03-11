@@ -93,6 +93,9 @@ app.factory('Message', ['$http', function($http)
   return {
     send: function(userId, projectId, data) {
       return $http.post('/api/messages/' + userId + '/' + projectId, data);
+    },
+    forProject: function(projectId) {
+      return $http.get('/api/messages/' + projectId);
     }
   }
 }]);

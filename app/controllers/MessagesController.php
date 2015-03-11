@@ -5,15 +5,15 @@ use Transformers\MessageTransformer;
 class MessagesController extends ApiController
 {
     /**
-     * Display a listing of the projects.
+     * Display a listing of the messages.
      *
      * @return Response
      */
-    public function index($forUserId)
+    public function index($forProjectId)
     {
         try
         {
-            $messages = Message::orderBy('created_at', 'DESC')->where('to_id', '=', $forUserId)->get();
+            $messages = Message::orderBy('created_at', 'DESC')->where('project_id', '=', $forProjectId)->get();
         }
         catch(Exception $e)
         {

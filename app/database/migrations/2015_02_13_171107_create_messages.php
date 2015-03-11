@@ -15,8 +15,6 @@ class CreateMessages extends Migration {
 		Schema::create('messages', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('to_id')->unsigned();
-			$table->foreign('to_id')->references('id')->on('users');
 			$table->integer('project_id')->unsigned();
 			$table->foreign('project_id')->references('id')->on('projects');
 			$table->string('full_name');

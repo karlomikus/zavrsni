@@ -10,7 +10,6 @@ class MessageTransformer extends TransformerAbstract
         return
         [
             'id'        => (int) $msg->id,
-            'to'        => (int) $msg->to->id,
             'project'   => $msg->project->title,
             'projectID' => (int) $msg->project->id,
             'email'     => $msg->email,
