@@ -1,4 +1,5 @@
 <div class="row">
+	<!-- Main project details start -->
 	<div class="col-md-9">
 		<h1 ng-bind="project.title"></h1>
 		<div ng-bind-html="project.descriptionParsed"></div>
@@ -11,45 +12,46 @@
 			<li>Lokacija: {{ project.location }}</li>
 		</ul>
 	</div>
-	<div class="col-md-3 text-center" data-spy="affix" data-offset-top="60" data-offset-bottom="200">
+	<!-- Main project details end -->
+	<div class="col-md-3">
 		<img src="http://placehold.it/100x100" alt="project owner image" class="img-circle">
-		<br><br>
-		<span class="label label-primary" ng-repeat="tag in project.tagsArray">{{ tag }}</span>
-		<br><br>
-		<project-user-actions for="project" ng-if="currentUser.id == project.userId" />
+		<project-user-actions for="project" ng-if="currentUser.id == project.userId"></project-user-actions>
+		<div class="applications" ng-controller="ApplicationsController">
+			<h3>Zaprimljene prijave:</h3>
+			<ul>
+				<li ng-repeat="msg in messages">
+					<a href="#" data-toggle="modal" data-target="#application-modal" ng-click="applicationInfo(msg.id)">{{ msg.fullName }}</a>
+				</li>
+			</ul>
+			<!-- Application info modal start -->
+			<div class="modal fade" id="application-modal" tabindex="-1">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h4 class="modal-title">{{ message.fullName }}</h4>
+			      </div>
+			      <div class="modal-body">
+			      	<strong>Poruka:</strong>
+			        <p>
+			        	{{ message.message }}
+			        </p>
+			        <ul>
+			        	<li><a href="mailto:{{ message.email }}">Email</a></li>
+			        	<li><a href="{{ message.CV }}">Životopis</a></li>
+			        </ul>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="message = {}">Close</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<!-- Application info modal end -->
+		</div>
 	</div>
 </div>
 <hr>
-<div class="applications" ng-controller="ApplicationsController">
-	<h3>Zaprimljene prijave:</h3>
-	<ul>
-		<li ng-repeat="msg in messages">
-			<a href="#" data-toggle="modal" data-target="#application-modal" ng-click="applicationInfo(msg.id)">{{ msg.fullName }}</a>
-		</li>
-	</ul>
-	<div class="modal fade" id="application-modal" tabindex="-1">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h4 class="modal-title">{{ message.fullName }}</h4>
-	      </div>
-	      <div class="modal-body">
-	      	<strong>Poruka:</strong>
-	        <p>
-	        	{{ message.message }}
-	        </p>
-	        <ul>
-	        	<li><a href="mailto:{{ message.email }}">Email</a></li>
-	        	<li><a href="{{ message.CV }}">Životopis</a></li>
-	        </ul>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="message = {}">Close</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-</div>
+<!-- Application form start -->
 <div class="row" ng-controller="MessageFormController">
 	<div class="col-md-12">
 		<h3>Prijavi se za posao!</h3>
@@ -76,3 +78,4 @@
 		</form>
 	</div>
 </div>
+<!-- Application form end -->

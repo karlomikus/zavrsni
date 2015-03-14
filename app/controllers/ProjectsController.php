@@ -11,18 +11,12 @@ class ProjectsController extends ApiController
      */
     public function index()
     {
-        try
-        {
-            $projects = Project::orderBy('created_at', 'DESC')->get();
-        }
-        catch(Exception $e)
-        {
-            $this->setStatusCode(400);
-        }
-        finally
-        {
-            return $this->respondWithCollection($projects, new ProjectTransformer());
-        }
+        $projects = Project::orderBy('created_at', 'DESC')->get();
+
+        if(!$projects)
+            return $this->respondWithError("No projects found!");
+        
+        return $this->respondWithCollection($projects, new ProjectTransformer());
     }
 
     /**
@@ -34,7 +28,6 @@ class ProjectsController extends ApiController
     {
         try
         {
-            $responseStatus = 200;
             $title          = Input::get('title');
             $description    = Input::get('description');
             $skills         = Input::get('skills');
@@ -61,34 +54,26 @@ class ProjectsController extends ApiController
         }
         catch (Exception $e)
         {
-            $responseStatus = 400;
+            return $this->respondWithError($e->getMessage());
         }
-        finally
-        {
-            return Response::json(null, $responseStatus);
-        }
+        
+        return $this->respondWithArray([]);
     }
 
     /**
      * Display the specified project.
      *
-     * @param  int  $id
+     * @param  int  $id Project ID
      * @return Response
      */
     public function show($id)
     {
-        try
-        {
-            $project = Project::find($id);
-        }
-        catch(Exception $e)
-        {
-            $this->setStatusCode(400);
-        }
-        finally
-        {
-            return $this->respondWithItem($project, new ProjectTransformer());
-        }
+        $project = Project::find($id);
+
+        if(!$project)
+            $this->respondWithError("No project found with given ID!");
+        
+        return $this->respondWithItem($project, new ProjectTransformer());
     }
 
     /**
@@ -101,7 +86,6 @@ class ProjectsController extends ApiController
     {
         try
         {
-            $responseStatus = 200;
             $title          = Input::get('title');
             $description    = Input::get('description');
             $skills         = Input::get('skills');
@@ -126,12 +110,10 @@ class ProjectsController extends ApiController
         }
         catch (Exception $e)
         {
-            $responseStatus = 400;
+            return $this->respondWithError($e->getMessage());
         }
-        finally
-        {
-            return Response::json(null, $responseStatus);
-        }
+        
+        return $this->respondWithArray([]);
     }
 
     /**
@@ -144,16 +126,13 @@ class ProjectsController extends ApiController
     {
         try
         {
-            $responseStatus = 200;
             Project::destroy($id);
         }
         catch(Exception $e)
         {
-            $responseStatus = 400;
+            return $this->respondWithError($e->getMessage());
         }
-        finally
-        {
-            return Response::json(null, $responseStatus);
-        }
+        
+        return $this->respondWithArray([]);
     }
 }
