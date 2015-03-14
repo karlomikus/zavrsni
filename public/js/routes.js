@@ -7,7 +7,12 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   $routeProvider
     .when('/', {
       templateUrl: 'templates/projects/main.html',
-      controller: 'ProjectsController'
+      controller: 'ProjectsController',
+      resolve: {
+        projects: function(Project) {
+          return Project.get().$promise;
+        }
+      }
     })
     .when('/new', {
       templateUrl: 'templates/projects/form.html',
@@ -15,7 +20,12 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     })
     .when('/project/:id', {
       templateUrl: 'templates/projects/detail.html',
-      controller: 'ProjectDetailsController'
+      controller: 'ProjectDetailsController',
+      resolve: {
+        project: function($route, Project) {
+          return Project.get({id: $route.current.params.id}).$promise;
+        }
+      }
     })
     .when('/project/edit/:id', {
       templateUrl: 'templates/projects/form.html',

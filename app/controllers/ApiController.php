@@ -8,12 +8,8 @@ class ApiController extends Controller {
 	
     protected $fractal;
     protected $statusCode = 200;
+    protected $info = null;
 
-    /**
-     * Inject fractal manager
-     * 
-     * @param Manager $fractal
-     */
     function __construct(Manager $fractal)
     {
     	$this->fractal = $fractal;
@@ -52,6 +48,22 @@ class ApiController extends Controller {
 	}
 
 	/**
+	 * Generate error message response
+	 * 
+	 * @param  string $error Error message
+	 * @return Response
+	 */
+	protected function respondWithError($error)
+	{
+		$response = [
+			'data' => null,
+			'error' => $error
+		];
+
+		return $this->setStatusCode(400)->respondWithArray($response);
+	}
+
+	/**
 	 * Generate JSON response
 	 * 
 	 * @param  array  $array   Data
@@ -64,12 +76,6 @@ class ApiController extends Controller {
 	}
 
 	/* Getters and setters */
-
-	public function getStatusCode()
-	{
-		return $this->statusCode;
-	}
-
 	public function setStatusCode($statusCode)
 	{
 		$this->statusCode = $statusCode;

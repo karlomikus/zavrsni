@@ -44,24 +44,16 @@ app.controller('RegisterController', ['$scope', 'Auth', 'Notification', function
 /**
  * 	Projects controllers
  */
-app.controller('ProjectsController', ['$scope', 'Project', function($scope, Project)
+app.controller('ProjectsController', ['$scope', 'projects', function($scope, projects)
 {
-	var projects = Project.get(function()
-	{
-		$scope.projects = projects.data;
-	});
+	$scope.projects = projects.data;
 }]);
 
-app.controller('ProjectDetailsController', ['$scope', '$routeParams', '$location', 'Project', function($scope, $routeParams, $location, Project)
+app.controller('ProjectDetailsController', ['$scope', '$routeParams', '$location', 'project', function($scope, $routeParams, $location, project)
 {
-	$scope.project = {};
-	Project.get({id: $routeParams.id}, function(project)
-	{
-		$scope.project = project.data;
-	});
+	$scope.project = project.data;
 
-	$scope.delete = function(id)
-	{
+	$scope.delete = function(id) {
 		Project.delete({id: id});
 		$location.path('/');
 	}
@@ -111,11 +103,9 @@ app.controller('ProjectFormController', ['$scope', '$location', '$routeParams', 
 app.controller('MessageFormController', ['$scope', 'Notification', 'Message', function($scope, Notification, Message)
 {
 	$scope.send = function(data) {
-
-		var userId = $scope.$parent.project.userId;
 		var projectId = $scope.$parent.project.id;
 
-		Message.send(userId, projectId, data).success(function() {
+		Message.send(projectId, data).success(function() {
 			Notification.notify('Poruka je uspješno poslana', 'success');
 			$scope.messageData = {};
 			$scope.messageForm.$setPristine();
@@ -123,14 +113,20 @@ app.controller('MessageFormController', ['$scope', 'Notification', 'Message', fu
 	};
 }]);
 
-app.controller('ApplicationsController', ['$scope', 'Message', function($scope, Message){
-	
+app.controller('ApplicationsController', ['$scope', 'Message', function($scope, Message)
+{	
 	var projectId = $scope.$parent.project.id;
 
 	Message.forProject(projectId).success(function(response) {
 		$scope.messages = response.data;
 	});
 
+	$scope.message = {};
+	$scope.applicationInfo = function(msgID) {
+		Message.single(msgID).success(function(response) {
+			$scope.message = response.data;
+		});
+	};
 }]);
 
 /**

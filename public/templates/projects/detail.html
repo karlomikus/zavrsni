@@ -24,14 +24,26 @@
 	<h3>Prijave:</h3>
 	<ul>
 		<li ng-repeat="msg in messages">
-			<div>
-				<h5>{{ msg.fullName }}</h5>
-				<p>
-					{{ msg.message }}
-				</p>
-			</div>
+			<a href="#" data-toggle="modal" data-target="#application-modal" ng-click="applicationInfo(msg.id)">{{ msg.fullName }}</a>
 		</li>
 	</ul>
+	<div class="modal fade" id="application-modal" tabindex="-1">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">{{ message.fullName }}</h4>
+	      </div>
+	      <div class="modal-body">
+	        {{ message.message }}
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </div>
 <div class="row" ng-controller="MessageFormController">
 	<div class="col-md-12">

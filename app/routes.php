@@ -45,7 +45,7 @@ Route::group(['prefix' => 'api'], function()
     // Messages
     Route::get('messages/{id}', 'MessagesController@index');
     Route::get('messages/single/{id}', 'MessagesController@show');
-    Route::post('messages/{userId}/{projectId}', 'MessagesController@store');
+    Route::post('messages/{projectId}', 'MessagesController@store');
 });
 
 // Administrator access routes
@@ -75,7 +75,4 @@ Route::group(['prefix' => 'admin', 'before' => 'auth|auth.admin'], function()
     Route::post('users/create', 'Admin\UsersController@store');
     Route::get('users/delete/{id}', 'Admin\UsersController@destroy');
     Route::get('users/changeban/{id}', 'Admin\UsersController@changeBanStatus');
-
-    // Settings
-    Route::get('settings', 'Admin\SettingsController@index');
 });

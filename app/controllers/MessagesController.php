@@ -5,32 +5,26 @@ use Transformers\MessageTransformer;
 class MessagesController extends ApiController
 {
     /**
-     * Display a listing of the messages.
+     * Display a listing of the messages for specified project.
      *
      * @return Response
      */
     public function index($forProjectId)
     {
-        try
-        {
-            $messages = Message::orderBy('created_at', 'DESC')->where('project_id', '=', $forProjectId)->get();
-        }
-        catch(Exception $e)
-        {
-            $this->setStatusCode(400);
-        }
-        finally
-        {
-            return $this->respondWithCollection($messages, new MessageTransformer());
-        }
+        $messages = Message::orderBy('created_at', 'DESC')->where('project_id', '=', $forProjectId)->get();
+        
+        if(!$messages)
+            return $this->respondWithError('No messages found for the given ID!');
+
+        return $this->respondWithCollection($messages, new MessageTransformer());
     }
 
     /**
-     * Store a newly created project in storage.
+     * Store a newly created message in storage.
      *
      * @return Response
      */
-    public function store($toUserId, $projectId)
+    public function store($projectId)
     {
         try
         {
@@ -41,7 +35,6 @@ class MessagesController extends ApiController
             $msg->email      = Input::get('email');
             $msg->cv         = Input::get('cv');
             $msg->message    = Input::get('msg');
-            $msg->to_id      = $toUserId;
             $msg->project_id = $projectId;
 
             $msg->save();
@@ -57,25 +50,19 @@ class MessagesController extends ApiController
     }
 
     /**
-     * Display the specified project.
+     * Display the specified message.
      *
      * @param  int  $id
      * @return Response
      */
     public function show($id)
     {
-        try
-        {
-            $message = Message::find($id);
-        }
-        catch(Exception $e)
-        {
-            $this->setStatusCode(400);
-        }
-        finally
-        {
-            return $this->respondWithItem($message, new MessageTransformer());
-        }
+        $message = Message::find($id);
+
+        if(!$message)
+            return $this->respondWithError('No message found for the given ID!');
+        
+        return $this->respondWithItem($message, new MessageTransformer());
     }
 
     /**

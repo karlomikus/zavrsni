@@ -91,11 +91,14 @@ app.factory('UserStorage', ['$window', function($window)
 app.factory('Message', ['$http', function($http)
 {
   return {
-    send: function(userId, projectId, data) {
-      return $http.post('/api/messages/' + userId + '/' + projectId, data);
+    send: function(projectId, data) {
+      return $http.post('/api/messages/' + projectId + '/', data);
     },
     forProject: function(projectId) {
       return $http.get('/api/messages/' + projectId);
+    },
+    single: function(msgId) {
+      return $http.get('/api/messages/single/' + msgId);
     }
   }
 }]);
