@@ -28,7 +28,6 @@ class MessagesController extends ApiController
     {
         try
         {
-            $responseStatus = 200;
             $msg = new Message();
 
             $msg->full_name  = Input::get('fullname');
@@ -41,12 +40,10 @@ class MessagesController extends ApiController
         }
         catch (Exception $e)
         {
-            $responseStatus = 400;
+            return $this->respondWithError($e->getMessage());
         }
-        finally
-        {
-            return Response::json(null, $responseStatus);
-        }
+        
+        return $this->respondWithArray([]);
     }
 
     /**
@@ -63,71 +60,5 @@ class MessagesController extends ApiController
             return $this->respondWithError('No message found for the given ID!');
         
         return $this->respondWithItem($message, new MessageTransformer());
-    }
-
-    /**
-     * Update the specified project in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id)
-    {
-        try
-        {
-            $responseStatus = 200;
-            $title          = Input::get('title');
-            $description    = Input::get('description');
-            $skills         = Input::get('skills');
-            $category       = Input::get('categoryId');
-            $tags           = Input::get('tags');
-            $startDate      = Input::get('startDate');
-            $endDate        = Input::get('endDate');
-            $location       = Input::get('location');
-
-            $project = Project::find($id);
-
-            $project->title       = $title;
-            $project->description = $description;
-            $project->skills      = $skills;
-            $project->tags        = $tags;
-            $project->category_id = $category;
-            $project->start_date  = $startDate;
-            $project->end_date    = $endDate;
-            $project->location    = $location;
-
-            $project->save();
-        }
-        catch (Exception $e)
-        {
-            $responseStatus = 400;
-        }
-        finally
-        {
-            return Response::json(null, $responseStatus);
-        }
-    }
-
-    /**
-     * Remove the specified project from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        try
-        {
-            $responseStatus = 200;
-            Project::destroy($id);
-        }
-        catch(Exception $e)
-        {
-            $responseStatus = 400;
-        }
-        finally
-        {
-            return Response::json(null, $responseStatus);
-        }
     }
 }

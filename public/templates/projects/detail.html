@@ -21,7 +21,7 @@
 </div>
 <hr>
 <div class="applications" ng-controller="ApplicationsController">
-	<h3>Prijave:</h3>
+	<h3>Zaprimljene prijave:</h3>
 	<ul>
 		<li ng-repeat="msg in messages">
 			<a href="#" data-toggle="modal" data-target="#application-modal" ng-click="applicationInfo(msg.id)">{{ msg.fullName }}</a>
@@ -31,15 +31,20 @@
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">{{ message.fullName }}</h4>
+	        <h4 class="modal-title">{{ message.fullName }}</h4>
 	      </div>
 	      <div class="modal-body">
-	        {{ message.message }}
+	      	<strong>Poruka:</strong>
+	        <p>
+	        	{{ message.message }}
+	        </p>
+	        <ul>
+	        	<li><a href="mailto:{{ message.email }}">Email</a></li>
+	        	<li><a href="{{ message.CV }}">Životopis</a></li>
+	        </ul>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Save changes</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="message = {}">Close</button>
 	      </div>
 	    </div>
 	  </div>
