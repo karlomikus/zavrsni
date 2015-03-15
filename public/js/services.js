@@ -38,6 +38,7 @@ app.factory('Profile', ['$http', '$rootScope', function($http, $rootScope)
 app.factory('Auth', ['$http', 'UserStorage', function($http, UserStorage)
 {
   return {
+    // Login the user
     login: function(credentials) {
       var self = this;
       $http.post('/api/auth/login', credentials).then(function(response) {
@@ -45,20 +46,24 @@ app.factory('Auth', ['$http', 'UserStorage', function($http, UserStorage)
       });
     },
 
+    // Logout the user
     logout: function() {
-      UserStorage.destroy();
       return $http.get('/api/auth/logout');
     },
 
+    // Check if user has server side session and
+    // save him to storage
     checkSession: function() {
       $http.get('/api/auth/session').then(function(response) {
-        if(Object.getOwnPropertyNames(response.data).length !== 0)
-          UserStorage.set(JSON.stringify(response.data.data));
-        else
-          UserStorage.destroy();
+        UserStorage.set(JSON.stringify(response.data.data));
+        console.log("Found user session!");
+      }, function(response) {
+        UserStorage.destroy();
+        console.log(response.data.error);
       });
     },
 
+    // Get the currently logged in user from storage
     currentUser: function() {
       var jsonString = UserStorage.get();
       if(jsonString != null)
@@ -66,6 +71,7 @@ app.factory('Auth', ['$http', 'UserStorage', function($http, UserStorage)
       return null;
     },
 
+    // Register the user
     register: function(credentials) {
       return $http.post('/api/auth/register', credentials);
     }
@@ -76,13 +82,13 @@ app.factory('UserStorage', ['$window', function($window)
 {
   return {
     set: function(val) {
-      $window.sessionStorage.setItem("User", val);
+      $window.localStorage.setItem("User", val);
     },
     get: function() {
-      return $window.sessionStorage.getItem("User");
+      return $window.localStorage.getItem("User");
     },
     destroy: function() {
-      $window.sessionStorage.removeItem("User");
+      $window.localStorage.removeItem("User");
     }
   }
 }]);

@@ -4,7 +4,7 @@ var app = angular.module('myApp', ['ngRoute', 'ngResource', 'ngSanitize', 'myApp
 
 app.run(['$rootScope', '$route', 'Auth', function($rootScope, $route, Auth)
 {
-    Auth.checkSession();
+    //Auth.checkSession();
 	$rootScope.$on('$routeChangeStart', function(next, current) {
 		Auth.checkSession();
 	});

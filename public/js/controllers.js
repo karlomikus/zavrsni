@@ -5,7 +5,7 @@ var app = angular.module('myApp.controllers', []);
 /**
  * 	Main controllers
  */
-app.controller('MainController', ['$scope', 'Auth', 'UserStorage', function($scope, Auth, UserStorage)
+app.controller('MainController', ['$scope', '$window', 'Auth', 'UserStorage', function($scope, $window, Auth, UserStorage)
 {
 	$scope.currentUser = Auth.currentUser();
 
@@ -14,13 +14,14 @@ app.controller('MainController', ['$scope', 'Auth', 'UserStorage', function($sco
 		Auth.login(loginData);
 		$scope.currentUser = Auth.currentUser();
 		Auth.checkSession();
+		$window.location = "/";
 	}
 
 	$scope.logout = function()
 	{
-		Auth.logout();
-		$scope.currentUser = Auth.currentUser();
-		Auth.checkSession();
+		Auth.logout().then(function(response) {
+			console.log("User logged out!");
+		});
 	}
 
 	$scope.isLoggedIn = function()

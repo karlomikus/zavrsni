@@ -5,7 +5,8 @@ use Transformers\ProfileTransformer;
 class AuthController extends ApiController
 {
     /**
-     * Authenticate the user
+     * Authenticate the user. Returns users information
+     * on succesful authentication.
      *
      * @return Response
      */
@@ -26,10 +27,10 @@ class AuthController extends ApiController
         }
         catch(Exception $e)
         {
-            $user = $e->getMessage();
+            return $this->respondWithError($e->getMessage());
         }
 
-        return Response::json($user);
+        return $this->respondWithItem($user, new ProfileTransformer());
     }
 
     /**
@@ -39,20 +40,12 @@ class AuthController extends ApiController
      */
     public function currentUser()
     {
-        try
-        {
-            $user = Sentry::getUser();
-        }
-        catch(Exception $e)
-        {
-            $this->setStatusCode(400);
-        }
-        finally
-        {
-            if($user != null)
-                return $this->respondWithItem($user, new ProfileTransformer());
-            return Response::json(null);
-        }
+        $user = Sentry::getUser();
+
+        if(!$user)
+            return $this->respondWithError('No valid user session found!');
+        
+        return $this->respondWithItem($user, new ProfileTransformer());
     }
 
     /**
@@ -69,45 +62,37 @@ class AuthController extends ApiController
         }
         catch(Exception $e)
         {
-            $this->setStatusCode(400);
+            return $this->respondWithError('No valid user information found!');
         }
-        finally
-        {
-            return $this->respondWithItem($user, new ProfileTransformer());
-        }
+        
+        return $this->respondWithItem($user, new ProfileTransformer());
     }
 
+    /**
+     * Register a new user
+     * 
+     * @return Response
+     */
     public function register()
     {
         try
         {
-            $responseStatus = 200;
             $email          = Input::get('email');
             $password       = Input::get('password');
 
-            $user = Sentry::register(array(
+            // Register and activate the user
+            Sentry::register(
+            [
                 'email'    => $email,
                 'password' => $password,
-            ), true);
+            ], true);
         }
         catch (Exception $e)
         {
-            $responseStatus = 400;
+            return $this->respondWithError($e->getMessage());
         }
-        finally
-        {
-            return Response::json(null, $responseStatus);
-        }
-    }
-
-    /**
-     * Check if user is logged in
-     *
-     * @return Response
-     */
-    public function isLoggedIn()
-    {
-        return Response::json(Sentry::check() ? true : null);
+        
+        return $this->respondWithArray(['success' => true]);
     }
 
     /**
@@ -118,7 +103,6 @@ class AuthController extends ApiController
     public function logout()
     {
         Sentry::logout();
-
-        return Redirect::to('/');
+        return $this->respondWithArray(['loggedIn' => Sentry::check()]);
     }
 }
