@@ -40,10 +40,7 @@ app.factory('Auth', ['$http', 'UserStorage', function($http, UserStorage)
   return {
     // Login the user
     login: function(credentials) {
-      var self = this;
-      $http.post('/api/auth/login', credentials).then(function(response) {
-        self.checkSession();
-      });
+      return $http.post('/api/auth/login', credentials);
     },
 
     // Logout the user
@@ -54,13 +51,15 @@ app.factory('Auth', ['$http', 'UserStorage', function($http, UserStorage)
     // Check if user has server side session and
     // save him to storage
     checkSession: function() {
-      $http.get('/api/auth/session').then(function(response) {
+      var q = $http.get('/api/auth/session').then(function(response) {
         UserStorage.set(JSON.stringify(response.data.data));
         console.log("Found user session!");
       }, function(response) {
         UserStorage.destroy();
         console.log(response.data.error);
       });
+
+      return q;
     },
 
     // Get the currently logged in user from storage

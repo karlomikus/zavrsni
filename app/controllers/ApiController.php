@@ -5,7 +5,7 @@ use League\Fractal\Resource\Item;
 use League\Fractal\Manager;
 
 class ApiController extends Controller {
-	
+
     protected $fractal;
     protected $statusCode = 200;
     protected $info = null;
@@ -17,7 +17,7 @@ class ApiController extends Controller {
 
 	/**
 	 * Single resource item response
-	 * 
+	 *
 	 * @param  mixed $item
 	 * @param  mixed $callback
 	 * @return Response
@@ -33,7 +33,7 @@ class ApiController extends Controller {
 
 	/**
 	 * Multiple item collection response
-	 * 
+	 *
 	 * @param  mixed $collection
 	 * @param  mixed $callback
 	 * @return Response
@@ -49,7 +49,7 @@ class ApiController extends Controller {
 
 	/**
 	 * Generate error message response
-	 * 
+	 *
 	 * @param  string $error Error message
 	 * @return Response
 	 */
@@ -65,7 +65,7 @@ class ApiController extends Controller {
 
 	/**
 	 * Generate JSON response
-	 * 
+	 *
 	 * @param  array  $array   Data
 	 * @param  array  $headers Optional headers
 	 * @return Response        Response with status code and optional headers

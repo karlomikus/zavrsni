@@ -44,7 +44,7 @@ class AuthController extends ApiController
 
         if(!$user)
             return $this->respondWithError('No valid user session found!');
-        
+
         return $this->respondWithItem($user, new ProfileTransformer());
     }
 
@@ -64,13 +64,13 @@ class AuthController extends ApiController
         {
             return $this->respondWithError('No valid user information found!');
         }
-        
+
         return $this->respondWithItem($user, new ProfileTransformer());
     }
 
     /**
      * Register a new user
-     * 
+     *
      * @return Response
      */
     public function register()
@@ -91,7 +91,7 @@ class AuthController extends ApiController
         {
             return $this->respondWithError($e->getMessage());
         }
-        
+
         return $this->respondWithArray(['success' => true]);
     }
 
