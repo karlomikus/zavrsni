@@ -2,7 +2,11 @@
 
 var app = angular.module('myApp.services', []);
 
-// PROJECTS
+/**
+ *  ------------------
+ *  Projects         |
+ *  ------------------
+ */
 app.factory('Project', ['$resource', function($resource)
 {
   return $resource('/api/projects/:id', {}, {
@@ -12,13 +16,21 @@ app.factory('Project', ['$resource', function($resource)
   });
 }]);
 
-// CATEGORIES
+/**
+ *  ------------------
+ *  Categories       |
+ *  ------------------
+ */
 app.factory('Category', ['$resource', function($resource)
 {
   return $resource('/api/categories/:id');
 }]);
 
-// PROFILE
+/**
+ *  ------------------
+ *  Profile          |
+ *  ------------------
+ */
 app.factory('Profile', ['$http', '$rootScope', function($http, $rootScope)
 {
   return {
@@ -34,7 +46,11 @@ app.factory('Profile', ['$http', '$rootScope', function($http, $rootScope)
   };
 }]);
 
-// USER AND AUTHENTICATION
+/**
+ *  ------------------
+ *  Auth and users   |
+ *  ------------------
+ */
 app.factory('Auth', ['$http', 'UserStorage', function($http, UserStorage)
 {
   return {
@@ -77,6 +93,11 @@ app.factory('Auth', ['$http', 'UserStorage', function($http, UserStorage)
   };
 }]);
 
+/**
+ *  ----------------------------------
+ *  Storage engine for users         |
+ *  ----------------------------------
+ */
 app.factory('UserStorage', ['$window', function($window)
 {
   return {
@@ -92,7 +113,11 @@ app.factory('UserStorage', ['$window', function($window)
   }
 }]);
 
-// MESSAGES
+/**
+ *  ------------------
+ *  Messages         |
+ *  ------------------
+ */
 app.factory('Message', ['$http', function($http)
 {
   return {
@@ -108,7 +133,11 @@ app.factory('Message', ['$http', function($http)
   }
 }]);
 
-// NOTIFICATIONS
+/**
+ *  ------------------
+ *  Notifications    |
+ *  ------------------
+ */
 app.factory('Notification', function()
 {
   return {

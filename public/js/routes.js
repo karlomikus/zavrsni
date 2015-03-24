@@ -2,6 +2,11 @@
 
 var app = angular.module('myApp.routes', []);
 
+/**
+ *  ------------------
+ *  Routing          |
+ *  ------------------
+ */
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider)
 {
   $routeProvider

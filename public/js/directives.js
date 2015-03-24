@@ -2,7 +2,11 @@
 
 var app = angular.module('myApp.directives', []);
 
-// Project user actions
+/**
+ *  -----------------------------------
+ *  User actions for projects         |
+ *  -----------------------------------
+ */
 app.directive('projectUserActions', ['$location', 'Project', function($location, Project)
 {
 	return {
@@ -20,7 +24,11 @@ app.directive('projectUserActions', ['$location', 'Project', function($location,
 	}
 }]);
 
-// User login form
+/**
+ *  -----------------------------------
+ *  User login form                   |
+ *  -----------------------------------
+ */
 app.directive('loginForm', function()
 {
 	return {
@@ -29,7 +37,11 @@ app.directive('loginForm', function()
 	}
 });
 
-// Top navbar user information
+/**
+ *  -----------------------------------
+ *  Top navbar with user information  |
+ *  -----------------------------------
+ */
 app.directive('userBar', function()
 {
 	return {
@@ -38,7 +50,11 @@ app.directive('userBar', function()
 	}
 });
 
-// Bootstrap datepicker
+/**
+ *  -----------------------------------
+ *  Input datepicker                  |
+ *  -----------------------------------
+ */
 app.directive('datepicker', function()
 {
 	return {
@@ -51,7 +67,11 @@ app.directive('datepicker', function()
 	}
 });
 
-
+/**
+ *  -----------------------------------
+ *  String truncate plugin            |
+ *  -----------------------------------
+ */
 angular.module('truncate', [])
 .filter('characters', function () {
     return function (input, chars, breakOnWord) {

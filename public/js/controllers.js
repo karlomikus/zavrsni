@@ -3,7 +3,9 @@
 var app = angular.module('myApp.controllers', []);
 
 /**
- * 	Main controllers
+ *  -----------------------------------
+ * 	Main controller                   |
+ * 	-----------------------------------
  */
 app.controller('MainController', ['$scope', '$window', 'Auth', 'UserStorage', function($scope, $window, Auth, UserStorage)
 {
@@ -29,20 +31,10 @@ app.controller('MainController', ['$scope', '$window', 'Auth', 'UserStorage', fu
 	}
 }]);
 
-app.controller('RegisterController', ['$scope', 'Auth', 'Notification', function($scope, Auth, Notification)
-{
-	$scope.submit = function(credentials) {
-		Auth.register(credentials).success(function() {
-			Notification.notify('Registracija uspješna!', 'success');
-			window.location = "/";
-		}).error(function() {
-			Notification.notify('Registracija neuspješna!', 'error');
-		});
-	}
-}]);
-
 /**
- * 	Projects controllers
+ *  -----------------------------------
+ * 	projects controllers              |
+ * 	-----------------------------------
  */
 app.controller('ProjectsController', ['$scope', 'projects', function($scope, projects, Profile)
 {
@@ -61,7 +53,6 @@ app.controller('ProjectDetailsController', ['$scope', '$routeParams', '$location
 
 app.controller('ProjectFormController', ['$scope', '$location', '$routeParams', 'Project', 'Category', 'Notification', function($scope, $location, $routeParams, Project, Category, Notification)
 {
-	// Check if ID is passed incase of project editing
 	var projectId = $routeParams.id == undefined ? null : $routeParams.id;
 	$scope.categories = Category.query();
 
@@ -130,7 +121,9 @@ app.controller('ApplicationsController', ['$scope', 'Message', function($scope, 
 }]);
 
 /**
- *  Profile controllers
+ *  -----------------------------------
+ * 	Users controllers                 |
+ * 	-----------------------------------
  */
 app.controller('ProfileController', ['$scope', 'Profile', function($scope, Profile)
 {
@@ -151,6 +144,18 @@ app.controller('ProfileController', ['$scope', 'Profile', function($scope, Profi
 	}
 }]);
 
+app.controller('RegisterController', ['$scope', 'Auth', 'Notification', function($scope, Auth, Notification)
+{
+	$scope.submit = function(credentials) {
+		Auth.register(credentials).success(function() {
+			Notification.notify('Registracija uspješna!', 'success');
+			window.location = "/";
+		}).error(function() {
+			Notification.notify('Registracija neuspješna!', 'error');
+		});
+	}
+}]);
+
 app.controller('MyProjectsController', ['$scope', '$rootScope', 'Profile', function($scope, $rootScope, Profile)
 {
 	var userId = $scope.$parent.currentUser.id;
@@ -159,9 +164,4 @@ app.controller('MyProjectsController', ['$scope', '$rootScope', 'Profile', funct
 	Profile.projects(userId).success(function(data) {
 		$scope.projects = data.data;
 	});
-}]);
-
-app.controller('MessageController', ['$scope', 'Message', function($scope, Message)
-{
-
 }]);
