@@ -86,7 +86,7 @@ app.controller('ProjectFormController', ['$scope', '$location', '$routeParams', 
 		{
 			$scope.project.$save();
 			Notification.notify('Projekt je uspješno spremljen!', 'success');
-			$location.path('/myprojects/');
+			window.location = "/myprojects";
 		}
 	}
 }]);

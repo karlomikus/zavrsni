@@ -18,7 +18,7 @@ app.directive('projectUserActions', ['$location', 'Project', function($location,
         link: function(scope, elem, attrs) {
             scope.delete = function(id) {
                 Project.delete({id: id});
-                $location.path('/');
+                window.location = "/myprojects";
             }
         }
 	}
