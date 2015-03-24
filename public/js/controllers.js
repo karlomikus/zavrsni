@@ -7,26 +7,23 @@ var app = angular.module('myApp.controllers', []);
  */
 app.controller('MainController', ['$scope', '$window', 'Auth', 'UserStorage', function($scope, $window, Auth, UserStorage)
 {
+	Auth.checkSession().then(function(response) {
+		$scope.currentUser = Auth.currentUser();
+	});
 	$scope.currentUser = Auth.currentUser();
 
-	$scope.login = function(loginData)
-	{
+	$scope.login = function(loginData) {
 		Auth.login(loginData);
-		$scope.currentUser = Auth.currentUser();
-		Auth.checkSession();
-		$window.location = "/";
+		$window.location.replace("/");
 	}
 
-	$scope.logout = function()
-	{
+	$scope.logout = function() {
 		Auth.logout().then(function(response) {
+			Auth.checkSession();
+			$scope.currentUser = Auth.currentUser();
 			console.log("User logged out!");
+			$window.location.replace("/");
 		});
-	}
-
-	$scope.isLoggedIn = function()
-	{
-		return $scope.currentUser != null;
 	}
 }]);
 
@@ -115,7 +112,7 @@ app.controller('MessageFormController', ['$scope', 'Notification', 'Message', fu
 }]);
 
 app.controller('ApplicationsController', ['$scope', 'Message', function($scope, Message)
-{	
+{
 	var projectId = $scope.$parent.project.id;
 
 	Message.forProject(projectId).success(function(response) {
@@ -138,7 +135,7 @@ app.controller('ProfileController', ['$scope', 'Profile', function($scope, Profi
 	var userId = $scope.$parent.currentUser.id;
 
 	$scope.profileData = {};
-	
+
 	Profile.get(userId).success(function(response) {
 		$scope.profileData = response.data;
 	});
@@ -164,5 +161,5 @@ app.controller('MyProjectsController', ['$scope', '$rootScope', 'Profile', funct
 
 app.controller('MessageController', ['$scope', 'Message', function($scope, Message)
 {
-	
+
 }]);

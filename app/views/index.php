@@ -29,9 +29,9 @@
                 </div>
                 <div class="collapse navbar-collapse" id="nav-collapse">
                     <ul class="nav navbar-nav">
-                        <li ng-if="!isLoggedIn()"><a href="/register">Registracija</a></li>
+                        <li ng-if="!currentUser"><a href="/register">Registracija</a></li>
                     </ul>
-                    <form class="navbar-form navbar-right" ng-show="!isLoggedIn()" ng-submit="login(loginData)">
+                    <form class="navbar-form navbar-right" ng-if="!currentUser" ng-submit="login(loginData)">
                         <div class="form-group">
                             <input ng-model="loginData.email" name="email" type="text" class="form-control" placeholder="Email">
                         </div>
@@ -40,7 +40,7 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Prijava</button>
                     </form>
-                    <ul class="nav navbar-nav navbar-right" ng-show="isLoggedIn()">
+                    <ul class="nav navbar-nav navbar-right" ng-if="currentUser">
                         <li class="dropdown">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ currentUser.fullName }}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
