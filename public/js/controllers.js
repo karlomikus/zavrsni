@@ -7,23 +7,25 @@ var app = angular.module('myApp.controllers', []);
  */
 app.controller('MainController', ['$scope', '$window', 'Auth', 'UserStorage', function($scope, $window, Auth, UserStorage)
 {
-	Auth.checkSession().then(function(response) {
-		$scope.currentUser = Auth.currentUser();
-	});
-	$scope.currentUser = Auth.currentUser();
+	updateAuth();
 
 	$scope.login = function(loginData) {
-		Auth.login(loginData);
-		$window.location.replace("/");
+		Auth.login(loginData).then(function(response) {
+			updateAuth();
+		});
 	}
 
 	$scope.logout = function() {
 		Auth.logout().then(function(response) {
-			Auth.checkSession();
-			$scope.currentUser = Auth.currentUser();
-			console.log("User logged out!");
-			$window.location.replace("/");
+			updateAuth();
 		});
+	}
+
+	function updateAuth() {
+		Auth.checkSession().then(function(response) {
+			$scope.currentUser = Auth.currentUser();
+		});
+		$scope.currentUser = Auth.currentUser();
 	}
 }]);
 
