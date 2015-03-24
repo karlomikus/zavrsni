@@ -42,10 +42,10 @@
                     </form>
                     <ul class="nav navbar-nav navbar-right" ng-if="currentUser">
                         <li class="dropdown">
-                            <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ currentUser.fullName }} <span class="badge">2</span> <span class="caret"></span></a>
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ currentUser.fullName }}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/profile">Profil</a></li>
-                                <li><a href="/myprojects">Moji projekti <span class="badge">2</span></a></li>
+                                <li><a href="/myprojects">Moji projekti</a></li>
                                 <li ng-show="currentUser.admin"><a href="/admin" target="_blank">Administracija</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#" ng-click="logout()">Odjava</a></li>

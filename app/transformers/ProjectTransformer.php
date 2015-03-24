@@ -1,6 +1,7 @@
 <?php namespace Transformers;
 
 use Project;
+use DB;
 use Parsedown;
 use League\Fractal\TransformerAbstract;
 
@@ -28,7 +29,7 @@ class ProjectTransformer extends TransformerAbstract
             'endDate'           => date_format(date_create($project->end_date), 'd.m.Y'),
             'location'          => $project->location,
             'contactType'       => $project->contact_type,
-            'messages'          => (int) 12
+            'messages'          => (int) DB::table('messages')->where('project_id', '=', $project->id)->count()
         ];
     }
 }

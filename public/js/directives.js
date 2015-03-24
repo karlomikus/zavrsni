@@ -3,7 +3,7 @@
 var app = angular.module('myApp.directives', []);
 
 // Project user actions
-app.directive('projectUserActions', function()
+app.directive('projectUserActions', ['$location', 'Project', function($location, Project)
 {
 	return {
 		restrict: 'E',
@@ -11,8 +11,14 @@ app.directive('projectUserActions', function()
 			project: '=for'
 		},
 		templateUrl: 'templates/directives/project-user-actions.html',
+        link: function(scope, elem, attrs) {
+            scope.delete = function(id) {
+                Project.delete({id: id});
+                $location.path('/');
+            }
+        }
 	}
-});
+}]);
 
 // User login form
 app.directive('loginForm', function()

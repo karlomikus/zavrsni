@@ -50,11 +50,6 @@ app.controller('ProjectsController', ['$scope', 'projects', function($scope, pro
 app.controller('ProjectDetailsController', ['$scope', '$routeParams', '$location', 'project', function($scope, $routeParams, $location, project)
 {
 	$scope.project = project.data;
-
-	$scope.delete = function(id) {
-		Project.delete({id: id});
-		$location.path('/');
-	}
 }]);
 
 app.controller('ProjectFormController', ['$scope', '$location', '$routeParams', 'Project', 'Category', 'Notification', function($scope, $location, $routeParams, Project, Category, Notification)
@@ -138,8 +133,11 @@ app.controller('ProfileController', ['$scope', 'Profile', function($scope, Profi
 
 	Profile.get(userId).success(function(response) {
 		$scope.profileData = response.data;
-		$scope.profileData.pic = {};
 	});
+
+	$scope.uploadFile = function(file) {
+		$scope.profileData.pic = file;
+	}
 
 	$scope.updateProfile = function(data) {
 		Profile.update(data);

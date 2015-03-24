@@ -20,4 +20,9 @@ class Project extends Ardent
     {
         return $this->belongsTo('Category');
     }
+
+    public function messages()
+    {
+        return $this->hasMany('Message');
+    }
 }
