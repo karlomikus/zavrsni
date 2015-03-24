@@ -126,6 +126,8 @@ class ProjectsController extends ApiController
     {
         try
         {
+            // Delete the related messages
+            Message::where('project_id', '=', $id)->delete();
             Project::destroy($id);
         }
         catch(Exception $e)

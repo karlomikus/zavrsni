@@ -45,14 +45,19 @@ app.controller('RegisterController', ['$scope', 'Auth', 'Notification', function
 /**
  * 	Projects controllers
  */
-app.controller('ProjectsController', ['$scope', 'projects', function($scope, projects)
+app.controller('ProjectsController', ['$scope', 'projects', function($scope, projects, Profile)
 {
 	$scope.projects = projects.data;
 }]);
 
-app.controller('ProjectDetailsController', ['$scope', '$routeParams', '$location', 'project', function($scope, $routeParams, $location, project)
+app.controller('ProjectDetailsController', ['$scope', '$routeParams', '$location', 'Profile', 'project', function($scope, $routeParams, $location, Profile, project)
 {
 	$scope.project = project.data;
+
+	$scope.authorInfo = {};
+	Profile.get(project.data.userId).then(function(response) {
+		$scope.authorInfo = response.data.data;
+	});
 }]);
 
 app.controller('ProjectFormController', ['$scope', '$location', '$routeParams', 'Project', 'Category', 'Notification', function($scope, $location, $routeParams, Project, Category, Notification)

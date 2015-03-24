@@ -77,14 +77,18 @@ class AuthController extends ApiController
     {
         try
         {
-            $email          = Input::get('email');
-            $password       = Input::get('password');
+            $email     = Input::get('email');
+            $password  = Input::get('password');
+            $firstName = Input::get('firstName');
+            $lastName  = Input::get('lastName');
 
             // Register and activate the user
             Sentry::register(
             [
-                'email'    => $email,
-                'password' => $password,
+                'email'      => $email,
+                'password'   => $password,
+                'first_name' => $firstName,
+                'last_name'  => $lastName
             ], true);
         }
         catch (Exception $e)

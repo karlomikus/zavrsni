@@ -17,6 +17,13 @@
 		<div class="project-user-pic">
 			<img src="http://placehold.it/100x100" alt="project owner image" class="img-circle">
 		</div>
+		<p>
+			{{ authorInfo.description }}
+		</p>
+		<ul>
+			<li><a href="{{ authorInfo.website }}">Website</a></li>
+			<li><a href="{{ authorInfo.facebook }}">Facebook</a></li>
+		</ul>
 		<project-user-actions for="project" ng-if="currentUser.id == project.userId"></project-user-actions>
 		<div class="applications" ng-if="currentUser.id == project.userId" ng-controller="ApplicationsController">
 			<h3>Zaprimljene prijave:</h3>
