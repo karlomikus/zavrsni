@@ -14,11 +14,13 @@
 	</div>
 	<!-- Main project details end -->
 	<div class="col-md-3">
-		<img src="http://placehold.it/100x100" alt="project owner image" class="img-circle">
+		<div class="project-user-pic">
+			<img src="http://placehold.it/100x100" alt="project owner image" class="img-circle">
+		</div>
 		<project-user-actions for="project" ng-if="currentUser.id == project.userId"></project-user-actions>
-		<div class="applications" ng-controller="ApplicationsController">
+		<div class="applications" ng-if="currentUser.id == project.userId" ng-controller="ApplicationsController">
 			<h3>Zaprimljene prijave:</h3>
-			<ul>
+			<ul class="application-list">
 				<li ng-repeat="msg in messages">
 					<a href="#" data-toggle="modal" data-target="#application-modal" ng-click="applicationInfo(msg.id)">{{ msg.fullName }}</a>
 				</li>
